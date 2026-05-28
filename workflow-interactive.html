@@ -1,0 +1,1088 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AI 工程采购工作流 - 交互式架构图</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #165DFF;
+      --blue-mid: #4080FF;
+      --blue-light: #EEF2FF;
+      --orange: #FF7D00;
+      --orange-light: #FF9D00;
+      --orange-bg: #FFF3E0;
+      --bg: #F5F7FA;
+      --panel: #ffffff;
+      --ink: #1A202C;
+      --muted: #64748B;
+      --line: #E2E8F0;
+      --shadow: 0 24px 64px rgba(22, 93, 255, 0.12);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.5;
+    }
+
+    .stage {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Header ─── */
+    .hdr {
+      background: var(--ink);
+      color: #fff;
+      padding: 22px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .hdr-left { display: flex; align-items: center; gap: 16px; }
+
+    .logo-mark {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--orange));
+      display: grid; place-items: center;
+      font-size: 18px; font-weight: 900; color: #fff;
+    }
+
+    .hdr-title { font-size: 22px; font-weight: 800; letter-spacing: 0; }
+    .hdr-sub { font-size: 14px; color: rgba(255,255,255,0.55); margin-top: 2px; }
+
+    .hdr-pills { display: flex; gap: 10px; align-items: center; }
+
+    .pill {
+      display: inline-flex; align-items: center;
+      height: 30px; padding: 0 12px;
+      border-radius: 999px;
+      font-size: 12px; font-weight: 700;
+      background: rgba(22, 93, 255, 0.18);
+      color: #93C5FD;
+      border: 1px solid rgba(22, 93, 255, 0.35);
+    }
+
+    .pill.orange {
+      background: rgba(255, 125, 0, 0.18);
+      color: #FDAA6D;
+      border-color: rgba(255, 125, 0, 0.35);
+    }
+
+    .lang-toggle {
+      display: flex;
+      gap: 4px;
+      background: rgba(255,255,255,0.05);
+      padding: 4px;
+      border-radius: 8px;
+    }
+
+    .lang-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      background: transparent;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.2s;
+    }
+
+    .lang-btn.active {
+      background: var(--blue);
+      color: #fff;
+    }
+
+    /* ─── Hero tagline ─── */
+    .hero {
+      background: linear-gradient(160deg, #0F172A 0%, #1E293B 100%);
+      padding: 48px 48px 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: 12px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 14px;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 3.5vw, 46px);
+      font-weight: 900; line-height: 1.1; letter-spacing: 0;
+      color: #F8FAFC; max-width: 820px;
+    }
+
+    .hero-title em { color: var(--blue); font-style: normal; }
+
+    .hero-desc {
+      margin-top: 16px; max-width: 680px;
+      font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.6;
+    }
+
+    /* ─── Flow — Single Axis ─── */
+    .flow-section {
+      flex: 1;
+      padding: 48px 64px;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .flow-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 40px;
+      align-self: flex-start;
+    }
+
+    /* Axis line container */
+    .axis-container {
+      width: 100%;
+      position: relative;
+    }
+
+    /* The continuous axis line */
+    .axis-line {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue-mid), var(--blue-mid) 60%, var(--orange) 75%, var(--orange) 100%);
+      border-radius: 2px;
+      transform: translateY(-50%);
+    }
+
+    .axis-line::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, var(--blue-mid), var(--orange));
+      animation: axisFlow 3s ease-in-out infinite;
+      border-radius: 2px;
+    }
+
+    @keyframes axisFlow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 1; }
+    }
+
+    /* Cards as axis nodes */
+    .flow {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      gap: 0;
+      padding: 0;
+    }
+
+    .flow-card {
+      position: relative;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--shadow);
+      opacity: 0;
+      transform: translateY(12px);
+      animation: fadeUp 0.5s ease forwards;
+      cursor: pointer;
+      z-index: 2;
+      min-width: 0;
+      width: 140px;
+    }
+
+    .flow-card:nth-child(1) { animation-delay: 0.05s; }
+    .flow-card:nth-child(2) { animation-delay: 0.1s; }
+    .flow-card:nth-child(3) { animation-delay: 0.15s; }
+    .flow-card:nth-child(4) { animation-delay: 0.2s; }
+    .flow-card:nth-child(5) { animation-delay: 0.25s; }
+    .flow-card:nth-child(6) { animation-delay: 0.3s; }
+    .flow-card:nth-child(7) { animation-delay: 0.35s; }
+
+    @keyframes fadeUp {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* highlight rule & agent */
+    .flow-card.highlight {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px rgba(255, 125, 0, 0.15), 0 8px 32px rgba(255, 125, 0, 0.2);
+    }
+
+    .flow-card.highlight .card-index { background: var(--orange); }
+
+    .card-index {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff; font-size: 12px; font-weight: 900;
+      display: grid; place-items: center;
+      flex-shrink: 0;
+    }
+
+    .card-title {
+      font-size: 13px; font-weight: 800; color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .card-desc {
+      font-size: 11px; color: var(--muted); line-height: 1.4;
+    }
+
+    .card-tech {
+      display: flex; flex-direction: column; gap: 3px;
+    }
+
+    .tech-tag {
+      display: inline-flex; align-items: center;
+      height: 20px; padding: 0 6px;
+      border-radius: 4px;
+      font-size: 10px; font-weight: 600;
+      background: #EEF2FF;
+      color: var(--blue);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .flow-card.highlight .tech-tag {
+      background: #FFF3E0;
+      color: var(--orange);
+    }
+
+    /* Tooltip — positioned above card */
+    .tooltip {
+      position: absolute;
+      left: 50%;
+      bottom: calc(100% + 20px);
+      transform: translateX(-50%) translateY(8px);
+      width: 300px;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 18px;
+      box-shadow: 0 24px 64px rgba(22, 93, 255, 0.18);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .flow-card:hover .tooltip {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .flow-card.highlight .tooltip {
+      border-color: var(--orange);
+      box-shadow: 0 24px 64px rgba(255, 125, 0, 0.22);
+    }
+
+    /* Tooltip arrow pointing down */
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 8px solid transparent;
+      border-top-color: var(--panel);
+    }
+
+    .tooltip h4 {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--ink);
+      margin-bottom: 10px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tooltip ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .tooltip li {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .tooltip li strong {
+      color: var(--blue);
+      font-weight: 700;
+    }
+
+    .flow-card.highlight .tooltip li strong {
+      color: var(--orange);
+    }
+
+    .tooltip .synergy {
+      margin-top: 10px;
+      padding-top: 8px;
+      border-top: 1px dashed var(--line);
+      font-size: 11px;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ─── Footer value ─── */
+    .footer-val {
+      background: var(--ink);
+      padding: 24px 48px;
+      display: flex; align-items: center; gap: 32px;
+    }
+
+    .val-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+    }
+
+    .val-items { display: flex; gap: 24px; flex-wrap: wrap; }
+
+    .val-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .val-icon {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+      display: grid; place-items: center;
+      font-size: 14px;
+    }
+
+    .val-icon.orange { background: linear-gradient(135deg, var(--orange), var(--orange-light)); }
+
+    .val-text { color: #F8FAFC; font-size: 14px; font-weight: 700; }
+    .val-sub { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 1px; }
+
+    /* ─── Page 2: Comparison ─── */
+    .comparison-section {
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 48px;
+      border-top: 2px solid var(--line);
+    }
+
+    .comparison-title {
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 900;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .comparison-title span {
+      color: var(--blue);
+    }
+
+    .comparison-title .us {
+      color: var(--orange);
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .compare-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .compare-card.our-solution {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px rgba(255, 125, 0, 0.1), var(--shadow);
+    }
+
+    .compare-header {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .compare-badge {
+      display: inline-flex;
+      align-items: center;
+      height: 24px;
+      padding: 0 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--blue-light);
+      color: var(--blue);
+      width: fit-content;
+    }
+
+    .our-solution .compare-badge {
+      background: var(--orange-bg);
+      color: var(--orange);
+    }
+
+    .compare-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .compare-core {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.5;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .compare-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .compare-item-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .compare-item-value {
+      font-size: 12px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .rating {
+      display: flex;
+      gap: 3px;
+      margin-top: 2px;
+    }
+
+    .star {
+      width: 16px;
+      height: 16px;
+      border-radius: 3px;
+      background: var(--line);
+    }
+
+    .star.filled {
+      background: var(--orange);
+    }
+
+    .compare-rating-text {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    /* Advantage summary */
+    .advantage-section {
+      background: linear-gradient(160deg, #0F172A 0%, #1E293B 100%);
+      border-radius: 16px;
+      padding: 40px 48px;
+    }
+
+    .advantage-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #F8FAFC;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+
+    .advantage-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .advantage-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .advantage-num {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--orange), var(--orange-light));
+      color: #fff;
+      font-size: 16px;
+      font-weight: 900;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .advantage-text h4 {
+      font-size: 14px;
+      font-weight: 800;
+      color: #F8FAFC;
+      margin-bottom: 4px;
+    }
+
+    .advantage-text p {
+      font-size: 12px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.5;
+    }
+
+    /* ─── Viewport scaling ─── */
+    @media (max-width: 1280px) {
+      .flow { flex-wrap: wrap; justify-content: center; gap: 12px; }
+      .flow-card { width: 120px; }
+      .comparison-grid { grid-template-columns: repeat(2, 1fr); }
+      .advantage-list { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      .hdr, .hero, .flow-section, .footer-val { padding: 18px 20px; }
+      .flow { flex-direction: column; gap: 10px; }
+      .flow-card { width: 100%; max-width: 300px; }
+      .axis-line { display: none; }
+      .footer-val { flex-direction: column; align-items: flex-start; gap: 14px; }
+      .comparison-grid { grid-template-columns: 1fr; }
+      .comparison-section { padding: 32px 20px; }
+      .advantage-section { padding: 24px; }
+    }
+
+    /* Bilingual content classes */
+    [data-lang] { display: none; }
+    body.lang-zh [data-lang="zh"] { display: block; }
+    body.lang-zh [data-lang="en"] { display: none; }
+    body.lang-en [data-lang="en"] { display: block; }
+    body.lang-en [data-lang="zh"] { display: none; }
+
+    /* Inline bilingual */
+    .bi { display: none; }
+    body.lang-zh .bi.zh { display: inline; }
+    body.lang-zh .bi.en { display: none; }
+    body.lang-en .bi.en { display: inline; }
+    body.lang-en .bi.zh { display: none; }
+  </style>
+</head>
+<body class="lang-zh">
+
+<div class="stage">
+
+  <!-- Header -->
+  <header class="hdr">
+    <div class="hdr-left">
+      <div class="logo-mark">AI</div>
+      <div>
+        <div class="hdr-title" data-lang="zh">AI 工程采购资料整理与发单助手</div>
+        <div class="hdr-title" data-lang="en">AI Procurement Coordinator</div>
+        <div class="hdr-sub" data-lang="zh">工作流架构总览 — 交互式技术详解</div>
+        <div class="hdr-sub" data-lang="en">Workflow Architecture Overview — Interactive Tech Stack</div>
+      </div>
+    </div>
+    <div class="hdr-pills">
+      <span class="pill" data-lang="zh">7 层主链路</span>
+      <span class="pill" data-lang="en">7-Layer Pipeline</span>
+      <span class="pill orange" data-lang="zh">规则 + Agent 层重点标识</span>
+      <span class="pill orange" data-lang="en">Rule + Agent Layer Highlighted</span>
+      <div class="lang-toggle">
+        <button class="lang-btn active" onclick="setLang('zh')">中</button>
+        <button class="lang-btn" onclick="setLang('en')">EN</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-eyebrow" data-lang="zh">✦ Progressive Automation Roadmap</div>
+    <div class="hero-eyebrow" data-lang="en">✦ Progressive Automation Roadmap</div>
+    <h1 class="hero-title">
+      <span data-lang="zh">从 <em>多源资料</em> 到 <em>确认发单</em> 的完整链路</span>
+      <span data-lang="en">From <em>Multi-Source Data</em> to <em>Confirmed Order</em></span>
+    </h1>
+    <p class="hero-desc" data-lang="zh">
+      多源资料入口 → AI 解析 → 结构化订单草稿 → 规则与冲突检测 Agent → 人工确认审批层 → 生成 PDF/Excel → 一键发单与状态追踪
+    </p>
+    <p class="hero-desc" data-lang="en">
+      Multi-source entry → AI Parsing → Structured order draft → Rule & Conflict Agent → Human approval → PDF/Excel generation → One-click dispatch & tracking
+    </p>
+  </section>
+
+  <!-- 7-layer flow -->
+  <section class="flow-section">
+    <div class="flow-label" data-lang="zh">WORKFLOW — 7 层主链路（Hover 查看技术栈）</div>
+    <div class="flow-label" data-lang="en">WORKFLOW — 7 Layers（Hover for Tech Stack）</div>
+
+    <div class="axis-container">
+      <div class="axis-line"></div>
+      <div class="flow">
+
+      <!-- 1. 数据入口 -->
+      <div class="flow-card">
+        <div class="card-index">1</div>
+        <div class="card-title" data-lang="zh">数据入口</div>
+        <div class="card-title" data-lang="en">Data Entry</div>
+        <div class="card-desc" data-lang="zh">邮件 / WhatsApp / 文件上传</div>
+        <div class="card-desc" data-lang="en">Email / WhatsApp / Upload</div>
+        <div class="card-tech">
+          <span class="tech-tag">IMAP/SMTP</span>
+          <span class="tech-tag">WhatsApp API</span>
+          <span class="tech-tag">REST upload</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第1层 - 数据入口 技术栈详解</h4>
+          <h4 data-lang="en">Layer 1 - Data Entry Tech Stack</h4>
+          <ul>
+            <li><strong>IMAP/SMTP</strong>: <span data-lang="zh">邮件协议连接器，自动拉取邮件及附件</span><span data-lang="en">Email connector, auto-fetches emails</span></li>
+            <li><strong>WhatsApp Business API</strong>: <span data-lang="zh">接收 WhatsApp 消息和文件，实时接入需求变更</span><span data-lang="en">Receives WhatsApp messages/files</span></li>
+            <li><strong>REST Upload</strong>: <span data-lang="zh">手动上传文件，支持拖拽，兼容 PDF/图片/Excel</span><span data-lang="en">Drag-drop upload, PDF/img/Excel</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">组合效果：多渠道统一入口，消除资料分散问题</p>
+          <p class="synergy" data-lang="en">Synergy: Unified multi-channel entry</p>
+        </div>
+      </div>
+
+      <!-- 2. 原始资料库 -->
+      <div class="flow-card">
+        <div class="card-index">2</div>
+        <div class="card-title" data-lang="zh">原始资料库</div>
+        <div class="card-title" data-lang="en">Raw Archive</div>
+        <div class="card-desc" data-lang="zh">原文件 / 来源 / 时间戳 / 项目</div>
+        <div class="card-desc" data-lang="en">Files / Source / Timestamp</div>
+        <div class="card-tech">
+          <span class="tech-tag">S3 存储</span>
+          <span class="tech-tag">PostgreSQL</span>
+          <span class="tech-tag">时间戳索引</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第2层 - 原始资料库 技术栈详解</h4>
+          <h4 data-lang="en">Layer 2 - Raw Archive Tech Stack</h4>
+          <ul>
+            <li><strong>S3 对象存储</strong>: <span data-lang="zh">保存原始文件二进制，支持海量文件</span><span data-lang="en">Stores raw file binaries, massive files</span></li>
+            <li><strong>PostgreSQL metadata</strong>: <span data-lang="zh">记录来源/发送人/时间戳/项目/文件类型</span><span data-lang="en">Records source/sender/timestamp/project</span></li>
+            <li><strong>时间戳索引</strong>: <span data-lang="zh">按时间线追溯变更，支持版本回溯</span><span data-lang="en">Timeline tracking, version rollback</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">组合效果：原始资料完整归档，每个文件都可追溯来源</p>
+          <p class="synergy" data-lang="en">Synergy: Complete raw archive with traceable sources</p>
+        </div>
+      </div>
+
+      <!-- 3. AI 解析层 -->
+      <div class="flow-card">
+        <div class="card-index">3</div>
+        <div class="card-title" data-lang="zh">AI 解析层</div>
+        <div class="card-title" data-lang="en">AI Parsing</div>
+        <div class="card-desc" data-lang="zh">OCR / 表格识别 / JSON 抽取</div>
+        <div class="card-desc" data-lang="en">OCR / Table parse / LLM extract</div>
+        <div class="card-tech">
+          <span class="tech-tag">PaddleOCR</span>
+          <span class="tech-tag">LLM Claude/GPT</span>
+          <span class="tech-tag">多模态</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第3层 - AI 解析层 技术栈详解</h4>
+          <h4 data-lang="en">Layer 3 - AI Parsing Tech Stack</h4>
+          <ul>
+            <li><strong>PaddleOCR</strong>: <span data-lang="zh">识别图片/扫描件文字，支持中英文混合</span><span data-lang="en">Text recognition from images/scans</span></li>
+            <li><strong>LLM (Claude/GPT)</strong>: <span data-lang="zh">从非结构化文本提取结构化 JSON 字段</span><span data-lang="en">Extracts structured JSON from text</span></li>
+            <li><strong>表格识别 + 多模态</strong>: <span data-lang="zh">解析 Excel/PDF 表格，关联图片与规格</span><span data-lang="en">Parses tables, links images to specs</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">组合效果：图片→文字→结构化字段，规格关联不丢失</p>
+          <p class="synergy" data-lang="en">Synergy: Image→Text→Structured, specs preserved</p>
+        </div>
+      </div>
+
+      <!-- 4. 订单数据库 -->
+      <div class="flow-card">
+        <div class="card-index">4</div>
+        <div class="card-title" data-lang="zh">订单数据库</div>
+        <div class="card-title" data-lang="en">Order DB</div>
+        <div class="card-desc" data-lang="zh">项目 / 商品 / 规格 / 版本</div>
+        <div class="card-desc" data-lang="en">Project / Item / Spec / Version</div>
+        <div class="card-tech">
+          <span class="tech-tag">Supabase/PG</span>
+          <span class="tech-tag">item_versions</span>
+          <span class="tech-tag">JSONB 追溯</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第4层 - 订单数据库 技术栈详解</h4>
+          <h4 data-lang="en">Layer 4 - Order Database Tech Stack</h4>
+          <ul>
+            <li><strong>Supabase/PostgreSQL</strong>: <span data-lang="zh">订单主数据库，JSONB 扩展存储半结构化数据</span><span data-lang="en">Order master DB with JSONB extension</span></li>
+            <li><strong>item_versions</strong>: <span data-lang="zh">版本追踪表，每次变更生成新版本记录</span><span data-lang="en">Version tracking, new record per change</span></li>
+            <li><strong>JSONB 可追溯</strong>: <span data-lang="zh">每个字段嵌入来源证据，哪个文件提取了一目了然</span><span data-lang="en">Each field embeds source evidence JSONB</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">组合效果：结构化存储 + 版本完整追溯，字段都可看到来源</p>
+          <p class="synergy" data-lang="en">Synergy: Structured storage + full version trace</p>
+        </div>
+      </div>
+
+      <!-- 5. 规则与 Agent 层 (highlighted) -->
+      <div class="flow-card highlight">
+        <div class="card-index">5</div>
+        <div class="card-title" data-lang="zh">规则与 Agent 层</div>
+        <div class="card-title" data-lang="en">Rule & Agent</div>
+        <div class="card-desc" data-lang="zh">版本判断 / 冲突检测 / 风险评估</div>
+        <div class="card-desc" data-lang="en">Version / Conflict / Risk</div>
+        <div class="card-tech">
+          <span class="tech-tag">规则引擎</span>
+          <span class="tech-tag">Version Agent</span>
+          <span class="tech-tag">Risk Scorer</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第5层 - 规则与 Agent 层（核心）</h4>
+          <h4 data-lang="en">Layer 5 - Rule & Agent (Core)</h4>
+          <ul>
+            <li><strong>业务规则引擎</strong>: <span data-lang="zh">供应商匹配/字段校验/版本判断规则</span><span data-lang="en">Supplier matching, field validation rules</span></li>
+            <li><strong>AI Version Agent</strong>: <span data-lang="zh">自动判断最新需求版本，语义理解而非只看时间戳</span><span data-lang="en">Auto-determines latest version by context</span></li>
+            <li><strong>Risk Scorer</strong>: <span data-lang="zh">评估订单风险，低风险自动通过</span><span data-lang="en">Scores order risk, auto-approve low risk</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">组合效果：规则兜底 + AI 智能判断 + 风险量化</p>
+          <p class="synergy" data-lang="en">Synergy: Rules + AI judgment + risk quantification</p>
+        </div>
+      </div>
+
+      <!-- 6. 确认与审批层 -->
+      <div class="flow-card">
+        <div class="card-index">6</div>
+        <div class="card-title" data-lang="zh">确认与审批层</div>
+        <div class="card-title" data-lang="en">Approval</div>
+        <div class="card-desc" data-lang="zh">低风险自动 / 高风险人工确认</div>
+        <div class="card-desc" data-lang="en">Low-risk auto / High-risk manual</div>
+        <div class="card-tech">
+          <span class="tech-tag">Human-in-loop</span>
+          <span class="tech-tag">Approval Queue</span>
+          <span class="tech-tag">证据展示</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第6层 - 确认与审批层 技术栈详解</h4>
+          <h4 data-lang="en">Layer 6 - Approval Layer Tech Stack</h4>
+          <ul>
+            <li><strong>Human-in-the-loop</strong>: <span data-lang="zh">高风险字段人工逐条确认，业务安全边界</span><span data-lang="en">High-risk fields require manual confirmation</span></li>
+            <li><strong>Approval Queue</strong>: <span data-lang="zh">待确认队列，按风险等级排序，优先处理重要订单</span><span data-lang="en">Queue sorted by risk level and urgency</span></li>
+            <li><strong>版本证据展示</strong>: <span data-lang="zh">展示字段变更历史和来源证据，帮助人工快速判断</span><span data-lang="en">Shows change history for quick judgment</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">组合效果：AI 辅助 + 人工兜底，安全与效率平衡</p>
+          <p class="synergy" data-lang="en">Synergy: AI assist + human fallback, balanced</p>
+        </div>
+      </div>
+
+      <!-- 7. 输出层 -->
+      <div class="flow-card">
+        <div class="card-index">7</div>
+        <div class="card-title" data-lang="zh">输出执行层</div>
+        <div class="card-title" data-lang="en">Output</div>
+        <div class="card-desc" data-lang="zh">PDF/Excel / 发给工厂 / 状态追踪</div>
+        <div class="card-desc" data-lang="en">PDF/Excel / Send / Track</div>
+        <div class="card-tech">
+          <span class="tech-tag">PDF Template</span>
+          <span class="tech-tag">SMTP / WA</span>
+          <span class="tech-tag">Status webhook</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第7层 - 输出执行层 技术栈详解</h4>
+          <h4 data-lang="en">Layer 7 - Output Layer Tech Stack</h4>
+          <ul>
+            <li><strong>PDF Template Engine</strong>: <span data-lang="zh">渲染工厂可执行的生产单，高可读性布局</span><span data-lang="en">Renders factory-ready production orders</span></li>
+            <li><strong>SMTP / WhatsApp Business API</strong>: <span data-lang="zh">确认后一键发送到工厂，实时送达</span><span data-lang="en">One-click send to factory after confirmation</span></li>
+            <li><strong>Status Webhook</strong>: <span data-lang="zh">追踪工厂确认/生产/发货状态，异常自动提醒</span><span data-lang="en">Tracks status, auto-alert on exceptions</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">组合效果：确认后一键发单，状态实时追踪</p>
+          <p class="synergy" data-lang="en">Synergy: One-click dispatch, real-time tracking</p>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- Footer values -->
+  <footer class="footer-val">
+    <div class="val-label">Core Values</div>
+    <div class="val-items">
+      <div class="val-item">
+        <div class="val-icon">⏱</div>
+        <div>
+          <div class="val-text" data-lang="zh">降本增效</div>
+          <div class="val-text" data-lang="en">Cost Reduction</div>
+          <div class="val-sub" data-lang="zh">资料整理时间减少 70%</div>
+          <div class="val-sub" data-lang="en">Data consolidation time -70%</div>
+        </div>
+      </div>
+      <div class="val-item">
+        <div class="val-icon">🔍</div>
+        <div>
+          <div class="val-text" data-lang="zh">全流程可追溯</div>
+          <div class="val-text" data-lang="en">Full Traceability</div>
+          <div class="val-sub" data-lang="zh">每个字段都能看到来源证据</div>
+          <div class="val-sub" data-lang="en">Every field has source evidence</div>
+        </div>
+      </div>
+      <div class="val-item">
+        <div class="val-icon orange">✓</div>
+        <div>
+          <div class="val-text" data-lang="zh">订单零差错</div>
+          <div class="val-text" data-lang="en">Zero Error Orders</div>
+          <div class="val-sub" data-lang="zh">冲突缺失召回率 95%+</div>
+          <div class="val-sub" data-lang="en">Conflict/missing recall rate 95%+</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Page 2: Comparison -->
+<section class="comparison-section">
+  <h2 class="comparison-title">
+    <span data-lang="zh">我们的工作流</span><span class="us" data-lang="en">Our Workflow</span>
+    <span data-lang="zh"> vs 主流方案</span><span data-lang="en"> vs Mainstream Solutions</span>
+  </h2>
+
+  <div class="comparison-grid">
+    <!-- Our Solution -->
+    <div class="compare-card our-solution">
+      <div class="compare-header">
+        <span class="compare-badge" data-lang="zh">本方案</span><span class="compare-badge" data-lang="en">Our Solution</span>
+        <div class="compare-title" data-lang="zh">渐进式 AI Agent + 规则引擎</div>
+        <div class="compare-title" data-lang="en">Progressive AI Agent + Rule Engine</div>
+      </div>
+      <div class="compare-core" data-lang="zh">规则引擎兜底 + 渐进式 AI Agent 分层决策，高风险人工确认</div>
+      <div class="compare-core" data-lang="en">Rules as safety net + Progressive AI Agent layered decisions, human confirmation for high-risk</div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
+        <div class="compare-item-value" data-lang="zh">复杂多源采购订单的智能整理与发单</div>
+        <div class="compare-item-value" data-lang="en">Intelligent order consolidation for complex multi-source procurement</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
+        <div class="compare-item-value" data-lang="zh">邮件/聊天/图片/PDF 多源混合格单，需版本判断和冲突检测</div>
+        <div class="compare-item-value" data-lang="en">Multi-source mixed orders from email/chat/img/PDF, needs version & conflict detection</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
+        <div class="compare-item-value" data-lang="zh">需要一定 AI 工程能力，MVP 阶段依赖规则调优</div>
+        <div class="compare-item-value" data-lang="en">Requires AI engineering capability, MVP relies on rule tuning</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
+        <div class="rating">
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+        </div>
+        <div class="compare-rating-text" data-lang="zh">5/5 — 专为复杂多源订单场景设计</div>
+        <div class="compare-rating-text" data-lang="en">5/5 — Designed specifically for complex multi-source order scenarios</div>
+      </div>
+    </div>
+
+    <!-- n8n -->
+    <div class="compare-card">
+      <div class="compare-header">
+        <span class="compare-badge">n8n</span>
+        <div class="compare-title" data-lang="zh">传统工作流自动化</div>
+        <div class="compare-title" data-lang="en">Traditional Workflow Automation</div>
+      </div>
+      <div class="compare-core" data-lang="zh">no-code/low-code 可视化工作流编排，API 连接器丰富</div>
+      <div class="compare-core" data-lang="en">No-code/low-code visual workflow orchestration, rich API connectors</div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
+        <div class="compare-item-value" data-lang="zh">通用流程自动化，无代码易上手</div>
+        <div class="compare-item-value" data-lang="en">General process automation, easy no-code setup</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
+        <div class="compare-item-value" data-lang="zh">标准化 API 流程，定时任务，简单的数据转发</div>
+        <div class="compare-item-value" data-lang="en">Standardized API flows, scheduled tasks, simple data forwarding</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
+        <div class="compare-item-value" data-lang="zh">缺乏原生版本管理，AI 集成浅，无结构化订单建模</div>
+        <div class="compare-item-value" data-lang="en">No native version management, shallow AI integration, no structured order modeling</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
+        <div class="rating">
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+        </div>
+        <div class="compare-rating-text" data-lang="zh">3/5 — 适合数据转发，不适合版本判断</div>
+        <div class="compare-rating-text" data-lang="en">3/5 — Good for data routing, not for version judgment</div>
+      </div>
+    </div>
+
+    <!-- LangChain -->
+    <div class="compare-card">
+      <div class="compare-header">
+        <span class="compare-badge">LangChain</span>
+        <div class="compare-title" data-lang="zh">纯 Agent 编排</div>
+        <div class="compare-title" data-lang="en">Pure Agent Orchestration</div>
+      </div>
+      <div class="compare-core" data-lang="zh">强大的 LLM Agent 框架，支持复杂推理链和工具调用</div>
+      <div class="compare-core" data-lang="en">Powerful LLM Agent framework, supports complex reasoning chains</div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
+        <div class="compare-item-value" data-lang="zh">AI 优先的复杂推理和对话场景</div>
+        <div class="compare-item-value" data-lang="en">AI-first complex reasoning and conversational scenarios</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
+        <div class="compare-item-value" data-lang="zh">聊天机器人，文档问答，复杂多步推理</div>
+        <div class="compare-item-value" data-lang="en">Chatbots, document Q&A, complex multi-step reasoning</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
+        <div class="compare-item-value" data-lang="zh">技术门槛高，版本管理弱，不擅长结构化订单数据库建模</div>
+        <div class="compare-item-value" data-lang="en">High technical barrier, weak version management, not good at structured order DB modeling</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
+        <div class="rating">
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+        </div>
+        <div class="compare-rating-text" data-lang="zh">3/5 — AI 能力强但缺少订单建模思维</div>
+        <div class="compare-rating-text" data-lang="en">3/5 — Strong AI but lacks order modeling thinking</div>
+      </div>
+    </div>
+
+    <!-- Simple RAG -->
+    <div class="compare-card">
+      <div class="compare-header">
+        <span class="compare-badge">Simple RAG</span>
+        <div class="compare-title" data-lang="zh">文档提取为主</div>
+        <div class="compare-title" data-lang="en">Document Extraction Focused</div>
+      </div>
+      <div class="compare-core" data-lang="zh">向量检索 + LLM 阅读理解，从文档中提取答案</div>
+      <div class="compare-core" data-lang="en">Vector retrieval + LLM reading comprehension, extracts answers from documents</div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
+        <div class="compare-item-value" data-lang="zh">文档问答、内容检索、知识库查询</div>
+        <div class="compare-item-value" data-lang="en">Document Q&A, content retrieval, knowledge base queries</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
+        <div class="compare-item-value" data-lang="zh">已有知识库检索，合同条款查询，产品手册问答</div>
+        <div class="compare-item-value" data-lang="en">Knowledge base retrieval, contract clause lookup, product manual Q&A</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
+        <div class="compare-item-value" data-lang="zh">无版本概念，无结构化订单建模，无状态追踪能力</div>
+        <div class="compare-item-value" data-lang="en">No version concept, no structured order modeling, no status tracking</div>
+      </div>
+      <div class="compare-item">
+        <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
+        <div class="rating">
+          <div class="star filled"></div>
+          <div class="star filled"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+          <div class="star"></div>
+        </div>
+        <div class="compare-rating-text" data-lang="zh">2/5 — 只解决文档提取，不解决订单管理</div>
+        <div class="compare-rating-text" data-lang="en">2/5 — Only solves document extraction, not order management</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Advantages Summary -->
+  <div class="advantage-section">
+    <h3 class="advantage-title" data-lang="zh">✦ 本方案的核心优势总结</h3>
+    <h3 class="advantage-title" data-lang="en">✦ Core Advantages of Our Solution</h3>
+    <div class="advantage-list">
+      <div class="advantage-item">
+        <div class="advantage-num">1</div>
+        <div class="advantage-text">
+          <h4 data-lang="zh">原生版本管理架构</h4>
+          <h4 data-lang="en">Native Version Management</h4>
+          <p data-lang="zh">item_versions + 时间戳索引 + JSONB 来源证据，从架构层面解决"哪个是最新版本"的核心问题，而非后期打补丁</p>
+          <p data-lang="en">item_versions + timestamp indexing + JSONB source evidence, solves "which version is latest" at architecture level, not as an afterthought</p>
+        </div>
+      </div>
+      <div class="advantage-item">
+        <div class="advantage-num">2</div>
+        <div class="advantage-text">
+          <h4 data-lang="zh">规则 + Agent 分层决策</h4>
+          <h4 data-lang="en">Rule + Agent Layered Decisions</h4>
+          <p data-lang="zh">规则引擎兜底，AI Agent 智能判断，Risk Scorer 量化风险。不是纯规则（死板）也不是纯 Agent（不可控），而是分层混合</p>
+          <p data-lang="en">Rules as safety net, AI Agent for intelligent judgment, Risk Scorer quantifies risk. Not pure rules (rigid) or pure Agent (uncontrollable), but layered hybrid</p>
+        </div>
+      </div>
+      <div class="advantage-item">
+        <div class="advantage-num">3</div>
+        <div class="advantage-text">
+          <h4 data-lang="zh">Human-in-the-loop 安全网</h4>
+          <h4 data-lang="en">Human-in-the-loop Safety Net</h4>
+          <p data-lang="zh">高风险字段强制人工确认，不过度承诺自动化。AI 负责整理，人负责决策，安全与效率平衡</p>
+          <p data-lang="en">High-risk fields require mandatory human confirmation, no over-promising automation. AI handles consolidation, human decides, balanced safety and efficiency</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function setLang(lang) {
+    document.body.className = 'lang-' + lang;
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+      btn.classList.remove('active');
+    });
+    event.target.classList.add('active');
+  }
+</script>
+
+</body>
+</html>
