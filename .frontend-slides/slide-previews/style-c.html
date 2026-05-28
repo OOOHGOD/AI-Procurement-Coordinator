@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Style C - Swiss / Neo Grid</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #003FBF;
+      --blue-bg: #F0F5FF;
+      --orange: #D4500A;
+      --orange-bg: #FFF0E8;
+      --ink: #111827;
+      --muted: #6B7280;
+      --line: #D1D5DB;
+      --bg: #F3F4F6;
+      --panel: #ffffff;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    html, body {
+      height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      line-height: 1.55;
+    }
+
+    .stage {
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ─── Top bar ─── */
+    .topbar {
+      background: var(--ink);
+      padding: 16px 52px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-box {
+      width: 38px; height: 38px;
+      border-radius: 6px;
+      background: linear-gradient(135deg, #003FBF, #0072C6);
+      display: grid; place-items: center;
+      font-size: 15px; font-weight: 900; color: #fff;
+    }
+
+    .topbar-name { font-size: 17px; font-weight: 800; color: #fff; }
+    .topbar-sub { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 1px; }
+
+    .topbar-meta { display: flex; gap: 8px; align-items: center; }
+
+    .meta-chip {
+      display: inline-flex; align-items: center;
+      height: 26px; padding: 0 10px;
+      border-radius: 4px;
+      font-size: 11px; font-weight: 700;
+      background: rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.7);
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    /* ─── Hero ─── */
+    .hero {
+      background: var(--panel);
+      border-bottom: 2px solid var(--ink);
+      padding: 40px 52px 32px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: end;
+    }
+
+    .hero-label {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: clamp(26px, 3.2vw, 44px);
+      font-weight: 900; line-height: 1.1; letter-spacing: 0;
+      color: var(--ink);
+    }
+
+    .hero-title em { color: var(--blue); font-style: normal; }
+
+    .hero-body {
+      margin-top: 12px; max-width: 640px;
+      font-size: 14px; color: var(--muted); line-height: 1.7;
+    }
+
+    .hero-side {
+      width: 220px;
+      background: var(--blue-bg);
+      border: 1px solid #BFCDDB;
+      border-radius: 8px;
+      padding: 16px;
+    }
+
+    .side-title {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--blue); margin-bottom: 8px;
+    }
+
+    .side-stat {
+      display: flex; align-items: baseline; gap: 6px;
+      margin: 8px 0;
+    }
+
+    .stat-num { font-size: 28px; font-weight: 900; color: var(--blue); }
+    .stat-label { font-size: 12px; color: var(--muted); }
+
+    /* ─── Grid / workflow ─── */
+    .grid-section {
+      flex: 1;
+      padding: 28px 52px 36px;
+      background: var(--bg);
+    }
+
+    .grid-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .grid-label {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .grid-title {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--ink);
+    }
+
+    .pipeline {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 10px;
+    }
+
+    .node {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+      opacity: 0;
+      transform: translateY(16px);
+      animation: pop 0.4s ease forwards;
+    }
+
+    .node:nth-child(1) { animation-delay: 0.04s; }
+    .node:nth-child(2) { animation-delay: 0.08s; }
+    .node:nth-child(3) { animation-delay: 0.12s; }
+    .node:nth-child(4) { animation-delay: 0.16s; }
+    .node:nth-child(5) { animation-delay: 0.2s; }
+    .node:nth-child(6) { animation-delay: 0.24s; }
+    .node:nth-child(7) { animation-delay: 0.28s; }
+
+    @keyframes pop { to { opacity: 1; transform: translateY(0); } }
+
+    /* highlight node 5 */
+    .node.key {
+      border-color: var(--orange);
+      box-shadow: 0 0 0 2px rgba(212, 80, 10, 0.1), 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .node.key .node-num { background: var(--orange); }
+
+    .node-num {
+      width: 26px; height: 26px;
+      border-radius: 4px;
+      background: var(--ink);
+      color: #fff; font-size: 12px; font-weight: 900;
+      display: grid; place-items: center;
+    }
+
+    .node-name {
+      font-size: 13px; font-weight: 800; color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .node-detail {
+      font-size: 11px; color: var(--muted); line-height: 1.5;
+      flex: 1;
+    }
+
+    .node-tags {
+      display: flex; flex-wrap: wrap; gap: 3px;
+      margin-top: 2px;
+    }
+
+    .ntag {
+      display: inline-flex; align-items: center;
+      height: 18px; padding: 0 6px;
+      border-radius: 3px;
+      font-size: 10px; font-weight: 600;
+      background: var(--blue-bg);
+      color: var(--blue);
+    }
+
+    .node.key .ntag {
+      background: var(--orange-bg);
+      color: var(--orange);
+    }
+
+    /* divider arrows */
+    .pipe-divider {
+      display: grid;
+      place-items: center;
+    }
+
+    .pipe-divider::after {
+      content: "";
+      width: 100%; height: 2px;
+      background: var(--line);
+    }
+
+    /* ─── Value strip ─── */
+    .val-strip {
+      background: var(--ink);
+      padding: 20px 52px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .val-strip-label {
+      font-size: 10px; font-weight: 800;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); white-space: nowrap;
+    }
+
+    .val-items { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    .val-card {
+      padding: 10px 16px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex; align-items: center; gap: 10px;
+    }
+
+    .val-icon {
+      width: 28px; height: 28px;
+      border-radius: 6px;
+      background: var(--blue);
+      display: grid; place-items: center;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    .val-icon.orange { background: var(--orange); }
+
+    .val-name { color: #F9FAFB; font-size: 13px; font-weight: 700; }
+    .val-note { color: rgba(255,255,255,0.4); font-size: 10px; }
+
+    /* Responsive */
+    @media (max-width: 1280px) {
+      .pipeline { grid-template-columns: repeat(4, 1fr); }
+    }
+
+    @media (max-width: 720px) {
+      .topbar, .hero, .grid-section, .val-strip { padding: 16px 20px; }
+      .pipeline { grid-template-columns: repeat(2, 1fr); }
+      .hero { grid-template-columns: 1fr; }
+      .hero-side { width: 100%; }
+      .val-strip { flex-direction: column; align-items: flex-start; gap: 12px; }
+    }
+  </style>
+</head>
+<body>
+<div class="stage">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-brand">
+      <div class="logo-box">AI</div>
+      <div>
+        <div class="topbar-name">AI 工程采购资料整理与发单助手</div>
+        <div class="topbar-sub">Progressive Automation Roadmap — Architecture Overview</div>
+      </div>
+    </div>
+    <div class="topbar-meta">
+      <span class="meta-chip">7-LAYER PIPELINE</span>
+      <span class="meta-chip">RULES + AGENT KEY</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div>
+      <div class="hero-label">Product Positioning — 家装 / 工程采购场景</div>
+      <h1 class="hero-title">
+        从 <em>混乱多源资料</em> 到 <em>确认发单</em><br>
+        完整链路 · 规则驱动 · Agent 智能
+      </h1>
+      <p class="hero-body">
+        多源资料入口 → AI 解析抽取 → 结构化订单草稿 → 规则与冲突检测 Agent → 人工确认审批层 → 生成工厂 PDF → 一键发单与状态追踪
+      </p>
+    </div>
+    <aside class="hero-side">
+      <div class="side-title">MVP Success Metrics</div>
+      <div class="side-stat">
+        <span class="stat-num">70%</span>
+        <span class="stat-label">资料整理时间减少</span>
+      </div>
+      <div class="side-stat">
+        <span class="stat-num">90%+</span>
+        <span class="stat-label">字段提取准确率</span>
+      </div>
+      <div class="side-stat">
+        <span class="stat-num">95%+</span>
+        <span class="stat-label">冲突缺失召回率</span>
+      </div>
+    </aside>
+  </section>
+
+  <!-- Pipeline -->
+  <section class="grid-section">
+    <div class="grid-header">
+      <div class="grid-label">WORKFLOW PIPELINE — 7 Layers</div>
+      <div class="grid-title">资料入口 → 发单执行</div>
+    </div>
+    <div class="pipeline">
+
+      <!-- 1. 数据入口 -->
+      <div class="node">
+        <div class="node-num">01</div>
+        <div class="node-name">数据入口</div>
+        <div class="node-detail">邮件 / WhatsApp / 文件上传 / 表单 / 云盘统一收集</div>
+        <div class="node-tags">
+          <span class="ntag">IMAP</span>
+          <span class="ntag">WA Business</span>
+          <span class="ntag">REST</span>
+        </div>
+      </div>
+
+      <div class="pipe-divider"></div>
+
+      <!-- 2. 原始资料库 -->
+      <div class="node">
+        <div class="node-num">02</div>
+        <div class="node-name">原始资料库</div>
+        <div class="node-detail">保存原文件、来源、发送人、时间、项目名称</div>
+        <div class="node-tags">
+          <span class="ntag">S3 / OSS</span>
+          <span class="ntag">metadata</span>
+        </div>
+      </div>
+
+      <div class="pipe-divider"></div>
+
+      <!-- 3. AI 解析层 -->
+      <div class="node">
+        <div class="node-num">03</div>
+        <div class="node-name">AI 解析层</div>
+        <div class="node-detail">OCR · 表格识别 · PDF 解析 · 大模型 JSON 抽取</div>
+        <div class="node-tags">
+          <span class="ntag">PaddleOCR</span>
+          <span class="ntag">LLM</span>
+        </div>
+      </div>
+
+      <div class="pipe-divider"></div>
+
+      <!-- 4. 订单数据库 -->
+      <div class="node">
+        <div class="node-num">04</div>
+        <div class="node-name">订单数据库</div>
+        <div class="node-detail">项目·房间·商品·规格·数量·供应商·版本·状态</div>
+        <div class="node-tags">
+          <span class="ntag">PostgreSQL</span>
+          <span class="ntag">JSONB</span>
+        </div>
+      </div>
+
+      <div class="pipe-divider"></div>
+
+      <!-- 5. 规则与 Agent 层 (KEY) -->
+      <div class="node key">
+        <div class="node-num">05</div>
+        <div class="node-name">规则与 Agent 层</div>
+        <div class="node-detail">最新版本判断 · 冲突检测 · 缺失字段检测 · 供应商匹配 · 风险评分</div>
+        <div class="node-tags">
+          <span class="ntag">Rule Engine</span>
+          <span class="ntag">AI Agent</span>
+          <span class="ntag">Risk Score</span>
+        </div>
+      </div>
+
+      <div class="pipe-divider"></div>
+
+      <!-- 6. 确认与审批层 -->
+      <div class="node">
+        <div class="node-num">06</div>
+        <div class="node-name">确认与审批层</div>
+        <div class="node-detail">低风险自动通过 · 高风险人工逐条确认后进入发单</div>
+        <div class="node-tags">
+          <span class="ntag">HITL</span>
+          <span class="ntag">Queue</span>
+        </div>
+      </div>
+
+      <div class="pipe-divider"></div>
+
+      <!-- 7. 输出执行层 -->
+      <div class="node">
+        <div class="node-num">07</div>
+        <div class="node-name">输出执行层</div>
+        <div class="node-detail">PDF / Excel 生成 · 邮件 · WhatsApp 发给工厂 · 状态追踪</div>
+        <div class="node-tags">
+          <span class="ntag">PDF Engine</span>
+          <span class="ntag">Webhook</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Value strip -->
+  <footer class="val-strip">
+    <div class="val-strip-label">Core Values</div>
+    <div class="val-items">
+      <div class="val-card">
+        <div class="val-icon">⏱</div>
+        <div>
+          <div class="val-name">降本增效</div>
+          <div class="val-note">资料整理时间减少 70%</div>
+        </div>
+      </div>
+      <div class="val-card">
+        <div class="val-icon">🔍</div>
+        <div>
+          <div class="val-name">全流程可追溯</div>
+          <div class="val-note">每个字段都能看到来源证据</div>
+        </div>
+      </div>
+      <div class="val-card">
+        <div class="val-icon orange">✓</div>
+        <div>
+          <div class="val-name">订单零差错</div>
+          <div class="val-note">冲突缺失召回率 95%+</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</div>
+</body>
+</html>

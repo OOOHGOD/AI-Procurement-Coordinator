@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir \"d:\\\\Couresware\\\\Workspace\\\\AI Procurement Coordinator\\\\\")",
+      "Skill(update-config)",
+      "Skill(update-config:*)"
+    ]
+  }
+}
