@@ -14,6 +14,10 @@
       --orange: #FF7D00;
       --orange-light: #FF9D00;
       --orange-bg: #FFF3E0;
+      --green: #00C48C;
+      --green-light: #E6F7F2;
+      --red: #FF4757;
+      --red-light: #FFE8EC;
       --bg: #F5F7FA;
       --panel: #ffffff;
       --ink: #1A202C;
@@ -86,6 +90,12 @@
       border-color: rgba(255, 125, 0, 0.35);
     }
 
+    .pill.green {
+      background: rgba(0, 196, 140, 0.18);
+      color: #6DEFC0;
+      border-color: rgba(0, 196, 140, 0.35);
+    }
+
     .lang-toggle {
       display: flex;
       gap: 4px;
@@ -137,6 +147,40 @@
       font-size: 16px; color: rgba(255,255,255,0.6); line-height: 1.6;
     }
 
+    /* ─── MVP Scope Highlight ─── */
+    .mvp-strip {
+      background: linear-gradient(90deg, var(--blue-mid), var(--blue) 50%, var(--orange) 100%);
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .mvp-label {
+      font-size: 11px; font-weight: 800; letter-spacing: 0.08em;
+      text-transform: uppercase; color: rgba(255,255,255,0.6);
+      white-space: nowrap;
+    }
+
+    .mvp-items { display: flex; gap: 20px; flex-wrap: wrap; }
+
+    .mvp-item {
+      display: flex; align-items: center; gap: 8px;
+      padding: 8px 14px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.15);
+      font-size: 13px; font-weight: 700; color: #fff;
+    }
+
+    .mvp-item-num {
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      display: grid; place-items: center;
+      font-size: 11px; font-weight: 900;
+    }
+
     /* ─── Flow — Single Axis ─── */
     .flow-section {
       flex: 1;
@@ -166,7 +210,7 @@
       left: 0;
       right: 0;
       height: 3px;
-      background: linear-gradient(90deg, var(--blue-mid), var(--blue-mid) 60%, var(--orange) 75%, var(--orange) 100%);
+      background: linear-gradient(90deg, var(--blue-mid), var(--blue-mid) 55%, var(--orange) 75%, var(--orange) 100%);
       border-radius: 2px;
       transform: translateY(-50%);
     }
@@ -215,7 +259,7 @@
       cursor: pointer;
       z-index: 2;
       min-width: 0;
-      width: 140px;
+      width: 155px;
     }
 
     .flow-card:nth-child(1) { animation-delay: 0.05s; }
@@ -225,6 +269,7 @@
     .flow-card:nth-child(5) { animation-delay: 0.25s; }
     .flow-card:nth-child(6) { animation-delay: 0.3s; }
     .flow-card:nth-child(7) { animation-delay: 0.35s; }
+    .flow-card:nth-child(8) { animation-delay: 0.4s; }
 
     @keyframes fadeUp {
       to { opacity: 1; transform: translateY(0); }
@@ -237,6 +282,13 @@
     }
 
     .flow-card.highlight .card-index { background: var(--orange); }
+
+    .flow-card.green-accent {
+      border-color: var(--green);
+      box-shadow: 0 0 0 2px rgba(0, 196, 140, 0.12), 0 8px 32px rgba(0, 196, 140, 0.15);
+    }
+
+    .flow-card.green-accent .card-index { background: var(--green); }
 
     .card-index {
       width: 26px; height: 26px;
@@ -277,13 +329,18 @@
       color: var(--orange);
     }
 
+    .flow-card.green-accent .tech-tag {
+      background: var(--green-light);
+      color: var(--green);
+    }
+
     /* Tooltip — positioned above card */
     .tooltip {
       position: absolute;
       left: 50%;
       bottom: calc(100% + 20px);
       transform: translateX(-50%) translateY(8px);
-      width: 300px;
+      width: 320px;
       background: var(--panel);
       border: 1px solid var(--line);
       border-radius: 12px;
@@ -305,6 +362,11 @@
     .flow-card.highlight .tooltip {
       border-color: var(--orange);
       box-shadow: 0 24px 64px rgba(255, 125, 0, 0.22);
+    }
+
+    .flow-card.green-accent .tooltip {
+      border-color: var(--green);
+      box-shadow: 0 24px 64px rgba(0, 196, 140, 0.2);
     }
 
     /* Tooltip arrow pointing down */
@@ -349,6 +411,10 @@
       color: var(--orange);
     }
 
+    .flow-card.green-accent .tooltip li strong {
+      color: var(--green);
+    }
+
     .tooltip .synergy {
       margin-top: 10px;
       padding-top: 8px;
@@ -357,6 +423,31 @@
       color: var(--ink);
       font-weight: 600;
     }
+
+    /* Confidence badges */
+    .conf-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-top: 4px;
+    }
+
+    .conf-high { background: var(--green-light); color: var(--green); }
+    .conf-mid { background: #FFF3E0; color: var(--orange); }
+    .conf-low { background: var(--red-light); color: var(--red); }
+
+    /* Conflict level badges */
+    .conflict-badge {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 10px; font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .conflict-fatal { background: var(--red-light); color: var(--red); }
+    .conflict-general { background: #FFF3E0; color: var(--orange); }
+    .conflict-missing { background: var(--blue-light); color: var(--blue); }
 
     /* ─── Footer value ─── */
     .footer-val {
@@ -390,11 +481,105 @@
     }
 
     .val-icon.orange { background: linear-gradient(135deg, var(--orange), var(--orange-light)); }
+    .val-icon.green { background: linear-gradient(135deg, var(--green), #00E0A0); }
 
     .val-text { color: #F8FAFC; font-size: 14px; font-weight: 700; }
     .val-sub { color: rgba(255,255,255,0.45); font-size: 11px; margin-top: 1px; }
 
-    /* ─── Page 2: Comparison ─── */
+    /* ─── Page 2: MVP Scope & Priority ─── */
+    .mvp-section {
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 48px;
+      border-top: 2px solid var(--line);
+    }
+
+    .mvp-title {
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 900;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .mvp-title span { color: var(--blue); }
+
+    .mvp-subtitle {
+      text-align: center;
+      font-size: 15px;
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto 40px;
+    }
+
+    .mvp-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .mvp-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: var(--shadow);
+    }
+
+    .mvp-card.priority-1 {
+      border-color: var(--green);
+      box-shadow: 0 0 0 2px rgba(0, 196, 140, 0.1), var(--shadow);
+    }
+
+    .mvp-card.priority-2 {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 2px rgba(22, 93, 255, 0.08), var(--shadow);
+    }
+
+    .mvp-card-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .mvp-num {
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      background: var(--blue);
+      color: #fff;
+      font-size: 14px; font-weight: 900;
+      display: grid; place-items: center;
+      flex-shrink: 0;
+    }
+
+    .priority-1 .mvp-num { background: var(--green); }
+    .priority-2 .mvp-num { background: var(--blue-mid); }
+
+    .mvp-card-title {
+      font-size: 14px; font-weight: 800; color: var(--ink);
+    }
+
+    .mvp-card-desc {
+      font-size: 12px; color: var(--muted); line-height: 1.5;
+    }
+
+    .mvp-tag {
+      display: inline-flex; align-items: center;
+      height: 22px; padding: 0 8px;
+      border-radius: 4px;
+      font-size: 10px; font-weight: 700;
+      width: fit-content;
+    }
+
+    .tag-core { background: var(--green-light); color: var(--green); }
+    .tag-enhance { background: var(--blue-light); color: var(--blue); }
+    .tag-future { background: var(--line); color: var(--muted); }
+
+    /* ─── Page 3: Comparison ─── */
     .comparison-section {
       min-height: 100vh;
       background: var(--bg);
@@ -410,13 +595,9 @@
       margin-bottom: 40px;
     }
 
-    .comparison-title span {
-      color: var(--blue);
-    }
+    .comparison-title span { color: var(--blue); }
 
-    .comparison-title .us {
-      color: var(--orange);
-    }
+    .comparison-title .us { color: var(--orange); }
 
     .comparison-grid {
       display: grid;
@@ -512,15 +693,132 @@
       background: var(--line);
     }
 
-    .star.filled {
-      background: var(--orange);
-    }
+    .star.filled { background: var(--orange); }
 
     .compare-rating-text {
       font-size: 11px;
       color: var(--muted);
       margin-top: 4px;
       font-style: italic;
+    }
+
+    /* ─── Page 4: Iteration Loop ─── */
+    .loop-section {
+      min-height: 100vh;
+      background: linear-gradient(160deg, #0F172A 0%, #1E293B 100%);
+      padding: 48px;
+      border-top: 2px solid rgba(255,255,255,0.06);
+    }
+
+    .loop-title {
+      font-size: clamp(24px, 3vw, 38px);
+      font-weight: 900;
+      color: #F8FAFC;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .loop-title em { color: var(--green); font-style: normal; }
+
+    .loop-subtitle {
+      text-align: center;
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      max-width: 700px;
+      margin: 0 auto 48px;
+    }
+
+    .loop-flow {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 48px;
+    }
+
+    .loop-node {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 12px;
+      padding: 20px 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      min-width: 160px;
+    }
+
+    .loop-node-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue));
+      display: grid; place-items: center;
+      font-size: 18px;
+    }
+
+    .loop-node.green .loop-node-icon {
+      background: linear-gradient(135deg, var(--green), #00E0A0);
+    }
+
+    .loop-node-title {
+      font-size: 13px; font-weight: 800; color: #F8FAFC;
+    }
+
+    .loop-node-desc {
+      font-size: 11px; color: rgba(255,255,255,0.5); text-align: center;
+    }
+
+    .loop-arrow {
+      font-size: 24px;
+      color: rgba(255,255,255,0.3);
+      padding: 0 12px;
+    }
+
+    .loop-phases {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .phase-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .phase-num {
+      font-size: 11px; font-weight: 800;
+      color: var(--green);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .phase-title {
+      font-size: 16px; font-weight: 800; color: #F8FAFC;
+      margin-bottom: 8px;
+    }
+
+    .phase-desc {
+      font-size: 12px; color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
+
+    .phase-tasks {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .phase-task {
+      font-size: 11px; color: rgba(255,255,255,0.7);
+      padding: 8px 12px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 6px;
+      border-left: 3px solid var(--blue-mid);
     }
 
     /* Advantage summary */
@@ -551,21 +849,17 @@
     }
 
     .advantage-num {
-      width: 36px;
-      height: 36px;
+      width: 36px; height: 36px;
       border-radius: 50%;
       background: linear-gradient(135deg, var(--orange), var(--orange-light));
       color: #fff;
-      font-size: 16px;
-      font-weight: 900;
-      display: grid;
-      place-items: center;
+      font-size: 16px; font-weight: 900;
+      display: grid; place-items: center;
       flex-shrink: 0;
     }
 
     .advantage-text h4 {
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 14px; font-weight: 800;
       color: #F8FAFC;
       margin-bottom: 4px;
     }
@@ -579,9 +873,12 @@
     /* ─── Viewport scaling ─── */
     @media (max-width: 1280px) {
       .flow { flex-wrap: wrap; justify-content: center; gap: 12px; }
-      .flow-card { width: 120px; }
+      .flow-card { width: 130px; }
       .comparison-grid { grid-template-columns: repeat(2, 1fr); }
       .advantage-list { grid-template-columns: 1fr; }
+      .mvp-grid { grid-template-columns: repeat(2, 1fr); }
+      .loop-flow { flex-wrap: wrap; }
+      .loop-phases { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 720px) {
@@ -593,6 +890,9 @@
       .comparison-grid { grid-template-columns: 1fr; }
       .comparison-section { padding: 32px 20px; }
       .advantage-section { padding: 24px; }
+      .mvp-grid { grid-template-columns: 1fr; }
+      .loop-phases { grid-template-columns: 1fr; }
+      .mvp-strip { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px 20px; }
     }
 
     /* Bilingual content classes */
@@ -621,15 +921,17 @@
       <div>
         <div class="hdr-title" data-lang="zh">AI 工程采购资料整理与发单助手</div>
         <div class="hdr-title" data-lang="en">AI Procurement Coordinator</div>
-        <div class="hdr-sub" data-lang="zh">工作流架构总览 — 交互式技术详解</div>
-        <div class="hdr-sub" data-lang="en">Workflow Architecture Overview — Interactive Tech Stack</div>
+        <div class="hdr-sub" data-lang="zh">优化版工作流架构 — 人工 + AI 分工细化 + 迭代闭环</div>
+        <div class="hdr-sub" data-lang="en">Optimized Workflow — Refined Human-AI Division + Iteration Loop</div>
       </div>
     </div>
     <div class="hdr-pills">
-      <span class="pill" data-lang="zh">7 层主链路</span>
-      <span class="pill" data-lang="en">7-Layer Pipeline</span>
-      <span class="pill orange" data-lang="zh">规则 + Agent 层重点标识</span>
-      <span class="pill orange" data-lang="en">Rule + Agent Layer Highlighted</span>
+      <span class="pill" data-lang="zh">8 层主链路</span>
+      <span class="pill" data-lang="en">8-Layer Pipeline</span>
+      <span class="pill orange" data-lang="zh">规则引擎 + 数据迭代层</span>
+      <span class="pill orange" data-lang="en">Rule Engine + Data Iteration</span>
+      <span class="pill green" data-lang="zh">置信度评分</span>
+      <span class="pill green" data-lang="en">Confidence Scoring</span>
       <div class="lang-toggle">
         <button class="lang-btn active" onclick="setLang('zh')">中</button>
         <button class="lang-btn" onclick="setLang('en')">EN</button>
@@ -646,17 +948,31 @@
       <span data-lang="en">From <em>Multi-Source Data</em> to <em>Confirmed Order</em></span>
     </h1>
     <p class="hero-desc" data-lang="zh">
-      多源资料入口 → AI 解析 → 结构化订单草稿 → 规则与冲突检测 Agent → 人工确认审批层 → 生成 PDF/Excel → 一键发单与状态追踪
+      资料入口 → 合规校验 → AI解析（置信度评分）→ 结构化订单（按商品/房间分组）→ 冲突分级检测 → 分级人工确认 → 文件预览校验 → 工厂发单追踪 → 规则迭代优化
     </p>
     <p class="hero-desc" data-lang="en">
-      Multi-source entry → AI Parsing → Structured order draft → Rule & Conflict Agent → Human approval → PDF/Excel generation → One-click dispatch & tracking
+      Entry → Compliance → AI Parse (Confidence) → Structured Order (by Product/Room) → Conflict Grading → Tiered Confirmation → Format Validation → Dispatch → Rule Iteration
     </p>
   </section>
 
-  <!-- 7-layer flow -->
+  <!-- MVP Strip -->
+  <section class="mvp-strip">
+    <div class="mvp-label" data-lang="zh">MVP 核心范围（6项）</div>
+    <div class="mvp-label" data-lang="en">MVP Scope (6 Items)</div>
+    <div class="mvp-items">
+      <div class="mvp-item"><span class="mvp-item-num">1</span><span data-lang="zh">文件上传入口</span><span data-lang="en">File Upload</span></div>
+      <div class="mvp-item"><span class="mvp-item-num">2</span><span data-lang="zh">AI解析+置信度</span><span data-lang="en">AI Parse+Confidence</span></div>
+      <div class="mvp-item"><span class="mvp-item-num">3</span><span data-lang="zh">结构化订单表</span><span data-lang="en">Structured Order</span></div>
+      <div class="mvp-item"><span class="mvp-item-num">4</span><span data-lang="zh">冲突分级提示</span><span data-lang="en">Conflict Grading</span></div>
+      <div class="mvp-item"><span class="mvp-item-num">5</span><span data-lang="zh">分级确认界面</span><span data-lang="en">Tiered Confirmation</span></div>
+      <div class="mvp-item"><span class="mvp-item-num">6</span><span data-lang="zh">单供应商PDF</span><span data-lang="en">Single-Supplier PDF</span></div>
+    </div>
+  </section>
+
+  <!-- 8-layer flow -->
   <section class="flow-section">
-    <div class="flow-label" data-lang="zh">WORKFLOW — 7 层主链路（Hover 查看技术栈）</div>
-    <div class="flow-label" data-lang="en">WORKFLOW — 7 Layers（Hover for Tech Stack）</div>
+    <div class="flow-label" data-lang="zh">WORKFLOW — 8 层主链路（Hover 查看技术栈）</div>
+    <div class="flow-label" data-lang="en">WORKFLOW — 8 Layers（Hover for Tech Stack）</div>
 
     <div class="axis-container">
       <div class="axis-line"></div>
@@ -667,173 +983,196 @@
         <div class="card-index">1</div>
         <div class="card-title" data-lang="zh">数据入口</div>
         <div class="card-title" data-lang="en">Data Entry</div>
-        <div class="card-desc" data-lang="zh">邮件 / WhatsApp / 文件上传</div>
-        <div class="card-desc" data-lang="en">Email / WhatsApp / Upload</div>
+        <div class="card-desc" data-lang="zh">文件上传（暂不支持邮件/WhatsApp）</div>
+        <div class="card-desc" data-lang="en">File upload (email/WA later)</div>
         <div class="card-tech">
-          <span class="tech-tag">IMAP/SMTP</span>
-          <span class="tech-tag">WhatsApp API</span>
           <span class="tech-tag">REST upload</span>
+          <span class="tech-tag">PDF/图片/文本</span>
         </div>
         <div class="tooltip">
-          <h4 data-lang="zh">第1层 - 数据入口 技术栈详解</h4>
-          <h4 data-lang="en">Layer 1 - Data Entry Tech Stack</h4>
+          <h4 data-lang="zh">第1层 - 数据入口（ MVP 聚焦）</h4>
+          <h4 data-lang="en">Layer 1 - Data Entry (MVP Focus)</h4>
           <ul>
-            <li><strong>IMAP/SMTP</strong>: <span data-lang="zh">邮件协议连接器，自动拉取邮件及附件</span><span data-lang="en">Email connector, auto-fetches emails</span></li>
-            <li><strong>WhatsApp Business API</strong>: <span data-lang="zh">接收 WhatsApp 消息和文件，实时接入需求变更</span><span data-lang="en">Receives WhatsApp messages/files</span></li>
-            <li><strong>REST Upload</strong>: <span data-lang="zh">手动上传文件，支持拖拽，兼容 PDF/图片/Excel</span><span data-lang="en">Drag-drop upload, PDF/img/Excel</span></li>
+            <li><strong>REST Upload</strong>: <span data-lang="zh">手动上传文件，支持拖拽，兼容 PDF/图片/文本</span><span data-lang="en">Drag-drop upload, PDF/img/text</span></li>
+            <li><strong>MVP 范围</strong>: <span data-lang="zh">暂不接入邮件/WhatsApp，先验证核心闭环</span><span data-lang="en">Email/WhatsApp deferred, validate core loop first</span></li>
           </ul>
-          <p class="synergy" data-lang="zh">组合效果：多渠道统一入口，消除资料分散问题</p>
-          <p class="synergy" data-lang="en">Synergy: Unified multi-channel entry</p>
+          <p class="synergy" data-lang="zh">MVP 策略：先跑通"1个项目→1份生产单"，再扩展多渠道</p>
+          <p class="synergy" data-lang="en">MVP: Validate "1 project → 1 order" first</p>
         </div>
       </div>
 
-      <!-- 2. 原始资料库 -->
+      <!-- 2. 原始资料库 + 来源标签化 -->
       <div class="flow-card">
         <div class="card-index">2</div>
         <div class="card-title" data-lang="zh">原始资料库</div>
         <div class="card-title" data-lang="en">Raw Archive</div>
-        <div class="card-desc" data-lang="zh">原文件 / 来源 / 时间戳 / 项目</div>
-        <div class="card-desc" data-lang="en">Files / Source / Timestamp</div>
+        <div class="card-desc" data-lang="zh">来源标签化 + 合规校验</div>
+        <div class="card-desc" data-lang="en">Source tagging + Compliance</div>
         <div class="card-tech">
           <span class="tech-tag">S3 存储</span>
-          <span class="tech-tag">PostgreSQL</span>
-          <span class="tech-tag">时间戳索引</span>
+          <span class="tech-tag">来源标签</span>
+          <span class="tech-tag">格式校验</span>
         </div>
         <div class="tooltip">
-          <h4 data-lang="zh">第2层 - 原始资料库 技术栈详解</h4>
-          <h4 data-lang="en">Layer 2 - Raw Archive Tech Stack</h4>
+          <h4 data-lang="zh">第2层 - 原始资料库 + 合规校验</h4>
+          <h4 data-lang="en">Layer 2 - Raw Archive + Compliance</h4>
           <ul>
-            <li><strong>S3 对象存储</strong>: <span data-lang="zh">保存原始文件二进制，支持海量文件</span><span data-lang="en">Stores raw file binaries, massive files</span></li>
-            <li><strong>PostgreSQL metadata</strong>: <span data-lang="zh">记录来源/发送人/时间戳/项目/文件类型</span><span data-lang="en">Records source/sender/timestamp/project</span></li>
-            <li><strong>时间戳索引</strong>: <span data-lang="zh">按时间线追溯变更，支持版本回溯</span><span data-lang="en">Timeline tracking, version rollback</span></li>
+            <li><strong>S3 对象存储</strong>: <span data-lang="zh">保存原始文件二进制</span><span data-lang="en">Stores raw file binaries</span></li>
+            <li><strong>来源标签化</strong>: <span data-lang="zh">自动打标签：来源平台、文件类型、发送人角色</span><span data-lang="en">Auto-tags: source platform, file type, sender role</span></li>
+            <li><strong>合规校验</strong>: <span data-lang="zh">过滤无关文件、标注格式异常（如破损PDF）</span><span data-lang="en">Filters irrelevant files, flags corrupt PDFs</span></li>
           </ul>
-          <p class="synergy" data-lang="zh">组合效果：原始资料完整归档，每个文件都可追溯来源</p>
-          <p class="synergy" data-lang="en">Synergy: Complete raw archive with traceable sources</p>
+          <p class="synergy" data-lang="zh">为后续版本判断提供来源依据，减少无效解析</p>
+          <p class="synergy" data-lang="en">Provides source evidence for version judgment</p>
         </div>
       </div>
 
-      <!-- 3. AI 解析层 -->
-      <div class="flow-card">
+      <!-- 3. AI 解析层 + 置信度评分 -->
+      <div class="flow-card highlight">
         <div class="card-index">3</div>
         <div class="card-title" data-lang="zh">AI 解析层</div>
         <div class="card-title" data-lang="en">AI Parsing</div>
-        <div class="card-desc" data-lang="zh">OCR / 表格识别 / JSON 抽取</div>
-        <div class="card-desc" data-lang="en">OCR / Table parse / LLM extract</div>
+        <div class="card-desc" data-lang="zh">OCR / 表格识别 / 置信度评分</div>
+        <div class="card-desc" data-lang="en">OCR / Table / Confidence</div>
         <div class="card-tech">
           <span class="tech-tag">PaddleOCR</span>
-          <span class="tech-tag">LLM Claude/GPT</span>
-          <span class="tech-tag">多模态</span>
+          <span class="tech-tag">LLM Claude</span>
+          <span class="tech-tag">置信度评分</span>
         </div>
         <div class="tooltip">
-          <h4 data-lang="zh">第3层 - AI 解析层 技术栈详解</h4>
-          <h4 data-lang="en">Layer 3 - AI Parsing Tech Stack</h4>
+          <h4 data-lang="zh">第3层 - AI 解析层（核心新增：置信度评分）</h4>
+          <h4 data-lang="en">Layer 3 - AI Parsing (New: Confidence Scoring)</h4>
           <ul>
-            <li><strong>PaddleOCR</strong>: <span data-lang="zh">识别图片/扫描件文字，支持中英文混合</span><span data-lang="en">Text recognition from images/scans</span></li>
-            <li><strong>LLM (Claude/GPT)</strong>: <span data-lang="zh">从非结构化文本提取结构化 JSON 字段</span><span data-lang="en">Extracts structured JSON from text</span></li>
-            <li><strong>表格识别 + 多模态</strong>: <span data-lang="zh">解析 Excel/PDF 表格，关联图片与规格</span><span data-lang="en">Parses tables, links images to specs</span></li>
+            <li><strong>PaddleOCR</strong>: <span data-lang="zh">识别图片/扫描件文字</span><span data-lang="en">Text recognition from images</span></li>
+            <li><strong>LLM 抽取</strong>: <span data-lang="zh">从非结构化文本提取 JSON 字段</span><span data-lang="en">Extracts structured JSON from text</span></li>
+            <li><strong>置信度评分</strong>: <span data-lang="zh">每个字段标注置信度（90%+/70-90%/<70%）</span><span data-lang="en">Each field gets confidence score (90%+/70-90%/<70%)</span></li>
           </ul>
-          <p class="synergy" data-lang="zh">组合效果：图片→文字→结构化字段，规格关联不丢失</p>
-          <p class="synergy" data-lang="en">Synergy: Image→Text→Structured, specs preserved</p>
+          <p class="synergy" data-lang="zh">置信度决定后续处理路径：自动通过 / 轻量确认 / 完整确认</p>
+          <p class="synergy" data-lang="en">Confidence determines next step: auto/pass/verify</p>
         </div>
       </div>
 
-      <!-- 4. 订单数据库 -->
+      <!-- 4. 订单数据库 + 版本轨迹化 -->
       <div class="flow-card">
         <div class="card-index">4</div>
         <div class="card-title" data-lang="zh">订单数据库</div>
         <div class="card-title" data-lang="en">Order DB</div>
-        <div class="card-desc" data-lang="zh">项目 / 商品 / 规格 / 版本</div>
-        <div class="card-desc" data-lang="en">Project / Item / Spec / Version</div>
+        <div class="card-desc" data-lang="zh">版本轨迹化 + 按商品/房间分组</div>
+        <div class="card-desc" data-lang="en">Version trace + Group by product/room</div>
         <div class="card-tech">
           <span class="tech-tag">Supabase/PG</span>
-          <span class="tech-tag">item_versions</span>
+          <span class="tech-tag">版本轨迹</span>
           <span class="tech-tag">JSONB 追溯</span>
         </div>
         <div class="tooltip">
-          <h4 data-lang="zh">第4层 - 订单数据库 技术栈详解</h4>
-          <h4 data-lang="en">Layer 4 - Order Database Tech Stack</h4>
+          <h4 data-lang="zh">第4层 - 订单数据库（新增：版本轨迹+分组）</h4>
+          <h4 data-lang="en">Layer 4 - Order DB (New: Version Trace + Grouping)</h4>
           <ul>
-            <li><strong>Supabase/PostgreSQL</strong>: <span data-lang="zh">订单主数据库，JSONB 扩展存储半结构化数据</span><span data-lang="en">Order master DB with JSONB extension</span></li>
-            <li><strong>item_versions</strong>: <span data-lang="zh">版本追踪表，每次变更生成新版本记录</span><span data-lang="en">Version tracking, new record per change</span></li>
-            <li><strong>JSONB 可追溯</strong>: <span data-lang="zh">每个字段嵌入来源证据，哪个文件提取了一目了然</span><span data-lang="en">Each field embeds source evidence JSONB</span></li>
+            <li><strong>版本轨迹</strong>: <span data-lang="zh">生成版本变更轨迹（如：5.20 尺寸450mm→5.22 尺寸500mm）</span><span data-lang="en">Generates version change trajectory</span></li>
+            <li><strong>按商品/房间分组</strong>: <span data-lang="zh">自动分组，同类项不分散，降低核对成本</span><span data-lang="en">Auto-groups by product/room</span></li>
+            <li><strong>JSONB 追溯</strong>: <span data-lang="zh">每个字段关联来源文件/消息链接，可一键查看原始信息</span><span data-lang="en">Each field links to source, one-click查看</span></li>
           </ul>
-          <p class="synergy" data-lang="zh">组合效果：结构化存储 + 版本完整追溯，字段都可看到来源</p>
-          <p class="synergy" data-lang="en">Synergy: Structured storage + full version trace</p>
+          <p class="synergy" data-lang="zh">人工可一键查看原始信息，避免争议</p>
+          <p class="synergy" data-lang="en">One-click access to original info, no disputes</p>
         </div>
       </div>
 
-      <!-- 5. 规则与 Agent 层 (highlighted) -->
+      <!-- 5. 规则引擎层 + 冲突分级 -->
       <div class="flow-card highlight">
         <div class="card-index">5</div>
-        <div class="card-title" data-lang="zh">规则与 Agent 层</div>
-        <div class="card-title" data-lang="en">Rule & Agent</div>
-        <div class="card-desc" data-lang="zh">版本判断 / 冲突检测 / 风险评估</div>
-        <div class="card-desc" data-lang="en">Version / Conflict / Risk</div>
+        <div class="card-title" data-lang="zh">规则引擎层</div>
+        <div class="card-title" data-lang="en">Rule Engine</div>
+        <div class="card-desc" data-lang="zh">冲突分级 + 版本判断 + 规则可配置</div>
+        <div class="card-desc" data-lang="en">Conflict grading + Configurable</div>
         <div class="card-tech">
           <span class="tech-tag">规则引擎</span>
+          <span class="tech-tag">冲突分级</span>
           <span class="tech-tag">Version Agent</span>
-          <span class="tech-tag">Risk Scorer</span>
         </div>
         <div class="tooltip">
-          <h4 data-lang="zh">第5层 - 规则与 Agent 层（核心）</h4>
-          <h4 data-lang="en">Layer 5 - Rule & Agent (Core)</h4>
+          <h4 data-lang="zh">第5层 - 规则引擎层（核心：冲突分级+可配置）</h4>
+          <h4 data-lang="en">Layer 5 - Rule Engine (Core: Conflict Grading + Configurable)</h4>
           <ul>
-            <li><strong>业务规则引擎</strong>: <span data-lang="zh">供应商匹配/字段校验/版本判断规则</span><span data-lang="en">Supplier matching, field validation rules</span></li>
-            <li><strong>AI Version Agent</strong>: <span data-lang="zh">自动判断最新需求版本，语义理解而非只看时间戳</span><span data-lang="en">Auto-determines latest version by context</span></li>
-            <li><strong>Risk Scorer</strong>: <span data-lang="zh">评估订单风险，低风险自动通过</span><span data-lang="en">Scores order risk, auto-approve low risk</span></li>
+            <li><strong>冲突分级</strong>: <span data-lang="zh">致命冲突（强制人工）/ 一般冲突（标注建议值）/ 缺失字段（自动推荐）</span><span data-lang="en">Fatal (force verify) / General (suggest) / Missing (recommend)</span></li>
+            <li><strong>版本判断规则</strong>: <span data-lang="zh">可配置：时间优先/上下文优先/"最终确认"消息优先</span><span data-lang="en">Configurable: time/context/"final confirmation" priority</span></li>
+            <li><strong>自动通过规则</strong>: <span data-lang="zh">置信度阈值可配置，无需改代码</span><span data-lang="en">Confidence threshold configurable, no code changes</span></li>
           </ul>
-          <p class="synergy" data-lang="zh">组合效果：规则兜底 + AI 智能判断 + 风险量化</p>
-          <p class="synergy" data-lang="en">Synergy: Rules + AI judgment + risk quantification</p>
+          <p class="synergy" data-lang="zh">规则引擎"可配置"：运营/项目经理可调整规则，无需开发介入</p>
+          <p class="synergy" data-lang="en">Rule engine "configurable": ops can adjust without dev</p>
         </div>
       </div>
 
-      <!-- 6. 确认与审批层 -->
+      <!-- 6. 确认与审批层 + 分级确认 -->
       <div class="flow-card">
         <div class="card-index">6</div>
         <div class="card-title" data-lang="zh">确认与审批层</div>
         <div class="card-title" data-lang="en">Approval</div>
-        <div class="card-desc" data-lang="zh">低风险自动 / 高风险人工确认</div>
-        <div class="card-desc" data-lang="en">Low-risk auto / High-risk manual</div>
+        <div class="card-desc" data-lang="zh">高置信度自动 / 中轻量确认 / 低完整确认</div>
+        <div class="card-desc" data-lang="en">Auto / Light verify / Full verify</div>
         <div class="card-tech">
           <span class="tech-tag">Human-in-loop</span>
           <span class="tech-tag">Approval Queue</span>
-          <span class="tech-tag">证据展示</span>
+          <span class="tech-tag">仅异常项</span>
         </div>
         <div class="tooltip">
-          <h4 data-lang="zh">第6层 - 确认与审批层 技术栈详解</h4>
-          <h4 data-lang="en">Layer 6 - Approval Layer Tech Stack</h4>
+          <h4 data-lang="zh">第6层 - 确认与审批层（核心：分级确认）</h4>
+          <h4 data-lang="en">Layer 6 - Approval (Core: Tiered Confirmation)</h4>
           <ul>
-            <li><strong>Human-in-the-loop</strong>: <span data-lang="zh">高风险字段人工逐条确认，业务安全边界</span><span data-lang="en">High-risk fields require manual confirmation</span></li>
-            <li><strong>Approval Queue</strong>: <span data-lang="zh">待确认队列，按风险等级排序，优先处理重要订单</span><span data-lang="en">Queue sorted by risk level and urgency</span></li>
-            <li><strong>版本证据展示</strong>: <span data-lang="zh">展示字段变更历史和来源证据，帮助人工快速判断</span><span data-lang="en">Shows change history for quick judgment</span></li>
+            <li><strong>高置信度无冲突</strong>: <span data-lang="zh">自动通过，无需人工操作</span><span data-lang="en">Auto-pass, no manual action needed</span></li>
+            <li><strong>中置信度/一般冲突</strong>: <span data-lang="zh">轻量确认，仅核对异常项</span><span data-lang="en">Light confirmation, verify exceptions only</span></li>
+            <li><strong>低置信度/致命冲突</strong>: <span data-lang="zh">完整确认，逐条核对</span><span data-lang="en">Full confirmation, verify all fields</span></li>
           </ul>
-          <p class="synergy" data-lang="zh">组合效果：AI 辅助 + 人工兜底，安全与效率平衡</p>
-          <p class="synergy" data-lang="en">Synergy: AI assist + human fallback, balanced</p>
+          <p class="synergy" data-lang="zh">避免"全量人工确认"，聚焦异常项，提升效率</p>
+          <p class="synergy" data-lang="en">Avoids full manual verification, focuses on exceptions</p>
         </div>
       </div>
 
-      <!-- 7. 输出层 -->
+      <!-- 7. 输出层 + 格式校验 -->
       <div class="flow-card">
         <div class="card-index">7</div>
         <div class="card-title" data-lang="zh">输出执行层</div>
         <div class="card-title" data-lang="en">Output</div>
-        <div class="card-desc" data-lang="zh">PDF/Excel / 发给工厂 / 状态追踪</div>
-        <div class="card-desc" data-lang="en">PDF/Excel / Send / Track</div>
+        <div class="card-desc" data-lang="zh">文件预览 + 格式校验 + 发给工厂</div>
+        <div class="card-desc" data-lang="en">Preview + Format check + Dispatch</div>
         <div class="card-tech">
           <span class="tech-tag">PDF Template</span>
+          <span class="tech-tag">格式校验</span>
           <span class="tech-tag">SMTP / WA</span>
-          <span class="tech-tag">Status webhook</span>
         </div>
         <div class="tooltip">
-          <h4 data-lang="zh">第7层 - 输出执行层 技术栈详解</h4>
-          <h4 data-lang="en">Layer 7 - Output Layer Tech Stack</h4>
+          <h4 data-lang="zh">第7层 - 输出执行层（新增：格式校验）</h4>
+          <h4 data-lang="en">Layer 7 - Output (New: Format Validation)</h4>
           <ul>
-            <li><strong>PDF Template Engine</strong>: <span data-lang="zh">渲染工厂可执行的生产单，高可读性布局</span><span data-lang="en">Renders factory-ready production orders</span></li>
-            <li><strong>SMTP / WhatsApp Business API</strong>: <span data-lang="zh">确认后一键发送到工厂，实时送达</span><span data-lang="en">One-click send to factory after confirmation</span></li>
-            <li><strong>Status Webhook</strong>: <span data-lang="zh">追踪工厂确认/生产/发货状态，异常自动提醒</span><span data-lang="en">Tracks status, auto-alert on exceptions</span></li>
+            <li><strong>文件预览</strong>: <span data-lang="zh">生成PDF/Excel后支持人工预览修改</span><span data-lang="en">PDF/Excel preview, allow manual edits</span></li>
+            <li><strong>格式校验</strong>: <span data-lang="zh">自动校验工厂要求字段是否齐全，避免因格式问题返工</span><span data-lang="en">Auto-validates factory required fields</span></li>
+            <li><strong>一键发送</strong>: <span data-lang="zh">确认后一键发送到工厂，减少操作步骤</span><span data-lang="en">One-click send to factory</span></li>
           </ul>
-          <p class="synergy" data-lang="zh">组合效果：确认后一键发单，状态实时追踪</p>
-          <p class="synergy" data-lang="en">Synergy: One-click dispatch, real-time tracking</p>
+          <p class="synergy" data-lang="zh">预览+校验双保险，避免工厂因格式问题返工</p>
+          <p class="synergy" data-lang="en">Preview + validation prevents rework</p>
+        </div>
+      </div>
+
+      <!-- 8. 发单追踪 + 数据迭代层 -->
+      <div class="flow-card green-accent">
+        <div class="card-index">8</div>
+        <div class="card-title" data-lang="zh">发单追踪层</div>
+        <div class="card-title" data-lang="en">Dispatch & Track</div>
+        <div class="card-desc" data-lang="zh">状态追踪 + 工厂反馈 + 规则迭代</div>
+        <div class="card-desc" data-lang="en">Tracking + Feedback + Rule Iteration</div>
+        <div class="card-tech">
+          <span class="tech-tag">Status webhook</span>
+          <span class="tech-tag">反馈闭环</span>
+          <span class="tech-tag">规则迭代</span>
+        </div>
+        <div class="tooltip">
+          <h4 data-lang="zh">第8层 - 发单追踪层（核心新增：数据迭代闭环）</h4>
+          <h4 data-lang="en">Layer 8 - Dispatch + Iteration Loop (Core New)</h4>
+          <ul>
+            <li><strong>状态追踪</strong>: <span data-lang="zh">追踪工厂确认/生产/发货状态，异常自动提醒</span><span data-lang="en">Tracks factory status, alerts on exceptions</span></li>
+            <li><strong>工厂反馈处理</strong>: <span data-lang="zh">工厂反馈的修改意见自动回传，更新订单版本</span><span data-lang="en">Factory feedback auto-updates order version</span></li>
+            <li><strong>规则迭代触发</strong>: <span data-lang="zh">累计3次同类冲突/解析错误，自动触发AI提示词/规则优化</span><span data-lang="en">3x same error → auto-triggers prompt/rule optimization</span></li>
+          </ul>
+          <p class="synergy" data-lang="zh">数据→规则→效率正向循环，自动化率从L5向L6/L7提升</p>
+          <p class="synergy" data-lang="en">Data→Rules→Efficiency loop, automation L5→L6/L7</p>
         </div>
       </div>
 
@@ -850,8 +1189,8 @@
         <div>
           <div class="val-text" data-lang="zh">降本增效</div>
           <div class="val-text" data-lang="en">Cost Reduction</div>
-          <div class="val-sub" data-lang="zh">资料整理时间减少 70%</div>
-          <div class="val-sub" data-lang="en">Data consolidation time -70%</div>
+          <div class="val-sub" data-lang="zh">AI 替代 80% 人工整理工作</div>
+          <div class="val-sub" data-lang="en">AI replaces 80% of manual consolidation</div>
         </div>
       </div>
       <div class="val-item">
@@ -864,12 +1203,21 @@
         </div>
       </div>
       <div class="val-item">
-        <div class="val-icon orange">✓</div>
+        <div class="val-icon green">✓</div>
         <div>
-          <div class="val-text" data-lang="zh">订单零差错</div>
-          <div class="val-text" data-lang="en">Zero Error Orders</div>
-          <div class="val-sub" data-lang="zh">冲突缺失召回率 95%+</div>
-          <div class="val-sub" data-lang="en">Conflict/missing recall rate 95%+</div>
+          <div class="val-text" data-lang="zh">精准分级确认</div>
+          <div class="val-text" data-lang="en">Precision Tiered Confirmation</div>
+          <div class="val-sub" data-lang="zh">仅聚焦异常项，减少 70% 人工确认量</div>
+          <div class="val-sub" data-lang="en">Focus on exceptions only, -70% manual work</div>
+        </div>
+      </div>
+      <div class="val-item">
+        <div class="val-icon orange">↻</div>
+        <div>
+          <div class="val-text" data-lang="zh">规则持续迭代</div>
+          <div class="val-text" data-lang="en">Continuous Rule Iteration</div>
+          <div class="val-sub" data-lang="zh">数据驱动规则优化，自动化率逐步提升</div>
+          <div class="val-sub" data-lang="en">Data-driven rule optimization</div>
         </div>
       </div>
     </div>
@@ -877,7 +1225,126 @@
 
 </div>
 
-<!-- Page 2: Comparison -->
+<!-- Page 2: MVP Scope -->
+<section class="mvp-section">
+  <h2 class="mvp-title"><span data-lang="zh">MVP 核心范围</span><span data-lang="en">MVP Core Scope</span></h2>
+  <p class="mvp-subtitle" data-lang="zh">第一阶段核心验证"AI提取→冲突检测→文件生成"的价值，供应商分类等效率优化项后置</p>
+  <p class="mvp-subtitle" data-lang="en">Phase 1 validates "AI extract → conflict detection → file generation". Supplier classification deferred.</p>
+
+  <div class="mvp-grid">
+    <div class="mvp-card priority-1">
+      <div class="mvp-card-header">
+        <div class="mvp-num">1</div>
+        <div class="mvp-card-title" data-lang="zh">项目资料上传入口</div>
+        <div class="mvp-card-title" data-lang="en">Project File Upload Entry</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">支持 PDF/图片/文本上传，暂不接入邮件/WhatsApp。聚焦单项目文件整理验证</div>
+      <div class="mvp-card-desc" data-lang="en">Supports PDF/img/text upload. Email/WhatsApp deferred. Focus on single project validation</div>
+      <span class="mvp-tag tag-core" data-lang="zh">MVP 核心</span>
+      <span class="mvp-tag tag-core" data-lang="en">MVP Core</span>
+    </div>
+
+    <div class="mvp-card priority-1">
+      <div class="mvp-card-header">
+        <div class="mvp-num">2</div>
+        <div class="mvp-card-title" data-lang="zh">AI 解析（带置信度评分）</div>
+        <div class="mvp-card-title" data-lang="en">AI Parsing with Confidence Scoring</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">OCR+LLM 抽取 JSON，每个字段标注置信度（90%+/70-90%/<70%），决定后续处理路径</div>
+      <div class="mvp-card-desc" data-lang="en">OCR+LLM extraction with per-field confidence scoring. Determines next processing path</div>
+      <span class="mvp-tag tag-core" data-lang="zh">MVP 核心</span>
+      <span class="mvp-tag tag-core" data-lang="en">MVP Core</span>
+    </div>
+
+    <div class="mvp-card priority-1">
+      <div class="mvp-card-header">
+        <div class="mvp-num">3</div>
+        <div class="mvp-card-title" data-lang="zh">结构化订单表（按商品/房间分组）</div>
+        <div class="mvp-card-title" data-lang="en">Structured Order (by Product/Room)</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">按"商品+房间"维度自动分组，同类项不分散，降低人工核对成本</div>
+      <div class="mvp-card-desc" data-lang="en">Auto-groups by "product + room". Similar items grouped, reducing manual verification</div>
+      <span class="mvp-tag tag-core" data-lang="zh">MVP 核心</span>
+      <span class="mvp-tag tag-core" data-lang="en">MVP Core</span>
+    </div>
+
+    <div class="mvp-card priority-1">
+      <div class="mvp-card-header">
+        <div class="mvp-num">4</div>
+        <div class="mvp-card-title" data-lang="zh">冲突/缺失字段分级提示</div>
+        <div class="mvp-card-title" data-lang="en">Conflict/Missing Field Grading</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">致命冲突（尺寸矛盾/数量为0）强制人工；一般冲突（颜色不一致）标注建议值；缺失字段自动推荐</div>
+      <div class="mvp-card-desc" data-lang="en">Fatal conflicts (size contradiction/zero qty) force verify. General conflicts suggest values. Missing fields auto-recommend</div>
+      <span class="mvp-tag tag-core" data-lang="zh">MVP 核心</span>
+      <span class="mvp-tag tag-core" data-lang="en">MVP Core</span>
+    </div>
+
+    <div class="mvp-card priority-1">
+      <div class="mvp-card-header">
+        <div class="mvp-num">5</div>
+        <div class="mvp-card-title" data-lang="zh">分级人工确认界面</div>
+        <div class="mvp-card-title" data-lang="en">Tiered Human Confirmation UI</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">仅展示异常项，高置信度无冲突自动通过，中/低置信度按需核对，减少 70% 人工操作</div>
+      <div class="mvp-card-desc" data-lang="en">Shows only exceptions. High confidence auto-pass. Medium/low requires targeted verification. -70% manual work</div>
+      <span class="mvp-tag tag-core" data-lang="zh">MVP 核心</span>
+      <span class="mvp-tag tag-core" data-lang="en">MVP Core</span>
+    </div>
+
+    <div class="mvp-card priority-1">
+      <div class="mvp-card-header">
+        <div class="mvp-num">6</div>
+        <div class="mvp-card-title" data-lang="zh">单供应商版工厂 PDF 生成</div>
+        <div class="mvp-card-title" data-lang="en">Single-Supplier Factory PDF</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">生成工厂可执行的生产单 PDF，支持预览修改，先验证"1个项目→1份生产单"闭环</div>
+      <div class="mvp-card-desc" data-lang="en">Generates factory-ready production order PDF with preview. Validates "1 project → 1 order" loop</div>
+      <span class="mvp-tag tag-core" data-lang="zh">MVP 核心</span>
+      <span class="mvp-tag tag-core" data-lang="en">MVP Core</span>
+    </div>
+  </div>
+
+  <div class="mvp-grid">
+    <div class="mvp-card priority-2">
+      <div class="mvp-card-header">
+        <div class="mvp-num">7</div>
+        <div class="mvp-card-title" data-lang="zh">邮件/WhatsApp 接入</div>
+        <div class="mvp-card-title" data-lang="en">Email/WhatsApp Integration</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">MVP 验证后再扩展多渠道，统一入口</div>
+      <div class="mvp-card-desc" data-lang="en">Expand after MVP validation</div>
+      <span class="mvp-tag tag-enhance" data-lang="zh">第二阶段</span>
+      <span class="mvp-tag tag-enhance" data-lang="en">Phase 2</span>
+    </div>
+
+    <div class="mvp-card priority-2">
+      <div class="mvp-card-header">
+        <div class="mvp-num">8</div>
+        <div class="mvp-card-title" data-lang="zh">多供应商拆单</div>
+        <div class="mvp-card-title" data-lang="en">Multi-Supplier Order Split</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">按供应商自动拆单，需先跑通单供应商闭环</div>
+      <div class="mvp-card-desc" data-lang="en">Auto-split by supplier, requires single-supplier loop first</div>
+      <span class="mvp-tag tag-enhance" data-lang="zh">第二阶段</span>
+      <span class="mvp-tag tag-enhance" data-lang="en">Phase 2</span>
+    </div>
+
+    <div class="mvp-card priority-2">
+      <div class="mvp-card-header">
+        <div class="mvp-num">9</div>
+        <div class="mvp-card-title" data-lang="zh">供应商推荐规则</div>
+        <div class="mvp-card-title" data-lang="en">Supplier Recommendation</div>
+      </div>
+      <div class="mvp-card-desc" data-lang="zh">基于历史数据推荐供应商，MVP 阶段暂关闭</div>
+      <div class="mvp-card-desc" data-lang="en">Based on historical data, deferred in MVP</div>
+      <span class="mvp-tag tag-enhance" data-lang="zh">第二阶段</span>
+      <span class="mvp-tag tag-enhance" data-lang="en">Phase 2</span>
+    </div>
+  </div>
+</section>
+
+<!-- Page 3: Comparison -->
 <section class="comparison-section">
   <h2 class="comparison-title">
     <span data-lang="zh">我们的工作流</span><span class="us" data-lang="en">Our Workflow</span>
@@ -889,11 +1356,11 @@
     <div class="compare-card our-solution">
       <div class="compare-header">
         <span class="compare-badge" data-lang="zh">本方案</span><span class="compare-badge" data-lang="en">Our Solution</span>
-        <div class="compare-title" data-lang="zh">渐进式 AI Agent + 规则引擎</div>
-        <div class="compare-title" data-lang="en">Progressive AI Agent + Rule Engine</div>
+        <div class="compare-title" data-lang="zh">渐进式 AI + 规则引擎 + 数据迭代</div>
+        <div class="compare-title" data-lang="en">Progressive AI + Rule Engine + Data Iteration</div>
       </div>
-      <div class="compare-core" data-lang="zh">规则引擎兜底 + 渐进式 AI Agent 分层决策，高风险人工确认</div>
-      <div class="compare-core" data-lang="en">Rules as safety net + Progressive AI Agent layered decisions, human confirmation for high-risk</div>
+      <div class="compare-core" data-lang="zh">置信度评分 + 冲突分级 + 分级确认 + 规则可配置 + 迭代闭环</div>
+      <div class="compare-core" data-lang="en">Confidence scoring + Conflict grading + Tiered confirmation + Configurable rules + Iteration loop</div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
         <div class="compare-item-value" data-lang="zh">复杂多源采购订单的智能整理与发单</div>
@@ -902,12 +1369,7 @@
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
         <div class="compare-item-value" data-lang="zh">邮件/聊天/图片/PDF 多源混合格单，需版本判断和冲突检测</div>
-        <div class="compare-item-value" data-lang="en">Multi-source mixed orders from email/chat/img/PDF, needs version & conflict detection</div>
-      </div>
-      <div class="compare-item">
-        <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
-        <div class="compare-item-value" data-lang="zh">需要一定 AI 工程能力，MVP 阶段依赖规则调优</div>
-        <div class="compare-item-value" data-lang="en">Requires AI engineering capability, MVP relies on rule tuning</div>
+        <div class="compare-item-value" data-lang="en">Multi-source mixed orders, needs version & conflict detection</div>
       </div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
@@ -919,7 +1381,7 @@
           <div class="star filled"></div>
         </div>
         <div class="compare-rating-text" data-lang="zh">5/5 — 专为复杂多源订单场景设计</div>
-        <div class="compare-rating-text" data-lang="en">5/5 — Designed specifically for complex multi-source order scenarios</div>
+        <div class="compare-rating-text" data-lang="en">5/5 — Designed for complex multi-source scenarios</div>
       </div>
     </div>
 
@@ -931,21 +1393,16 @@
         <div class="compare-title" data-lang="en">Traditional Workflow Automation</div>
       </div>
       <div class="compare-core" data-lang="zh">no-code/low-code 可视化工作流编排，API 连接器丰富</div>
-      <div class="compare-core" data-lang="en">No-code/low-code visual workflow orchestration, rich API connectors</div>
+      <div class="compare-core" data-lang="en">No-code/low-code visual workflow orchestration</div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
         <div class="compare-item-value" data-lang="zh">通用流程自动化，无代码易上手</div>
         <div class="compare-item-value" data-lang="en">General process automation, easy no-code setup</div>
       </div>
       <div class="compare-item">
-        <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
-        <div class="compare-item-value" data-lang="zh">标准化 API 流程，定时任务，简单的数据转发</div>
-        <div class="compare-item-value" data-lang="en">Standardized API flows, scheduled tasks, simple data forwarding</div>
-      </div>
-      <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
-        <div class="compare-item-value" data-lang="zh">缺乏原生版本管理，AI 集成浅，无结构化订单建模</div>
-        <div class="compare-item-value" data-lang="en">No native version management, shallow AI integration, no structured order modeling</div>
+        <div class="compare-item-value" data-lang="zh">缺乏原生版本管理、AI 集成浅、无结构化订单建模、无置信度评分</div>
+        <div class="compare-item-value" data-lang="en">No version mgmt, shallow AI, no structured order modeling, no confidence scoring</div>
       </div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
@@ -956,8 +1413,8 @@
           <div class="star"></div>
           <div class="star"></div>
         </div>
-        <div class="compare-rating-text" data-lang="zh">3/5 — 适合数据转发，不适合版本判断</div>
-        <div class="compare-rating-text" data-lang="en">3/5 — Good for data routing, not for version judgment</div>
+        <div class="compare-rating-text" data-lang="zh">3/5 — 适合数据转发</div>
+        <div class="compare-rating-text" data-lang="en">3/5 — Good for data routing</div>
       </div>
     </div>
 
@@ -969,21 +1426,16 @@
         <div class="compare-title" data-lang="en">Pure Agent Orchestration</div>
       </div>
       <div class="compare-core" data-lang="zh">强大的 LLM Agent 框架，支持复杂推理链和工具调用</div>
-      <div class="compare-core" data-lang="en">Powerful LLM Agent framework, supports complex reasoning chains</div>
+      <div class="compare-core" data-lang="en">Powerful LLM Agent framework, complex reasoning chains</div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
         <div class="compare-item-value" data-lang="zh">AI 优先的复杂推理和对话场景</div>
         <div class="compare-item-value" data-lang="en">AI-first complex reasoning and conversational scenarios</div>
       </div>
       <div class="compare-item">
-        <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
-        <div class="compare-item-value" data-lang="zh">聊天机器人，文档问答，复杂多步推理</div>
-        <div class="compare-item-value" data-lang="en">Chatbots, document Q&A, complex multi-step reasoning</div>
-      </div>
-      <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
-        <div class="compare-item-value" data-lang="zh">技术门槛高，版本管理弱，不擅长结构化订单数据库建模</div>
-        <div class="compare-item-value" data-lang="en">High technical barrier, weak version management, not good at structured order DB modeling</div>
+        <div class="compare-item-value" data-lang="zh">技术门槛高，无置信度评分概念，规则不可配置，无迭代闭环</div>
+        <div class="compare-item-value" data-lang="en">High barrier, no confidence scoring, rules not configurable, no iteration loop</div>
       </div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
@@ -994,8 +1446,8 @@
           <div class="star"></div>
           <div class="star"></div>
         </div>
-        <div class="compare-rating-text" data-lang="zh">3/5 — AI 能力强但缺少订单建模思维</div>
-        <div class="compare-rating-text" data-lang="en">3/5 — Strong AI but lacks order modeling thinking</div>
+        <div class="compare-rating-text" data-lang="zh">3/5 — AI 能力强但缺少订单建模</div>
+        <div class="compare-rating-text" data-lang="en">3/5 — Strong AI but lacks order modeling</div>
       </div>
     </div>
 
@@ -1007,21 +1459,16 @@
         <div class="compare-title" data-lang="en">Document Extraction Focused</div>
       </div>
       <div class="compare-core" data-lang="zh">向量检索 + LLM 阅读理解，从文档中提取答案</div>
-      <div class="compare-core" data-lang="en">Vector retrieval + LLM reading comprehension, extracts answers from documents</div>
+      <div class="compare-core" data-lang="en">Vector retrieval + LLM comprehension</div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">核心定位</span><span class="compare-item-label" data-lang="en">Core Position</span>
         <div class="compare-item-value" data-lang="zh">文档问答、内容检索、知识库查询</div>
-        <div class="compare-item-value" data-lang="en">Document Q&A, content retrieval, knowledge base queries</div>
-      </div>
-      <div class="compare-item">
-        <span class="compare-item-label" data-lang="zh">适用场景</span><span class="compare-item-label" data-lang="en">Use Cases</span>
-        <div class="compare-item-value" data-lang="zh">已有知识库检索，合同条款查询，产品手册问答</div>
-        <div class="compare-item-value" data-lang="en">Knowledge base retrieval, contract clause lookup, product manual Q&A</div>
+        <div class="compare-item-value" data-lang="en">Document Q&A, content retrieval, knowledge base</div>
       </div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">局限性</span><span class="compare-item-label" data-lang="en">Limitations</span>
-        <div class="compare-item-value" data-lang="zh">无版本概念，无结构化订单建模，无状态追踪能力</div>
-        <div class="compare-item-value" data-lang="en">No version concept, no structured order modeling, no status tracking</div>
+        <div class="compare-item-value" data-lang="zh">无版本概念，无置信度评分，无冲突分级，无状态追踪，无迭代闭环</div>
+        <div class="compare-item-value" data-lang="en">No version/confidence/conflict/tracking/iteration</div>
       </div>
       <div class="compare-item">
         <span class="compare-item-label" data-lang="zh">匹配度</span><span class="compare-item-label" data-lang="en">Match Score</span>
@@ -1032,8 +1479,8 @@
           <div class="star"></div>
           <div class="star"></div>
         </div>
-        <div class="compare-rating-text" data-lang="zh">2/5 — 只解决文档提取，不解决订单管理</div>
-        <div class="compare-rating-text" data-lang="en">2/5 — Only solves document extraction, not order management</div>
+        <div class="compare-rating-text" data-lang="zh">2/5 — 只解决文档提取</div>
+        <div class="compare-rating-text" data-lang="en">2/5 — Only solves document extraction</div>
       </div>
     </div>
   </div>
@@ -1046,29 +1493,135 @@
       <div class="advantage-item">
         <div class="advantage-num">1</div>
         <div class="advantage-text">
-          <h4 data-lang="zh">原生版本管理架构</h4>
-          <h4 data-lang="en">Native Version Management</h4>
-          <p data-lang="zh">item_versions + 时间戳索引 + JSONB 来源证据，从架构层面解决"哪个是最新版本"的核心问题，而非后期打补丁</p>
-          <p data-lang="en">item_versions + timestamp indexing + JSONB source evidence, solves "which version is latest" at architecture level, not as an afterthought</p>
+          <h4 data-lang="zh">置信度驱动的分级确认</h4>
+          <h4 data-lang="en">Confidence-Driven Tiered Confirmation</h4>
+          <p data-lang="zh">每个字段标注置信度，决定"自动通过/轻量确认/完整确认"，AI 替代 80% 人工整理工作</p>
+          <p data-lang="en">Per-field confidence score drives "auto/light/full verification". AI replaces 80% of manual work</p>
         </div>
       </div>
       <div class="advantage-item">
         <div class="advantage-num">2</div>
         <div class="advantage-text">
-          <h4 data-lang="zh">规则 + Agent 分层决策</h4>
-          <h4 data-lang="en">Rule + Agent Layered Decisions</h4>
-          <p data-lang="zh">规则引擎兜底，AI Agent 智能判断，Risk Scorer 量化风险。不是纯规则（死板）也不是纯 Agent（不可控），而是分层混合</p>
-          <p data-lang="en">Rules as safety net, AI Agent for intelligent judgment, Risk Scorer quantifies risk. Not pure rules (rigid) or pure Agent (uncontrollable), but layered hybrid</p>
+          <h4 data-lang="zh">规则引擎可配置 + 迭代闭环</h4>
+          <h4 data-lang="en">Configurable Rules + Iteration Loop</h4>
+          <p data-lang="zh">规则引擎可配置（运营可调整版本判断规则），数据迭代层累计错误自动触发提示词优化</p>
+          <p data-lang="en">Rule engine configurable (ops can adjust). Data iteration auto-triggers prompt optimization after 3x errors</p>
         </div>
       </div>
       <div class="advantage-item">
         <div class="advantage-num">3</div>
         <div class="advantage-text">
-          <h4 data-lang="zh">Human-in-the-loop 安全网</h4>
-          <h4 data-lang="en">Human-in-the-loop Safety Net</h4>
-          <p data-lang="zh">高风险字段强制人工确认，不过度承诺自动化。AI 负责整理，人负责决策，安全与效率平衡</p>
-          <p data-lang="en">High-risk fields require mandatory human confirmation, no over-promising automation. AI handles consolidation, human decides, balanced safety and efficiency</p>
+          <h4 data-lang="zh">全流程可追溯 + 冲突分级</h4>
+          <h4 data-lang="en">Full Traceability + Conflict Grading</h4>
+          <p data-lang="zh">每个字段关联来源文件，人工可一键查看；冲突分致命/一般/缺失，分级处理</p>
+          <p data-lang="en">Every field links to source file, one-click查看. Conflicts graded fatal/general/missing, tiered handling</p>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Page 4: Iteration Loop & Roadmap -->
+<section class="loop-section">
+  <h2 class="loop-title" data-lang="zh">数据→规则→效率 <em>正向迭代闭环</em></h2>
+  <h2 class="loop-title" data-lang="en">Data→Rules→Efficiency <em>Positive Iteration Loop</em></h2>
+  <p class="loop-subtitle" data-lang="zh">通过统计解析错误、冲突类型，定期优化 AI 提示词和解析规则，形成"数据→规则→效率"的正向循环，自动化率从 L5 向 L6/L7 提升</p>
+  <p class="loop-subtitle" data-lang="en">By tracking parsing errors and conflict types, regularly optimize AI prompts and rules, forming a positive loop from data→rules→efficiency</p>
+
+  <div class="loop-flow">
+    <div class="loop-node">
+      <div class="loop-node-icon">📊</div>
+      <div class="loop-node-title" data-lang="zh">数据采集</div>
+      <div class="loop-node-title" data-lang="en">Data Collection</div>
+      <div class="loop-node-desc" data-lang="zh">解析错误统计 / 冲突类型统计</div>
+      <div class="loop-node-desc" data-lang="en">Parse error / conflict type stats</div>
+    </div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-node green">
+      <div class="loop-node-icon">🧠</div>
+      <div class="loop-node-title" data-lang="zh">规则分析</div>
+      <div class="loop-node-title" data-lang="en">Rule Analysis</div>
+      <div class="loop-node-desc" data-lang="zh">同类错误累计 / 模式识别</div>
+      <div class="loop-node-desc" data-lang="en">Same error patterns / recognition</div>
+    </div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-node">
+      <div class="loop-node-icon">⚙️</div>
+      <div class="loop-node-title" data-lang="zh">规则优化</div>
+      <div class="loop-node-title" data-lang="en">Rule Optimization</div>
+      <div class="loop-node-desc" data-lang="zh">AI 提示词调优 / 解析规则更新</div>
+      <div class="loop-node-desc" data-lang="en">AI prompt tuning / rule updates</div>
+    </div>
+    <div class="loop-arrow">→</div>
+    <div class="loop-node green">
+      <div class="loop-node-icon">📈</div>
+      <div class="loop-node-title" data-lang="zh">效率提升</div>
+      <div class="loop-node-title" data-lang="en">Efficiency Gain</div>
+      <div class="loop-node-desc" data-lang="zh">自动化率 L5 → L6/L7</div>
+      <div class="loop-node-desc" data-lang="en">Automation L5 → L6/L7</div>
+    </div>
+  </div>
+
+  <div class="loop-phases">
+    <div class="phase-card">
+      <div class="phase-num" data-lang="zh">第一周</div>
+      <div class="phase-num" data-lang="en">Week 1</div>
+      <div class="phase-title" data-lang="zh">梳理标准 + 定义模板</div>
+      <div class="phase-title" data-lang="en">Define Standards + Templates</div>
+      <div class="phase-desc" data-lang="zh">梳理 3-5 个真实项目的历史资料，定义"标准订单字段"和"工厂 PDF 模板"</div>
+      <div class="phase-desc" data-lang="en">Review 3-5 real project histories, define standard order fields and factory PDF template</div>
+      <div class="phase-tasks">
+        <div class="phase-task" data-lang="zh">明确工厂需要的核心字段</div>
+        <div class="phase-task" data-lang="en">Identify core factory-required fields</div>
+        <div class="phase-task" data-lang="zh">定义工厂 PDF 模板格式</div>
+        <div class="phase-task" data-lang="en">Define factory PDF template format</div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num" data-lang="zh">第二-三周</div>
+      <div class="phase-num" data-lang="en">Weeks 2-3</div>
+      <div class="phase-title" data-lang="zh">开发 MVP 核心功能</div>
+      <div class="phase-title" data-lang="en">Develop MVP Core Features</div>
+      <div class="phase-desc" data-lang="zh">开发 MVP 核心功能（文件上传→AI 解析→结构化表格→冲突检测→PDF 生成）</div>
+      <div class="phase-desc" data-lang="en">Develop MVP core (file upload→AI parse→structured table→conflict detection→PDF generation)</div>
+      <div class="phase-tasks">
+        <div class="phase-task" data-lang="zh">实现置信度评分</div>
+        <div class="phase-task" data-lang="en">Implement confidence scoring</div>
+        <div class="phase-task" data-lang="zh">实现冲突分级检测</div>
+        <div class="phase-task" data-lang="en">Implement conflict grading</div>
+        <div class="phase-task" data-lang="zh">实现分级确认界面</div>
+        <div class="phase-task" data-lang="en">Implement tiered confirmation UI</div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num" data-lang="zh">第四周</div>
+      <div class="phase-num" data-lang="en">Week 4</div>
+      <div class="phase-title" data-lang="zh">真实项目测试 + 反馈收集</div>
+      <div class="phase-title" data-lang="en">Real Project Test + Feedback</div>
+      <div class="phase-desc" data-lang="zh">用真实项目测试，收集人工确认的反馈，优化 AI 解析规则和冲突检测逻辑</div>
+      <div class="phase-desc" data-lang="en">Test with real projects, collect human confirmation feedback, optimize AI parsing and conflict detection</div>
+      <div class="phase-tasks">
+        <div class="phase-task" data-lang="zh">首单关键字段双重校验</div>
+        <div class="phase-task" data-lang="en">First order double validation</div>
+        <div class="phase-task" data-lang="zh">收集异常项反馈</div>
+        <div class="phase-task" data-lang="en">Collect exception feedback</div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-num" data-lang="zh">后续迭代</div>
+      <div class="phase-num" data-lang="en">Future Iterations</div>
+      <div class="phase-title" data-lang="zh">逐步扩展 + 自动化率提升</div>
+      <div class="phase-title" data-lang="en">Gradual Expansion + Automation</div>
+      <div class="phase-desc" data-lang="zh">逐步接入邮件/WhatsApp→增加供应商分类→开放低风险自动发单→完善状态追踪</div>
+      <div class="phase-desc" data-lang="en">Add email/WhatsApp→Supplier classification→Low-risk auto dispatch→Status tracking</div>
+      <div class="phase-tasks">
+        <div class="phase-task" data-lang="zh">10 单无错误后放开自动通过</div>
+        <div class="phase-task" data-lang="en">Auto-pass after 10 error-free orders</div>
+        <div class="phase-task" data-lang="zh">3 次同类错误触发规则优化</div>
+        <div class="phase-task" data-lang="en">3x same error triggers rule optimization</div>
       </div>
     </div>
   </div>
