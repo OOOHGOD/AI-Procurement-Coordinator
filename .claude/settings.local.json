@@ -6,7 +6,8 @@
       "Skill(update-config:*)",
       "Bash(ls -la ~/.claude/skills/)",
       "Read(//c/Users/DC·Laptop-air/.claude/skills/**)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:minimax-algeng-chat-tts.oss-cn-wulanchabu.aliyuncs.com)"
     ]
   }
 }
