@@ -1,0 +1,10 @@
+{
+  "configured": true,
+  "review_required": false,
+  "template_type": "telop_agent_ready",
+  "template_file": "Telop - Quotation Template - Agent Ready Enhanced.xlsx",
+  "template_sha256": "bbd7f72b53e2db01053f45099e2a97f39c48a1539819ffdeca2c6b3833889f48",
+  "sheet_name": "Sheet1",
+  "staging_sheet": "Parsed_OCR_Data",
+  "field_map_sheet": "Field_Map"
+}

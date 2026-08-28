@@ -1,0 +1,260 @@
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+import tempfile
+import unittest
+from pathlib import Path
+
+from quote_assistant.deepseek_agent import quote_from_agent_payload
+from quote_assistant.local_workflow import LocalQuoteWorkflow, normalize_quote_from_ocr
+from quote_assistant.ocr import OcrDocument, extract_markdown, parse_jsonl
+from quote_assistant.service import QuoteService
+from quote_assistant.validation import validate_quote
+
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+
+class FakeOcrEngine:
+    def parse_local_file(self, file_path: Path) -> OcrDocument:
+        jsonl_text = json.dumps(
+            {
+                "result": {
+                    "layoutParsingResults": [
+                        {
+                            "markdown": {
+                                "text": (
+                                    "Quote No: Q-LOCAL-001\n"
+                                    "Supplier: Local Supplier\n"
+                                    "Currency: CNY\n"
+                                    "1 | SKU-1 | Chair | Wood | Oak | Natural | pcs | 2 | 100 | 200"
+                                )
+                            }
+                        }
+                    ]
+                }
+            },
+            ensure_ascii=False,
+        )
+        rows = parse_jsonl(jsonl_text)
+        return OcrDocument(
+            job_id="ocrjob-local-test",
+            model="PaddleOCR-VL",
+            markdown_text=extract_markdown(rows),
+            jsonl_text=jsonl_text,
+            raw_lines=rows,
+            result_url="https://example.invalid/result.jsonl",
+            metadata={"test": True},
+        )
+
+
+class FakeExtractionAgent:
+    def extract_quote(self, markdown_text: str, *, source_name: str, ocr_job_id: str = "") -> dict:
+        payload = {
+            "headers": {
+                "quote_no": "Q-LOCAL-001",
+                "supplier": "Local Supplier",
+                "customer": "Local Customer",
+                "project": "Local Project",
+                "quote_date": "2026-06-25",
+                "currency": "CNY",
+            },
+            "items": [
+                {
+                    "product_code": "SKU-1",
+                    "product_name": "Chair",
+                    "specification": "Wood",
+                    "material": "Oak",
+                    "color": "Natural",
+                    "unit": "pcs",
+                    "quantity": 2,
+                    "unit_price": 100,
+                    "amount": 200,
+                    "location": None,
+                    "remarks": None,
+                }
+            ],
+            "totals": {"subtotal": 200, "tax": 0, "grand_total": 200},
+            "notes": [],
+        }
+        return quote_from_agent_payload(payload, source_name=source_name, ocr_job_id=ocr_job_id, ocr_markdown=markdown_text)
+
+
+def create_service(root: Path) -> QuoteService:
+    (root / "templates").mkdir(parents=True)
+    (root / "config.json").write_text(
+        json.dumps(
+            {
+                "confidence_threshold": 0.8,
+                "critical_confidence_threshold": 0.9,
+                "amount_tolerance": 0.02,
+                "require_manual_approval": True,
+                "alert_on_severities": ["error", "critical"],
+                "critical_fields": ["supplier", "quote_no", "product_name", "quantity", "unit_price", "amount"],
+                "excel_template_mapping": "templates/template_mapping.json",
+            }
+        ),
+        encoding="utf-8",
+    )
+    (root / "templates" / "template_mapping.json").write_text(json.dumps({"configured": False}), encoding="utf-8")
+    return QuoteService(root)
+
+
+class LocalWorkflowTests(unittest.TestCase):
+    def test_jsonl_markdown_extraction_supports_layout_results(self):
+        jsonl_text = '{"result":{"layoutParsingResults":[{"markdown":{"text":"A"}}]}}\n'
+        rows = parse_jsonl(jsonl_text)
+        self.assertEqual("A", extract_markdown(rows))
+
+    def test_agent_payload_normalizes_to_existing_quote_schema(self):
+        quote = quote_from_agent_payload(
+            {
+                "headers": {"quote_no": "Q1", "supplier": "S", "currency": "CNY"},
+                "items": [{"product_name": "Chair", "quantity": "2", "unit_price": "10.5", "amount": "21"}],
+                "totals": {"subtotal": "21", "tax": "0", "grand_total": "21"},
+            },
+            source_name="source.pdf",
+            ocr_job_id="ocrjob-1",
+        )
+        self.assertEqual("paddleocr+deepseek-agent-v1", quote["document"]["parser"])
+        self.assertEqual(2.0, quote["items"][0]["quantity"]["value"])
+        self.assertEqual("deepseek_agent", quote["headers"]["quote_no"]["source"]["type"])
+
+    def test_agent_confidence_uses_ocr_evidence_and_amount_consistency(self):
+        quote = quote_from_agent_payload(
+            {
+                "headers": {"quote_no": "Q1", "supplier": "Supplier Without OCR Evidence", "currency": "CNY"},
+                "items": [{"product_name": "Chair", "quantity": "2", "unit_price": "10", "amount": "20"}],
+                "totals": {"subtotal": "20", "tax": "0", "grand_total": "20"},
+            },
+            source_name="source.pdf",
+            ocr_job_id="ocrjob-1",
+            ocr_markdown="Quote Q1 CNY Chair qty 2 price 10 amount 20 subtotal 20 tax 0 total 20",
+        )
+
+        self.assertGreaterEqual(quote["headers"]["quote_no"]["confidence"], 0.9)
+        self.assertLess(quote["headers"]["supplier"]["confidence"], 0.9)
+        self.assertGreater(quote["items"][0]["amount"]["confidence"], quote["headers"]["supplier"]["confidence"])
+        self.assertEqual(0.0, quote["items"][0]["product_code"]["confidence"])
+        detail = quote["items"][0]["amount"]["source"]["confidence_detail"]
+        self.assertIn("ocr_text_match", detail["evidence"])
+        self.assertIn("quantity_unit_price_amount_match", detail["business_rules"])
+
+    def test_local_workflow_creates_job_and_ocr_artifacts_without_cloud_storage(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            service = create_service(root)
+            workflow = LocalQuoteWorkflow(service, FakeOcrEngine(), FakeExtractionAgent())
+            source = PROJECT_ROOT / "samples" / "quote-normal.pdf"
+
+            result = workflow.run(source, reviewer="Tester")
+            self.assertEqual("ready_for_review", result.job["status"])
+            self.assertEqual("ocrjob-local-test", result.job["ocr"]["job_id"])
+            self.assertTrue((result.ocr_artifact_dir / "ocr.md").is_file())
+            self.assertTrue((result.ocr_artifact_dir / "ocr.jsonl").is_file())
+            self.assertNotIn("google", json.dumps(result.job, ensure_ascii=False).lower())
+            self.assertFalse(result.output_path)
+
+    def test_local_workflow_continues_from_existing_ocr_jsonl(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            service = create_service(root)
+            workflow = LocalQuoteWorkflow(service, FakeOcrEngine(), FakeExtractionAgent())
+            source = PROJECT_ROOT / "samples" / "quote-normal.pdf"
+            jsonl_path = root / "external-ocr.jsonl"
+            jsonl_path.write_text(
+                json.dumps(
+                    {
+                        "result": {
+                            "layoutParsingResults": [
+                                {
+                                    "markdown": {
+                                        "text": (
+                                            "Quote No: Q-LOCAL-001\n"
+                                            "Supplier: Local Supplier\n"
+                                            "Currency: CNY\n"
+                                            "1 | SKU-1 | Chair | Wood | Oak | Natural | pcs | 2 | 100 | 200"
+                                        )
+                                    }
+                                }
+                            ]
+                        }
+                    },
+                    ensure_ascii=False,
+                ),
+                encoding="utf-8",
+            )
+
+            result = workflow.run_from_ocr_artifacts(
+                source,
+                ocr_jsonl_path=jsonl_path,
+                ocr_job_id="n8n-paddle-job-1",
+                ocr_result_url="https://example.invalid/n8n.jsonl",
+                reviewer="n8n",
+            )
+
+            self.assertEqual("ready_for_review", result.job["status"])
+            self.assertEqual("n8n-paddle-job-1", result.job["ocr"]["job_id"])
+            self.assertEqual("https://example.invalid/n8n.jsonl", result.job["ocr"]["result_url"])
+            self.assertTrue((result.ocr_artifact_dir / "ocr.jsonl").is_file())
+            self.assertTrue((result.ocr_artifact_dir / "ocr.md").is_file())
+
+    def test_workflow_postprocess_repairs_controller_and_mold_fee_rows(self):
+        markdown = (
+            "采购单号：1000 下单号：123456\n"
+            "乙方：LDC 居用品有限公司\n"
+            "规格型号 尺寸:153mm×102mm×61mm 防滑设计:扳机键(LT/RT)、肩键(LB/RB) "
+            "底部自带3.5mm标准耳机插孔,支持直连游戏耳机。\n"
+            "个 100 500 50000.00\n"
+            "模具费 14000.00\n"
+        )
+        quote = quote_from_agent_payload(
+            {
+                "headers": {
+                    "supplier": "LDC 居用品有限公司",
+                    "customer": "Telop trading Co.ltd",
+                    "quote_date": "2026-06-22",
+                    "currency": "CNY",
+                },
+                "items": [
+                    {"quantity": 100, "unit_price": 500, "amount": 50000, "unit": "个"},
+                    {"product_name": "模具费", "amount": 14000},
+                ],
+                "totals": {"subtotal": 64000, "grand_total": 64000},
+            },
+            source_name="input.pdf",
+            ocr_job_id="ocrjob-1",
+            ocr_markdown=markdown,
+        )
+
+        repaired = normalize_quote_from_ocr(quote, markdown, source_name="input.pdf", ocr_job_id="ocrjob-1")
+        validation = validate_quote(repaired, {
+            "confidence_threshold": 0.8,
+            "critical_confidence_threshold": 0.9,
+            "amount_tolerance": 0.02,
+            "critical_fields": ["supplier", "quote_no", "product_name", "quantity", "unit_price", "amount"],
+        })
+
+        self.assertEqual(0, validation["blocking_issue_count"])
+        self.assertEqual("1000", repaired["headers"]["quote_no"]["value"])
+        self.assertEqual("游戏手柄", repaired["items"][0]["product_name"]["value"])
+        self.assertEqual(1.0, repaired["items"][1]["quantity"]["value"])
+        self.assertEqual(14000.0, repaired["items"][1]["unit_price"]["value"])
+
+    def test_cli_acceptance_command_returns_json(self):
+        completed = subprocess.run(
+            [sys.executable, "-m", "quote_assistant.cli", "--project-root", str(PROJECT_ROOT), "acceptance"],
+            cwd=PROJECT_ROOT,
+            check=True,
+            text=True,
+            capture_output=True,
+        )
+        payload = json.loads(completed.stdout)
+        self.assertTrue(payload["ok"])
+        self.assertIn("report", payload)
+
+
+if __name__ == "__main__":
+    unittest.main()

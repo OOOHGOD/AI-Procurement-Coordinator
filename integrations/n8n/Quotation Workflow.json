@@ -1,0 +1,906 @@
+{
+  "name": "Quotation Workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "triggerOn": "specificFolder",
+        "folderToWatch": {
+          "__rl": true,
+          "value": "1jHKtXJ-lRx5qAhbXEOwri7o87NoHha1W",
+          "mode": "id"
+        },
+        "event": "fileCreated",
+        "options": {}
+      },
+      "id": "3a7c3e6d-c4d0-400a-8cff-1b31fa084d78",
+      "name": "Google Drive Trigger",
+      "type": "n8n-nodes-base.googleDriveTrigger",
+      "position": [
+        560,
+        192
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "9XgXHP7bXpaRB2ft",
+          "name": "Google Drive account"
+        }
+      },
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "download",
+        "fileId": {
+          "__rl": true,
+          "value": "={{ $json.id }}",
+          "mode": "id"
+        },
+        "options": {}
+      },
+      "id": "1c2629f8-5dcf-41b0-8773-0da2c1882307",
+      "name": "Google Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        928,
+        192
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "9XgXHP7bXpaRB2ft",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "text": "={{ ['Source PDF file: ' + (($('Google Drive').first().binary?.data?.fileName) || $('Google Drive Trigger').first().json.name || 'uploaded.pdf'), '', 'PaddleOCR markdown:', $json.text].join(String.fromCharCode(10)) }}",
+        "attributes": {
+          "attributes": [
+            {
+              "name": "source_file",
+              "description": "Original PDF file name if visible, otherwise N/A."
+            },
+            {
+              "name": "quote_date",
+              "type": "date",
+              "description": "Quotation date. Normalize as YYYY-MM-DD. Use N/A only if not found.",
+              "required": true
+            },
+            {
+              "name": "order_no",
+              "description": "Quotation number or order number. Do not include # unless it is part of source text.",
+              "required": true
+            },
+            {
+              "name": "supplier_name",
+              "description": "Supplier company name or supplier code.",
+              "required": true
+            },
+            {
+              "name": "supplier_contact",
+              "description": "Supplier contact person name."
+            },
+            {
+              "name": "supplier_phone",
+              "description": "Supplier phone number."
+            },
+            {
+              "name": "supplier_location",
+              "description": "Supplier city/province/country in English when possible."
+            },
+            {
+              "name": "supplier_website",
+              "description": "Supplier website."
+            },
+            {
+              "name": "supplier_wechat",
+              "description": "Supplier WeChat ID."
+            },
+            {
+              "name": "product_name_en",
+              "description": "Short English product name suitable for the Description column.",
+              "required": true
+            },
+            {
+              "name": "size",
+              "description": "Product size/dimensions.",
+              "required": true
+            },
+            {
+              "name": "materials",
+              "description": "Main product materials in English.",
+              "required": true
+            },
+            {
+              "name": "colors",
+              "description": "Product colors."
+            },
+            {
+              "name": "logo",
+              "description": "Logo/branding method."
+            },
+            {
+              "name": "package",
+              "description": "Packaging information."
+            },
+            {
+              "name": "other",
+              "description": "Other product specification notes."
+            },
+            {
+              "name": "qty",
+              "type": "number",
+              "description": "MOQ or quote quantity. Return a number only.",
+              "required": true
+            },
+            {
+              "name": "unit_price_rmb",
+              "type": "number",
+              "description": "Unit price in RMB. Return a number only.",
+              "required": true
+            },
+            {
+              "name": "mold_fee_rmb",
+              "type": "number",
+              "description": "Mold fee in RMB. Return 0 if absent."
+            },
+            {
+              "name": "mold_refund_condition",
+              "description": "Condition under which mold fee is refunded."
+            },
+            {
+              "name": "trade_term",
+              "description": "Trade term such as EXW/FOB/CIF or N/A."
+            },
+            {
+              "name": "payment_sample_mold",
+              "description": "Payment term for sample and mold."
+            },
+            {
+              "name": "payment_bulk",
+              "description": "Bulk order payment term.",
+              "required": true
+            },
+            {
+              "name": "sample_fee",
+              "description": "Sample fee."
+            },
+            {
+              "name": "sample_time",
+              "description": "Sample time."
+            },
+            {
+              "name": "lead_time_days",
+              "type": "number",
+              "description": "Production or lead time in days. Return a number only.",
+              "required": true
+            },
+            {
+              "name": "transportation_cost",
+              "description": "Who bears transportation/shipping cost.",
+              "required": true
+            },
+            {
+              "name": "delivery_method",
+              "description": "Delivery method.",
+              "required": true
+            },
+            {
+              "name": "packing",
+              "description": "Packing method."
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "You are a quotation data extraction agent. Extract clean JSON fields from PaddleOCR markdown for a Telop quotation template. Use English for product specifications, supplier location, payment/term notes, and remarks when possible. Do not invent missing values; use N/A for missing text fields and 0 for missing numeric fee fields. Return only data that maps to the requested JSON schema. Preserve numeric values as numbers, not strings.",
+          "batching": {
+            "batchSize": 1,
+            "delayBetweenBatches": 0
+          }
+        }
+      },
+      "id": "d301e58d-dc6a-4bba-a0cd-805838f163ec",
+      "name": "DeepSeek Quote JSON Agent",
+      "type": "@n8n/n8n-nodes-langchain.informationExtractor",
+      "position": [
+        2576,
+        96
+      ],
+      "typeVersion": 1.2
+    },
+    {
+      "parameters": {},
+      "id": "2113c0f1-b681-4c39-8f61-9102ba689c7b",
+      "name": "No Operation, do nothing",
+      "type": "n8n-nodes-base.noOp",
+      "position": [
+        3968,
+        96
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Upload Invoice Doc Trigger",
+        "height": 680,
+        "width": 320
+      },
+      "id": "d2559287-0990-454a-b73a-4255dbd1a252",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        416,
+        -16
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "Extract Invoice Doc",
+        "height": 680,
+        "width": 1568,
+        "color": 6
+      },
+      "id": "fe84d418-08f5-4f8c-846a-04a2fe63a7e5",
+      "name": "Sticky Note1",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        752,
+        -16
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "# 📥 发票接收与通知自动化工作流\n这套 n8n 自动化工作流会监控谷歌云盘文件夹，检测新上传的发票 PDF 文件，提取客户名称、发票编号、金额、到期日等关键信息，将数据录入谷歌表格存档，并推送排版完整的 Telegram 消息通知收款团队。\n\n如需观看同类工作流的分步搭建视频教程：\nhttps://www.youtube.com/@automatewithmarc\n\n## ✅ 工作流实现功能\n🕵️ 实时监控指定谷歌云盘文件夹，识别新增发票文件\n📄 通过 AI（LangChain 信息提取器）读取 PDF 发票并提取票据信息\n📊 将提取到的数据逐条写入结构化谷歌表格\n💬 通过 Telegram 向收款团队推送发票详情通知\n🤖 可选配置 Claude Sonnet 大模型，生成通俗易懂的汇总文案\n\n## ⚙️ 运行流程分步说明\n1. **触发器**：指定谷歌云盘文件夹新增 PDF 发票时，自动启动工作流\n2. **下载并解析文件**：拉取云端文件，提取 PDF 内文字内容\n3. **AI 信息提取**：智能提取发票编号、客户、开票日期、金额等核心字段\n4. **数据归档至谷歌表格**：将所有提取信息追加写入预设发票跟踪表格\n5. **AI 通知文案生成**：调用 Anthropic Claude 模型整理简洁清晰的通知内容\n6. **email 推送提醒**：将整理好的发票汇总消息发送至对应email，通知\n\n## 🧠 用到的 AI 工具与节点\n- 谷歌云盘触发器 + 文件下载节点\n- PDF 文本提取节点\n- LangChain 信息提取器\n- 谷歌表格（追加数据）节点\n- Anthropic Claude（通知文案格式化）\n- Telegram 消息发送节点\n\n## 🛠️ 部署配置步骤\n1. 谷歌云盘：配置 OAuth2 授权凭证，填写需要监控的文件夹 ID\n2. 谷歌表格：绑定用于记录发票的跟踪表格\n3. Telegram：创建机器人并获取目标群组/频道的聊天 ID\n4. Anthropic / OpenAI：如需启用文案自动格式化，填入对应 API 密钥\n\n## 💡 适用业务场景\n- 自动化记账与发票台账管理\n- 财务团队实时收款提醒\n- AI 自动收录、汇总发票单据",
+        "height": 1180,
+        "width": 660,
+        "color": 7
+      },
+      "id": "eeac090a-e9ed-4594-bc6e-a74e3fc7b072",
+      "name": "Sticky Note5",
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        -304,
+        -16
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "4ede016c-aaf3-43eb-bf6b-606d5986d0f0",
+              "leftValue": "={{ $json.mimeType }}",
+              "rightValue": "application/pdf",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.filter",
+      "typeVersion": 2.3,
+      "position": [
+        768,
+        192
+      ],
+      "id": "b588c7a3-1e80-42ab-bd7d-a7097b9cfe72",
+      "name": "Filter"
+    },
+    {
+      "parameters": {
+        "jsCode": "// Paste your PaddleOCR API token between the quotes below.\n// Use the token only. Do not include the word bearer.\nconst PADDLEOCR_TOKEN = '';\n\nconst token = String(PADDLEOCR_TOKEN || '').trim();\nif (!token || token === 'PASTE_YOUR_PADDLEOCR_TOKEN_HERE') {\n  throw new Error('Open the PaddleOCR Token Check node and replace PASTE_YOUR_PADDLEOCR_TOKEN_HERE with your PaddleOCR API token.');\n}\n\nreturn $input.all().map((item) => ({\n  ...item,\n  json: {\n    ...item.json,\n    paddleocrToken: token,\n  },\n}));"
+      },
+      "id": "5ee01fcc-b4a3-4277-815c-f83c61b42b99",
+      "name": "PaddleOCR Token Check",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        1088,
+        192
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://paddleocr.aistudio-app.com/api/v2/ocr/jobs",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'bearer ' + $('PaddleOCR Token Check').first().json.paddleocrToken }}"
+            }
+          ]
+        },
+        "sendBody": true,
+        "contentType": "multipart-form-data",
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "model",
+              "value": "PaddleOCR-VL-1.6"
+            },
+            {
+              "name": "optionalPayload",
+              "value": "={{ JSON.stringify({ useDocOrientationClassify: false, useDocUnwarping: false, useChartRecognition: false }) }}"
+            },
+            {
+              "parameterType": "formBinaryData",
+              "name": "file",
+              "inputDataFieldName": "data"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "fea54b80-fe6f-46be-a5ab-3605c2c5c2a0",
+      "name": "Submit PaddleOCR Job",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1280,
+        192
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://paddleocr.aistudio-app.com/api/v2/ocr/jobs/' + $('Submit PaddleOCR Job').first().json.data.jobId }}",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "={{ 'bearer ' + $('PaddleOCR Token Check').first().json.paddleocrToken }}"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "json"
+            }
+          }
+        }
+      },
+      "id": "a2a1f090-164d-44b2-a657-b37327a5208e",
+      "name": "Check PaddleOCR Job",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        1728,
+        192
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "url": "={{ $json.data.resultUrl.jsonUrl }}",
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "text",
+              "outputPropertyName": "jsonl"
+            }
+          }
+        }
+      },
+      "id": "2aa8743a-a08b-4c47-9946-cfe1a89ec232",
+      "name": "Download PaddleOCR JSONL",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        2176,
+        96
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst output = [];\nconst LF = String.fromCharCode(10);\nconst CR = String.fromCharCode(13);\n\nfor (const item of items) {\n  const raw = item.json.jsonl ?? item.json.data ?? item.json.body ?? '';\n  const lines = String(raw)\n    .replaceAll(CR, '')\n    .split(LF)\n    .map((line) => line.trim())\n    .filter(Boolean);\n\n  const pages = [];\n  const markdownImages = [];\n  const outputImages = [];\n  let pageNumber = 0;\n\n  for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {\n    let parsed;\n    try {\n      parsed = JSON.parse(lines[lineIndex]);\n    } catch (error) {\n      throw new Error(`Failed to parse PaddleOCR JSONL line ${lineIndex + 1}: ${error.message}`);\n    }\n\n    const layoutResults = parsed.result?.layoutParsingResults ?? [];\n    for (const result of layoutResults) {\n      const markdown = result.markdown ?? {};\n      const markdownText = markdown.text ?? '';\n      pages.push({\n        page: pageNumber + 1,\n        markdown: markdownText,\n      });\n\n      for (const [path, url] of Object.entries(markdown.images ?? {})) {\n        markdownImages.push({ page: pageNumber + 1, path, url });\n      }\n      for (const [name, url] of Object.entries(result.outputImages ?? {})) {\n        outputImages.push({ page: pageNumber + 1, name, url });\n      }\n      pageNumber++;\n    }\n  }\n\n  const text = pages\n    .map((page) => [`<!-- PaddleOCR page ${page.page} -->`, page.markdown].join(LF))\n    .join(LF + LF);\n\n  output.push({\n    json: {\n      text,\n      pages,\n      markdownImages,\n      outputImages,\n      paddleocr: {\n        model: 'PaddleOCR-VL-1.6',\n        jsonlLineCount: lines.length,\n        pageCount: pages.length,\n      },\n    },\n  });\n}\n\nreturn output;"
+      },
+      "id": "553fe15a-2d40-44fa-b8a6-0b2f3d85c8ae",
+      "name": "Parse PaddleOCR JSONL",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2400,
+        96
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "options": {
+          "maxTokens": 4096,
+          "responseFormat": "json_object",
+          "temperature": 0.1,
+          "timeout": 360000,
+          "maxRetries": 2
+        }
+      },
+      "id": "0e40c6fe-a054-40c9-8b04-9e8bd14a577a",
+      "name": "DeepSeek Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatDeepSeek",
+      "position": [
+        2624,
+        320
+      ],
+      "typeVersion": 1,
+      "credentials": {
+        "deepSeekApi": {
+          "id": "5IHK3TnDvVqzyvvy",
+          "name": "DeepSeek account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const sourceFile = $('Google Drive').first().binary?.data?.fileName || $('Google Drive Trigger').first().json.name || 'uploaded.pdf';\nif ($json.error) {\n  throw new Error('DeepSeek extraction failed: ' + $json.error);\n}\n\nconst extracted = ($json.output && typeof $json.output === 'object' && !Array.isArray($json.output))\n  ? $json.output\n  : $json;\n\nconst ocr = $('Parse PaddleOCR JSONL').first().json || {};\nfunction asArray(value) {\n  return Array.isArray(value) ? value : [];\n}\n\nfunction normalizeImage(image, source) {\n  if (!image) return null;\n  if (typeof image === 'string') {\n    return { url: image, source, role: 'product_image', targetCell: 'B7' };\n  }\n  const url = image.url || image.imageUrl || image.image_url || image.href || image.dataUrl || image.data_url || '';\n  if (!url) return null;\n  return {\n    ...image,\n    url,\n    source,\n    role: image.role || 'product_image',\n    targetCell: image.targetCell || 'B7',\n  };\n}\n\nconst deepseekImages = [\n  ...asArray($json.product_images).map((image) => normalizeImage(image, 'deepseek')),\n  ...asArray($json.output?.product_images).map((image) => normalizeImage(image, 'deepseek_output')),\n].filter(Boolean);\n\n// Prefer cropped images referenced from PaddleOCR markdown, e.g. imgs/img_in_image_box_*.jpg.\n// layout_det_res images are page/layout previews, so use them only when no cropped image exists.\nconst markdownImages = asArray(ocr.markdownImages)\n  .map((image) => normalizeImage(image, 'paddleocr_markdownImages'))\n  .filter(Boolean);\nconst outputImages = asArray(ocr.outputImages)\n  .map((image) => normalizeImage(image, 'paddleocr_outputImages'))\n  .filter(Boolean);\nconst productImages = [\n  ...deepseekImages,\n  ...markdownImages,\n  ...(markdownImages.length ? [] : outputImages),\n].filter(Boolean);\n\nconst quote = {\n  ...extracted,\n  source_file: extracted.source_file || sourceFile,\n  product_images: productImages,\n  product_image_count: productImages.length,\n};\n\nconst textFields = [\n  'source_file', 'quote_date', 'order_no', 'supplier_name', 'supplier_contact',\n  'supplier_phone', 'supplier_location', 'supplier_website', 'supplier_wechat',\n  'product_name_en', 'size', 'materials', 'colors', 'logo', 'package', 'other',\n  'mold_refund_condition', 'trade_term', 'payment_sample_mold', 'payment_bulk',\n  'sample_fee', 'sample_time', 'transportation_cost', 'delivery_method', 'packing',\n];\nfor (const key of textFields) {\n  if (quote[key] === undefined || quote[key] === null || quote[key] === '') quote[key] = 'N/A';\n}\n\nfor (const key of ['qty', 'unit_price_rmb', 'mold_fee_rmb', 'lead_time_days']) {\n  const n = Number(String(quote[key] ?? '').replace(/[,RMB\\s]/gi, ''));\n  quote[key] = Number.isFinite(n) ? n : 0;\n}\n\nreturn [{\n  json: {\n    ...quote,\n    quoteJsonBase64: Buffer.from(JSON.stringify(quote), 'utf8').toString('base64'),\n  },\n}];"
+      },
+      "id": "fa30a67b-26f3-40ea-b969-1345c15bb251",
+      "name": "Prepare Excel JSON",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        2848,
+        96
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "executeOnce": false,
+        "command": "={{ 'node /home/node/.n8n/workflow-scripts/fill_telop_quote.js ' + $json.quoteJsonBase64 }}"
+      },
+      "id": "03dee252-8aed-431c-9e16-93c6a06f0115",
+      "name": "Generate Telop Excel",
+      "type": "n8n-nodes-base.executeCommand",
+      "position": [
+        3072,
+        96
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "jsCode": "const stdout = $json.stdout || '';\nconst jsonLine = stdout.split(/\\r?\\n/).map((line) => line.trim()).filter(Boolean).reverse().find((line) => line.startsWith('{'));\nif (!jsonLine) {\n  throw new Error('Excel generator did not return JSON. stdout=' + stdout + ' stderr=' + ($json.stderr || ''));\n}\nconst result = JSON.parse(jsonLine);\nconst containerOutputPath = result.outputPath;\n\nfunction todayInShanghai() {\n  return new Intl.DateTimeFormat('en-CA', {\n    timeZone: 'Asia/Shanghai',\n    year: 'numeric',\n    month: '2-digit',\n    day: '2-digit',\n  }).format(new Date()).replace(/-/g, '');\n}\n\nfunction normalizeDate(value) {\n  const text = String(value || '').trim();\n  if (!text || text.toUpperCase() === 'N/A') return todayInShanghai();\n  const match = text.match(/(\\d{4})[.\\/\\-?]?(\\d{1,2})[.\\/\\-?]?(\\d{1,2})/);\n  if (!match) return todayInShanghai();\n  const y = match[1];\n  const m = match[2];\n  const d = match[3];\n  return y + m.padStart(2, '0') + d.padStart(2, '0');\n}\n\nfunction safeFilePart(value, fallback) {\n  const raw = String(value || '').trim();\n  if (!raw || raw.toUpperCase() === 'N/A') return fallback;\n  const cleaned = raw\n    .replace(/[<>:\"/\\\\|?*\\x00-\\x1F]/g, ' ')\n    .replace(/\\s+/g, ' ')\n    .trim();\n  if (!cleaned || cleaned.toUpperCase() === 'N/A' || cleaned.toUpperCase() === 'N A') return fallback;\n  return cleaned.slice(0, 90);\n}\n\nconst quote = result.quote || {};\nconst productName = safeFilePart(quote.product_name_en, 'Quotation');\nconst datePart = normalizeDate(quote.quote_date);\nconst driveFileName = productName + '_' + datePart + '.xlsx';\n\nreturn [{\n  json: {\n    ...result,\n    containerOutputPath,\n    driveFileName,\n    driveFolderId: '1D7dud-WcTrHA1x4JuTwkjEdSvuDqyNtz',\n    driveFolderUrl: 'https://drive.google.com/drive/folders/1D7dud-WcTrHA1x4JuTwkjEdSvuDqyNtz',\n    message: 'Generated Excel: ' + containerOutputPath + '; Drive file name: ' + driveFileName,\n  },\n}];"
+      },
+      "id": "6b557d07-73c1-46de-9ad3-c0f225802da7",
+      "name": "Parse Excel Generation Result",
+      "type": "n8n-nodes-base.code",
+      "position": [
+        3296,
+        96
+      ],
+      "typeVersion": 2
+    },
+    {
+      "parameters": {
+        "fileSelector": "={{ $json.outputPath }}",
+        "options": {
+          "fileExtension": "xlsx",
+          "fileName": "={{ $json.driveFileName }}",
+          "mimeType": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+          "dataPropertyName": "data"
+        }
+      },
+      "id": "6936f04e-181e-410b-a9b3-969be7afb023",
+      "name": "Read Generated Excel",
+      "type": "n8n-nodes-base.readWriteFile",
+      "position": [
+        3520,
+        96
+      ],
+      "typeVersion": 1.1
+    },
+    {
+      "parameters": {
+        "name": "={{ $binary.data.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive",
+          "cachedResultName": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1D7dud-WcTrHA1x4JuTwkjEdSvuDqyNtz"
+        },
+        "options": {
+          "simplifyOutput": true
+        }
+      },
+      "id": "6c56dfe3-fe34-4116-90a5-4f80387167db",
+      "name": "Upload Final Quote to Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "position": [
+        3744,
+        96
+      ],
+      "typeVersion": 3,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "9XgXHP7bXpaRB2ft",
+          "name": "Google Drive account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "id": "0d00baa1-de12-470d-b120-1b247dd93589",
+      "name": "Wait 5 Seconds",
+      "type": "n8n-nodes-base.wait",
+      "position": [
+        1504,
+        192
+      ],
+      "typeVersion": 1.1,
+      "webhookId": "205cb0e2-1680-4c97-8fec-304445eb1159"
+    },
+    {
+      "parameters": {
+        "mode": "expression",
+        "numberOutputs": 3,
+        "output": "={{ $json.data?.state === 'done' ? 0 : (['pending', 'running'].includes($json.data?.state) ? 1 : 2) }}"
+      },
+      "id": "f07ded2d-b282-45bf-8c90-7b401f34eaa4",
+      "name": "Route PaddleOCR State",
+      "type": "n8n-nodes-base.switch",
+      "position": [
+        1952,
+        192
+      ],
+      "typeVersion": 3.4
+    },
+    {
+      "parameters": {
+        "errorMessage": "={{ 'PaddleOCR job failed or returned unknown state: ' + ($json.data?.state || 'unknown') + '. ' + ($json.data?.errorMsg || '') }}"
+      },
+      "id": "d3b78b84-e6e6-44be-947c-c17625b97ade",
+      "name": "PaddleOCR Failed",
+      "type": "n8n-nodes-base.stopAndError",
+      "position": [
+        2176,
+        336
+      ],
+      "typeVersion": 1
+    },
+    {
+      "parameters": {
+        "content": "AI Agent 识别信息\n",
+        "height": 688,
+        "width": 688
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        2336,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "6a87ebc6-19b2-46a8-a80e-91bc1004cafb",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "content": "填写filed to excel",
+        "height": 688,
+        "width": 656,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3040,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "fcdff5b6-c720-4ba8-a3ac-5f338d150f62",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "content": "保存save",
+        "height": 688,
+        "width": 448,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "position": [
+        3712,
+        -16
+      ],
+      "typeVersion": 1,
+      "id": "fcca9af2-1365-4772-abbf-547bb484cb04",
+      "name": "Sticky Note4"
+    },
+    {
+      "parameters": {},
+      "id": "8e86b637-9979-4a1e-aa73-9daa038028b9",
+      "name": "Manual Trigger",
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        560,
+        -64
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "// Manual mode: paste either a Google Drive PDF file ID or the full sharing URL.\n// Supported examples:\n//   1uOskHIT3WckE_Nc41k01EBcx6iFDuh8R\n//   https://drive.google.com/file/d/1uOskHIT3WckE_Nc41k01EBcx6iFDuh8R/view?usp=drive_link\n//   https://drive.google.com/open?id=1uOskHIT3WckE_Nc41k01EBcx6iFDuh8R\nconst MANUAL_GOOGLE_DRIVE_FILE = 'https://drive.google.com/file/d/1uOskHIT3WckE_Nc41k01EBcx6iFDuh8R/view?usp=drive_link';\nconst MANUAL_FILE_NAME = 'manual-input.pdf';\n\nfunction extractDriveFileId(value) {\n  const text = String(value || '').trim();\n  if (!text || text === 'PASTE_GOOGLE_DRIVE_FILE_ID_HERE') return '';\n\n  const patterns = [\n    /\\/file\\/d\\/([a-zA-Z0-9_-]+)/,\n    /[?&]id=([a-zA-Z0-9_-]+)/,\n    /\\/d\\/([a-zA-Z0-9_-]+)/,\n  ];\n  for (const pattern of patterns) {\n    const match = text.match(pattern);\n    if (match) return match[1];\n  }\n\n  return text.replace(/^['\"]|['\"]$/g, '').trim();\n}\n\nconst id = extractDriveFileId(MANUAL_GOOGLE_DRIVE_FILE);\nif (!id) {\n  throw new Error('Open the Manual Input PDF File node and paste a Google Drive PDF file ID or sharing URL.');\n}\nif (/^https?:\\/\\//i.test(id)) {\n  throw new Error('Could not extract a Google Drive file ID from the URL. Open the file link and copy the ID after /file/d/.');\n}\n\nreturn [{\n  json: {\n    id,\n    name: MANUAL_FILE_NAME,\n    mimeType: 'application/pdf',\n    triggerMode: 'manual',\n    manualInput: MANUAL_GOOGLE_DRIVE_FILE,\n  },\n}];"
+      },
+      "id": "f1d0bbc0-0395-4fc6-ac0d-956c28a30aa8",
+      "name": "Manual Input PDF File",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        784,
+        -64
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Google Drive": {
+      "main": [
+        [
+          {
+            "node": "PaddleOCR Token Check",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Drive Trigger": {
+      "main": [
+        [
+          {
+            "node": "Filter",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Filter": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "PaddleOCR Token Check": {
+      "main": [
+        [
+          {
+            "node": "Submit PaddleOCR Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Submit PaddleOCR Job": {
+      "main": [
+        [
+          {
+            "node": "Wait 5 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check PaddleOCR Job": {
+      "main": [
+        [
+          {
+            "node": "Route PaddleOCR State",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Download PaddleOCR JSONL": {
+      "main": [
+        [
+          {
+            "node": "Parse PaddleOCR JSONL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse PaddleOCR JSONL": {
+      "main": [
+        [
+          {
+            "node": "DeepSeek Quote JSON Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "DeepSeek Quote JSON Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "DeepSeek Quote JSON Agent": {
+      "main": [
+        [
+          {
+            "node": "Prepare Excel JSON",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Excel JSON": {
+      "main": [
+        [
+          {
+            "node": "Generate Telop Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Generate Telop Excel": {
+      "main": [
+        [
+          {
+            "node": "Parse Excel Generation Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Excel Generation Result": {
+      "main": [
+        [
+          {
+            "node": "Read Generated Excel",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Read Generated Excel": {
+      "main": [
+        [
+          {
+            "node": "Upload Final Quote to Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Final Quote to Drive": {
+      "main": [
+        [
+          {
+            "node": "No Operation, do nothing",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait 5 Seconds": {
+      "main": [
+        [
+          {
+            "node": "Check PaddleOCR Job",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route PaddleOCR State": {
+      "main": [
+        [
+          {
+            "node": "Download PaddleOCR JSONL",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Wait 5 Seconds",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "PaddleOCR Failed",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Trigger": {
+      "main": [
+        [
+          {
+            "node": "Manual Input PDF File",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Manual Input PDF File": {
+      "main": [
+        [
+          {
+            "node": "Google Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": true
+  },
+  "versionId": "aab2c56c-a751-47aa-b237-ae090c4d9029",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "ec9152683cbf1607531faf822b4ca6d1b17d6cf33d6c696d74d98a10f8296ea2"
+  },
+  "nodeGroups": [],
+  "id": "RlNNEchUebPGIp9p",
+  "tags": []
+}

@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
 <head>
   <meta charset="utf-8">
@@ -870,6 +870,229 @@
       line-height: 1.5;
     }
 
+
+    /* --- Page 5: AI Agent Workflow --- */
+    .agent-workflow-section {
+      min-height: 100vh;
+      background: var(--bg);
+      padding: 48px;
+      border-top: 2px solid var(--line);
+    }
+
+    .agent-page-head {
+      text-align: center;
+      max-width: 880px;
+      margin: 0 auto 34px;
+    }
+
+    .agent-kicker {
+      display: inline-flex;
+      align-items: center;
+      height: 28px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .agent-page-title {
+      font-size: clamp(24px, 3vw, 38px);
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: 14px;
+    }
+
+    .agent-page-title em {
+      color: var(--orange);
+      font-style: normal;
+    }
+
+    .agent-page-subtitle {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .agent-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(320px, 0.88fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .agent-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .agent-panel-title {
+      font-size: 16px;
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .agent-panel-title::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--orange);
+      box-shadow: 16px 0 0 var(--blue), 32px 0 0 var(--green);
+      flex-shrink: 0;
+    }
+
+    .agent-flow-diagram {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      position: relative;
+    }
+
+    .agent-flow-node {
+      min-height: 118px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      background: #FBFCFF;
+      position: relative;
+    }
+
+    .agent-flow-node::after {
+      content: "";
+      position: absolute;
+      right: -10px;
+      top: 50%;
+      width: 18px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--orange));
+      transform: translateY(-50%);
+    }
+
+    .agent-flow-node:last-child::after { display: none; }
+
+    .agent-flow-index {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: #fff;
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    .agent-flow-node:nth-child(2) .agent-flow-index { background: var(--orange); }
+    .agent-flow-node:nth-child(3) .agent-flow-index { background: var(--green); }
+    .agent-flow-node:nth-child(4) .agent-flow-index { background: var(--ink); }
+
+    .agent-flow-name {
+      font-size: 14px;
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .agent-flow-copy {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .agent-role-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .agent-role-card {
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 15px;
+      background: #FBFCFF;
+    }
+
+    .agent-role-name {
+      font-size: 13px;
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .agent-role-desc {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .agent-state-flow {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .agent-state-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 34px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: var(--blue-light);
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .agent-state-chip.warn { background: var(--orange-bg); color: var(--orange); }
+    .agent-state-chip.ok { background: var(--green-light); color: var(--green); }
+
+    .agent-stack-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .agent-stack-item {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      padding: 11px 12px;
+      border-radius: 10px;
+      background: #FBFCFF;
+      border: 1px solid var(--line);
+    }
+
+    .agent-stack-name {
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .agent-stack-value {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .agent-side-stack {
+      display: grid;
+      gap: 18px;
+    }
     /* ─── Viewport scaling ─── */
     @media (max-width: 1280px) {
       .flow { flex-wrap: wrap; justify-content: center; gap: 12px; }
@@ -933,8 +1156,8 @@
       <span class="pill green" data-lang="zh">置信度评分</span>
       <span class="pill green" data-lang="en">Confidence Scoring</span>
       <div class="lang-toggle">
-        <button class="lang-btn active" onclick="setLang('zh')">中</button>
-        <button class="lang-btn" onclick="setLang('en')">EN</button>
+        <button class="lang-btn active" onclick="setLang('zh', this)">中</button>
+        <button class="lang-btn" onclick="setLang('en', this)">EN</button>
       </div>
     </div>
   </header>
@@ -1627,13 +1850,103 @@
   </div>
 </section>
 
+
+<!-- Page 5: AI Agent Workflow -->
+<section class="agent-workflow-section">
+  <div class="agent-page-head">
+    <div class="agent-kicker" data-lang="zh">PAGE 5 / LANGGRAPH AGENT LAYER</div>
+    <div class="agent-kicker" data-lang="en">PAGE 5 / LANGGRAPH AGENT LAYER</div>
+    <h2 class="agent-page-title" data-lang="zh">AI Agent <em>技术方案工作流</em></h2>
+    <h2 class="agent-page-title" data-lang="en">AI Agent <em>Workflow Blueprint</em></h2>
+    <p class="agent-page-subtitle" data-lang="zh">在现有 8 层主链路之上增加可编排的 Agent 层：负责多轮澄清、结构化订单生成、冲突判断、人工确认路由和工具调用，把“AI 解析”升级为“可控执行”。</p>
+    <p class="agent-page-subtitle" data-lang="en">Add an orchestrated agent layer on top of the existing 8-layer pipeline: clarify requirements, generate structured orders, detect conflicts, route human approval, and call tools with controlled execution.</p>
+  </div>
+
+  <div class="agent-layout">
+    <div class="agent-panel">
+      <div class="agent-panel-title" data-lang="zh">架构总览图</div>
+      <div class="agent-panel-title" data-lang="en">Architecture Overview</div>
+      <div class="agent-flow-diagram">
+        <div class="agent-flow-node">
+          <div class="agent-flow-index">1</div>
+          <div class="agent-flow-name" data-lang="zh">需求理解 Agent</div>
+          <div class="agent-flow-name" data-lang="en">Requirement Agent</div>
+          <div class="agent-flow-copy" data-lang="zh">读取聊天、图片、PDF 与表格，识别缺失字段并发起澄清。</div>
+          <div class="agent-flow-copy" data-lang="en">Reads chat, images, PDFs and tables; detects missing fields and asks clarifying questions.</div>
+        </div>
+        <div class="agent-flow-node">
+          <div class="agent-flow-index">2</div>
+          <div class="agent-flow-name" data-lang="zh">报价 Agent</div>
+          <div class="agent-flow-name" data-lang="en">Quotation Agent</div>
+          <div class="agent-flow-copy" data-lang="zh">结合商品库、供应商规则、历史价格，生成报价草案与风险提示。</div>
+          <div class="agent-flow-copy" data-lang="en">Uses catalog, supplier rules and historical prices to draft quotes and risk notes.</div>
+        </div>
+        <div class="agent-flow-node">
+          <div class="agent-flow-index">3</div>
+          <div class="agent-flow-name" data-lang="zh">冲突检测 Agent</div>
+          <div class="agent-flow-name" data-lang="en">Conflict Agent</div>
+          <div class="agent-flow-copy" data-lang="zh">按版本、置信度、尺寸/颜色/数量规则判断自动通过或人工确认。</div>
+          <div class="agent-flow-copy" data-lang="en">Routes by version, confidence and size/color/quantity rules for auto-pass or review.</div>
+        </div>
+        <div class="agent-flow-node">
+          <div class="agent-flow-index">4</div>
+          <div class="agent-flow-name" data-lang="zh">订单创建 Agent</div>
+          <div class="agent-flow-name" data-lang="en">Order Agent</div>
+          <div class="agent-flow-copy" data-lang="zh">生成结构化订单、供应商分单、PDF/Excel，并写入追踪状态。</div>
+          <div class="agent-flow-copy" data-lang="en">Creates orders, supplier splits, PDF/Excel outputs and dispatch tracking records.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="agent-side-stack">
+      <div class="agent-panel">
+        <div class="agent-panel-title" data-lang="zh">核心 Agent 角色</div>
+        <div class="agent-panel-title" data-lang="en">Core Agent Roles</div>
+        <div class="agent-role-grid">
+          <div class="agent-role-card"><div class="agent-role-name" data-lang="zh">需求澄清</div><div class="agent-role-name" data-lang="en">Clarifier</div><div class="agent-role-desc" data-lang="zh">只追问影响下单的字段：尺寸、材质、颜色、数量、交期、供应商。</div><div class="agent-role-desc" data-lang="en">Asks only order-critical questions: size, material, color, quantity, deadline, supplier.</div></div>
+          <div class="agent-role-card"><div class="agent-role-name" data-lang="zh">报价计算</div><div class="agent-role-name" data-lang="en">Quoter</div><div class="agent-role-desc" data-lang="zh">输出价格、依据、可替代方案和待确认项。</div><div class="agent-role-desc" data-lang="en">Returns prices, rationale, alternatives and items needing confirmation.</div></div>
+          <div class="agent-role-card"><div class="agent-role-name" data-lang="zh">风险审核</div><div class="agent-role-name" data-lang="en">Reviewer</div><div class="agent-role-desc" data-lang="zh">发现冲突、低置信度、规则越界和重复下单风险。</div><div class="agent-role-desc" data-lang="en">Finds conflicts, low confidence, rule violations and duplicate-order risks.</div></div>
+          <div class="agent-role-card"><div class="agent-role-name" data-lang="zh">执行落单</div><div class="agent-role-name" data-lang="en">Executor</div><div class="agent-role-desc" data-lang="zh">在人工确认后调用创建订单、导出文件和发单工具。</div><div class="agent-role-desc" data-lang="en">Calls order, export and dispatch tools after human approval.</div></div>
+        </div>
+      </div>
+
+      <div class="agent-panel">
+        <div class="agent-panel-title" data-lang="zh">工作流状态机简图</div>
+        <div class="agent-panel-title" data-lang="en">State Machine</div>
+        <div class="agent-state-flow">
+          <span class="agent-state-chip">Intake</span>
+          <span class="agent-state-chip">Clarify</span>
+          <span class="agent-state-chip">Parse</span>
+          <span class="agent-state-chip warn">Conflict</span>
+          <span class="agent-state-chip">Quote</span>
+          <span class="agent-state-chip ok">Approve</span>
+          <span class="agent-state-chip ok">Create Order</span>
+          <span class="agent-state-chip">Track</span>
+        </div>
+      </div>
+
+      <div class="agent-panel">
+        <div class="agent-panel-title" data-lang="zh">技术选型列表</div>
+        <div class="agent-panel-title" data-lang="en">Technology Stack</div>
+        <div class="agent-stack-list">
+          <div class="agent-stack-item"><div class="agent-stack-name">LangGraph 1.2.4</div><div class="agent-stack-value" data-lang="zh">状态机、条件边、循环、人工确认中断。</div><div class="agent-stack-value" data-lang="en">State graph, conditional edges, loops and human approval interrupts.</div></div>
+          <div class="agent-stack-item"><div class="agent-stack-name">LangChain 1.3.4</div><div class="agent-stack-value" data-lang="zh">模型适配、结构化输出、Tool 调用封装。</div><div class="agent-stack-value" data-lang="en">Model adapters, structured output and tool calling wrappers.</div></div>
+          <div class="agent-stack-item"><div class="agent-stack-name">FastAPI + Pydantic</div><div class="agent-stack-value" data-lang="zh">订单 API、字段校验、JSON Schema 合同。</div><div class="agent-stack-value" data-lang="en">Order APIs, field validation and JSON Schema contracts.</div></div>
+          <div class="agent-stack-item"><div class="agent-stack-name">PostgreSQL + Redis</div><div class="agent-stack-value" data-lang="zh">订单持久化、版本追踪、短期缓存与重试状态。</div><div class="agent-stack-value" data-lang="en">Order persistence, version trace, short-term cache and retry state.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <script>
-  function setLang(lang) {
+  function setLang(lang, activeButton) {
     document.body.className = 'lang-' + lang;
     document.querySelectorAll('.lang-btn').forEach(function(btn) {
       btn.classList.remove('active');
     });
-    event.target.classList.add('active');
+    if (activeButton) {
+      activeButton.classList.add('active');
+    }
   }
 </script>
 

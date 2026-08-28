@@ -1,0 +1,11 @@
+[
+  {
+    "activated_at": "2026-07-01T11:38:01+00:00",
+    "reviewer": "Codex",
+    "template_file": "Telop - Quotation Template - Agent Ready Enhanced.xlsx",
+    "template_sha256": "bbd7f72b53e2db01053f45099e2a97f39c48a1539819ffdeca2c6b3833889f48",
+    "sheet_name": "Sheet1",
+    "mapped_cell_count": 38,
+    "structure_fingerprint": "3a5c95ee681be3818d70c7529c55b7877ce97a010841c84c122302a84db875ec"
+  }
+]

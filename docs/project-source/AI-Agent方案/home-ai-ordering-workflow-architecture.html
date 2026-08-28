@@ -1,0 +1,1779 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>家装 AI 智能下单工作流 - 技术路径全流程可视化</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700;900&family=Saira:wght@500;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===========================================
+       CSS CUSTOM PROPERTIES (THEME)
+       Adjust these variables to recolor the whole slide.
+       =========================================== */
+    :root {
+      --stage-bg: #dfe6f1;
+      --slide-bg: #f5f7fa;
+      --primary: #165dff;
+      --primary-deep: #0a3fbf;
+      --primary-soft: #eaf1ff;
+      --accent: #ff7d00;
+      --accent-soft: #fff3e6;
+      --ink: #111827;
+      --muted: #5c697a;
+      --subtle: #8995a8;
+      --line: #d6e1ef;
+      --panel: #ffffff;
+      --shadow: 0 20px 48px rgba(17, 24, 39, 0.11);
+      --font-display: "Saira", "Noto Sans SC", sans-serif;
+      --font-body: "Noto Sans SC", sans-serif;
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --duration-normal: 0.72s;
+    }
+
+    /* ===========================================
+       BASE STYLES
+       =========================================== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ===========================================
+       FIXED 16:9 STAGE: MANDATORY BASE STYLES
+       Include this ENTIRE file in every presentation.
+       Slides are authored at 1920×1080 and scaled as a whole.
+       =========================================== */
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    .deck-viewport {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        background: var(--stage-bg, #000);
+    }
+
+    .deck-stage {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        transform-origin: 0 0;
+        background: var(--slide-bg, #fff);
+    }
+
+    .slide {
+        position: absolute;
+        inset: 0;
+        width: 1920px;
+        height: 1080px;
+        overflow: hidden;
+        display: block;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        background: var(--slide-bg, #fff);
+    }
+
+    .slide.active,
+    .slide.visible {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        z-index: 1;
+    }
+
+    img,
+    video,
+    canvas,
+    svg {
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+    .deck-controls {
+        position: fixed;
+        left: 50%;
+        bottom: 22px;
+        transform: translateX(-50%);
+        z-index: 1000;
+    }
+
+    @media print {
+        html,
+        body {
+            width: 1920px;
+            height: auto;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-viewport {
+            position: static;
+            overflow: visible;
+            background: #fff;
+        }
+
+        .deck-stage {
+            position: static;
+            width: auto;
+            height: auto;
+            transform: none !important;
+            background: none;
+        }
+
+        .slide {
+            position: relative;
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            width: 1920px;
+            height: 1080px;
+            break-after: page;
+            page-break-after: always;
+        }
+
+        .slide:last-child {
+            break-after: auto;
+            page-break-after: auto;
+        }
+
+        .deck-controls {
+            display: none !important;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+            animation-duration: 0.01ms !important;
+            transition-duration: 0.2s !important;
+        }
+    }
+
+    /* ===========================================
+       SLIDE CANVAS AND BACKGROUND SYSTEM
+       Creates the light technical grid and subtle depth.
+       =========================================== */
+    .workflow-slide {
+      font-family: var(--font-body);
+      color: var(--ink);
+      padding: 54px 78px 48px;
+      background:
+        linear-gradient(rgba(22, 93, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 93, 255, 0.055) 1px, transparent 1px),
+        radial-gradient(circle at 8% 10%, rgba(22, 93, 255, 0.16), transparent 28%),
+        radial-gradient(circle at 96% 87%, rgba(255, 125, 0, 0.14), transparent 25%),
+        linear-gradient(180deg, #ffffff 0%, #f5f7fa 52%, #edf2f9 100%);
+      background-size: 40px 40px, 40px 40px, auto, auto, auto;
+    }
+
+    .workflow-slide::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border: 1px solid rgba(22, 93, 255, 0.14);
+      border-radius: 28px;
+      pointer-events: none;
+    }
+
+    .workflow-slide::after {
+      content: "";
+      position: absolute;
+      left: 86px;
+      right: 86px;
+      top: 164px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(22, 93, 255, 0.32), transparent);
+    }
+
+    /* ===========================================
+       HEADER
+       Contains title, positioning line, and summary metrics.
+       =========================================== */
+    .topline {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 530px;
+      align-items: start;
+      gap: 38px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 34px;
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0;
+      margin-bottom: 13px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 32px;
+      height: 12px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--primary), var(--accent));
+      box-shadow: 0 0 18px rgba(22, 93, 255, 0.35);
+    }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: 66px;
+      line-height: 1.04;
+      letter-spacing: 0;
+      font-weight: 900;
+      max-width: 1080px;
+    }
+
+    .subtitle {
+      color: var(--muted);
+      font-size: 23px;
+      line-height: 1.42;
+      margin-top: 12px;
+      max-width: 960px;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      padding-top: 8px;
+    }
+
+    .metric {
+      min-height: 128px;
+      border: 1px solid rgba(22, 93, 255, 0.18);
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      background: rgba(255, 255, 255, 0.78);
+      box-shadow: 0 12px 30px rgba(31, 48, 78, 0.08);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-size: 44px;
+      line-height: 0.95;
+      margin-bottom: 9px;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.35;
+    }
+
+    .metric:nth-child(2) strong {
+      color: var(--accent);
+    }
+
+    /* ===========================================
+       VERTICAL FLOW
+       Seven-layer architecture with animated arrows.
+       =========================================== */
+    .flow-shell {
+      position: relative;
+      z-index: 2;
+      margin-top: 34px;
+      display: grid;
+      grid-template-columns: 118px minmax(0, 1fr);
+      gap: 22px;
+      min-height: 610px;
+    }
+
+    .rail {
+      position: relative;
+      width: 118px;
+      border-radius: 28px;
+      background: rgba(255, 255, 255, 0.64);
+      border: 1px solid rgba(22, 93, 255, 0.18);
+      overflow: hidden;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+    }
+
+    .rail::before {
+      content: "";
+      position: absolute;
+      top: 42px;
+      bottom: 42px;
+      left: 56px;
+      width: 6px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, rgba(22, 93, 255, 0.16), rgba(22, 93, 255, 0.82), rgba(255, 125, 0, 0.8));
+      box-shadow: 0 0 28px rgba(22, 93, 255, 0.28);
+    }
+
+    .rail::after {
+      content: "";
+      position: absolute;
+      left: 50px;
+      top: 40px;
+      width: 18px;
+      height: 86px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, transparent, #ffffff, transparent);
+      opacity: 0.8;
+      animation: railFlow 2.8s linear infinite;
+    }
+
+    .rail-label {
+      writing-mode: vertical-rl;
+      transform: rotate(180deg);
+      position: absolute;
+      left: 16px;
+      top: 42px;
+      bottom: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+
+    .layers {
+      display: grid;
+      grid-template-rows: repeat(7, 1fr);
+      gap: 7px;
+    }
+
+    .layer-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 92px 280px 1fr 370px;
+      align-items: center;
+      gap: 20px;
+      min-height: 80px;
+      border: 1px solid rgba(22, 93, 255, 0.18);
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.92);
+      box-shadow: var(--shadow);
+      padding: 10px 22px 10px 18px;
+      overflow: visible;
+    }
+
+    .layer-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: 18px;
+      border-left: 7px solid var(--primary);
+      pointer-events: none;
+    }
+
+    .layer-card::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -14px;
+      width: 22px;
+      height: 22px;
+      border-right: 4px solid rgba(22, 93, 255, 0.64);
+      border-bottom: 4px solid rgba(22, 93, 255, 0.64);
+      transform: translateX(-50%) rotate(45deg);
+      background: transparent;
+    }
+
+    .layer-card:last-child::after {
+      content: none;
+    }
+
+    .layer-card.agent {
+      border-color: rgba(255, 125, 0, 0.42);
+      background:
+        linear-gradient(90deg, rgba(255, 125, 0, 0.13), rgba(255, 255, 255, 0.94) 42%),
+        #ffffff;
+      box-shadow: 0 22px 52px rgba(255, 125, 0, 0.14);
+    }
+
+    .layer-card.agent::before {
+      border-left-color: var(--accent);
+    }
+
+    .layer-card.agent::after {
+      border-color: rgba(255, 125, 0, 0.78);
+    }
+
+    .icon-wrap {
+      width: 70px;
+      height: 70px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+      box-shadow: 0 14px 28px rgba(22, 93, 255, 0.22);
+    }
+
+    .agent .icon-wrap {
+      background: linear-gradient(135deg, var(--accent), #ffa136);
+      box-shadow: 0 14px 28px rgba(255, 125, 0, 0.24);
+    }
+
+    .icon-wrap svg {
+      width: 38px;
+      height: 38px;
+      stroke: currentColor;
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .layer-title {
+      min-width: 0;
+    }
+
+    .layer-title .num {
+      display: block;
+      color: var(--subtle);
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .layer-title h2 {
+      font-size: 28px;
+      line-height: 1.12;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .layer-copy {
+      min-width: 0;
+    }
+
+    .layer-copy strong {
+      display: block;
+      color: var(--ink);
+      font-size: 21px;
+      line-height: 1.2;
+      margin-bottom: 7px;
+    }
+
+    .layer-copy p {
+      color: var(--muted);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      justify-content: flex-end;
+    }
+
+    .chips span {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      color: #26425f;
+      background: var(--primary-soft);
+      border: 1px solid rgba(22, 93, 255, 0.16);
+      border-radius: 999px;
+      padding: 0 10px;
+      font-size: 15px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .agent .chips span {
+      color: #884400;
+      background: var(--accent-soft);
+      border-color: rgba(255, 125, 0, 0.2);
+    }
+
+    /* ===========================================
+       VALUE FOOTER
+       Three bottom value statements for executive memory.
+       =========================================== */
+    .value-footer {
+      position: absolute;
+      left: 220px;
+      right: 78px;
+      bottom: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      z-index: 4;
+    }
+
+    .value-card {
+      min-height: 72px;
+      border-radius: 18px;
+      background: #111827;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 24px;
+      box-shadow: 0 20px 44px rgba(17, 24, 39, 0.18);
+    }
+
+    .value-card span {
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .value-card b {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 32px;
+      line-height: 1;
+    }
+
+    /* ===========================================
+       ANIMATIONS
+       Handles staggered fade-in and arrow motion.
+       =========================================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity var(--duration-normal) var(--ease-out-expo),
+                  transform var(--duration-normal) var(--ease-out-expo);
+    }
+
+    .visible .reveal {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .visible .layer-card:nth-child(1) { transition-delay: 0.08s; }
+    .visible .layer-card:nth-child(2) { transition-delay: 0.15s; }
+    .visible .layer-card:nth-child(3) { transition-delay: 0.22s; }
+    .visible .layer-card:nth-child(4) { transition-delay: 0.29s; }
+    .visible .layer-card:nth-child(5) { transition-delay: 0.36s; }
+    .visible .layer-card:nth-child(6) { transition-delay: 0.43s; }
+    .visible .layer-card:nth-child(7) { transition-delay: 0.50s; }
+
+    .visible .value-card:nth-child(1) { transition-delay: 0.62s; }
+    .visible .value-card:nth-child(2) { transition-delay: 0.68s; }
+    .visible .value-card:nth-child(3) { transition-delay: 0.74s; }
+
+    /* ===========================================
+       BILINGUAL CONTROLS
+       Uses body.lang-zh / body.lang-en without disturbing edit mode.
+       =========================================== */
+    [data-lang] {
+      display: none !important;
+    }
+
+    body.lang-zh [data-lang="zh"],
+    body.lang-en [data-lang="en"] {
+      display: block !important;
+    }
+
+    body.lang-zh span[data-lang="zh"],
+    body.lang-en span[data-lang="en"],
+    body.lang-zh strong[data-lang="zh"],
+    body.lang-en strong[data-lang="en"],
+    body.lang-zh b[data-lang="zh"],
+    body.lang-en b[data-lang="en"],
+    body.lang-zh em[data-lang="zh"],
+    body.lang-en em[data-lang="en"] {
+      display: inline !important;
+    }
+
+    body.lang-zh .chips span[data-lang="zh"],
+    body.lang-en .chips span[data-lang="en"],
+    body.lang-zh .tool-call-item[data-lang="zh"],
+    body.lang-en .tool-call-item[data-lang="en"] {
+      display: inline-flex !important;
+    }
+
+    body.lang-zh .eyebrow[data-lang="zh"],
+    body.lang-en .eyebrow[data-lang="en"],
+    body.lang-zh .rail-label[data-lang="zh"],
+    body.lang-en .rail-label[data-lang="en"] {
+      display: flex !important;
+    }
+
+    body.lang-zh .metric strong[data-lang="zh"],
+    body.lang-en .metric strong[data-lang="en"],
+    body.lang-zh .metric span[data-lang="zh"],
+    body.lang-en .metric span[data-lang="en"],
+    body.lang-zh .layer-copy strong[data-lang="zh"],
+    body.lang-en .layer-copy strong[data-lang="en"],
+    body.lang-zh .layer-copy p[data-lang="zh"],
+    body.lang-en .layer-copy p[data-lang="en"],
+    body.lang-zh .agent-role-name[data-lang="zh"],
+    body.lang-en .agent-role-name[data-lang="en"],
+    body.lang-zh .agent-role-desc[data-lang="zh"],
+    body.lang-en .agent-role-desc[data-lang="en"],
+    body.lang-zh .state-copy[data-lang="zh"],
+    body.lang-en .state-copy[data-lang="en"] {
+      display: block !important;
+    }
+
+    .lang-toggle {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      z-index: 10001;
+      display: inline-flex;
+      gap: 6px;
+      padding: 6px;
+      border: 1px solid rgba(22, 93, 255, 0.2);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 14px 28px rgba(17, 24, 39, 0.12);
+      backdrop-filter: blur(12px);
+    }
+
+    .lang-btn {
+      min-width: 46px;
+      height: 34px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      font: 900 14px var(--font-display);
+      letter-spacing: 0;
+    }
+
+    .lang-btn.active {
+      color: #ffffff;
+      background: linear-gradient(135deg, var(--primary), var(--primary-deep));
+      box-shadow: 0 8px 18px rgba(22, 93, 255, 0.24);
+    }
+
+    /* ===========================================
+       AI AGENT WORKFLOW SLIDE
+       LangGraph-style state machine and integration map.
+       =========================================== */
+    .agent-workflow-slide {
+      padding: 48px 68px 38px;
+    }
+
+    .agent-workflow-slide::after {
+      top: 154px;
+    }
+
+    .agent-workflow-slide.agent-readable::after,
+    .agent-detail-slide::after {
+      top: 158px;
+    }
+
+    .agent-head {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 450px;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .agent-head.focused {
+      grid-template-columns: minmax(0, 1fr);
+      max-width: 1500px;
+    }
+
+    .agent-head.detail {
+      grid-template-columns: minmax(0, 1fr) 610px;
+    }
+
+    .agent-kicker {
+      color: var(--primary);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: 0;
+      margin-bottom: 8px;
+    }
+
+    .agent-title {
+      font-family: var(--font-display);
+      font-size: 58px;
+      line-height: 1.14;
+      letter-spacing: 0;
+      font-weight: 900;
+    }
+
+    .agent-title em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .agent-subtitle {
+      max-width: 1030px;
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 21px;
+      line-height: 1.42;
+    }
+
+    .agent-principles {
+      display: grid;
+      gap: 10px;
+      padding-top: 8px;
+    }
+
+    .agent-principle {
+      min-height: 58px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 15px;
+      border: 1px solid rgba(22, 93, 255, 0.18);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 12px 26px rgba(31, 48, 78, 0.08);
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 800;
+      line-height: 1.28;
+    }
+
+    .agent-principle b {
+      min-width: 44px;
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1;
+    }
+
+    .agent-layout {
+      position: relative;
+      z-index: 2;
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1090px) minmax(0, 654px);
+      gap: 24px;
+    }
+
+    .agent-layout.agent-state-layout {
+      grid-template-columns: minmax(0, 1fr);
+      margin-top: 26px;
+    }
+
+    .agent-state-layout .langgraph-panel {
+      height: 760px;
+    }
+
+    .agent-state-layout .agent-panel-head {
+      min-height: 70px;
+      padding: 22px 28px 12px 34px;
+    }
+
+    .agent-state-layout .agent-panel-title {
+      font-size: 32px;
+    }
+
+    .agent-state-layout .agent-panel-tag {
+      min-height: 36px;
+      padding: 0 16px;
+      font-size: 16px;
+    }
+
+    .agent-state-layout .langgraph-board {
+      margin: 8px 28px 0 34px;
+      padding: 22px;
+      background-size: 34px 34px;
+    }
+
+    .agent-state-layout .state-row {
+      grid-template-columns: 1fr 48px 1fr 48px 1fr;
+      gap: 16px;
+      margin-bottom: 18px;
+    }
+
+    .agent-state-layout .agent-state-node {
+      min-height: 126px;
+      gap: 12px;
+      padding: 22px 24px;
+      border-radius: 20px;
+    }
+
+    .agent-state-layout .state-name {
+      font-size: 30px;
+    }
+
+    .agent-state-layout .state-copy {
+      font-size: 19px;
+      line-height: 1.32;
+    }
+
+    .agent-state-layout .state-arrow {
+      height: 4px;
+    }
+
+    .agent-state-layout .state-arrow::after {
+      width: 14px;
+      height: 14px;
+    }
+
+    .agent-state-layout .transition-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 18px 28px 0 34px;
+    }
+
+    .agent-state-layout .transition-condition {
+      min-height: 82px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 17px;
+      line-height: 1.32;
+    }
+
+    .agent-state-layout .transition-condition code {
+      margin-bottom: 6px;
+      font-size: 17px;
+    }
+
+    .agent-detail-layout {
+      position: relative;
+      z-index: 2;
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+    }
+
+    .agent-detail-panel {
+      height: 600px;
+    }
+
+    .agent-detail-panel .agent-panel-head {
+      min-height: 76px;
+      padding: 24px 30px 14px 36px;
+    }
+
+    .agent-detail-panel .agent-panel-title {
+      font-size: 32px;
+    }
+
+    .agent-detail-panel .agent-panel-tag {
+      min-height: 36px;
+      padding: 0 16px;
+      font-size: 16px;
+    }
+
+    .agent-detail-panel .agent-role-grid {
+      gap: 18px;
+      padding: 16px 28px 28px 36px;
+    }
+
+    .agent-detail-panel .agent-role-card {
+      min-height: 214px;
+      padding: 24px;
+      border-radius: 20px;
+    }
+
+    .agent-detail-panel .agent-role-name {
+      font-size: 28px;
+      margin-bottom: 14px;
+    }
+
+    .agent-detail-panel .agent-role-desc {
+      font-size: 20px;
+      line-height: 1.36;
+    }
+
+    .agent-detail-panel .tool-call-list {
+      gap: 12px;
+      padding: 16px 28px 28px 36px;
+    }
+
+    .agent-detail-panel .tool-call-item {
+      min-height: 50px;
+      border-radius: 14px;
+      padding: 0 16px;
+      font-size: 17px;
+    }
+
+    .agent-detail-slide .agent-integration {
+      bottom: 36px;
+    }
+
+    .agent-detail-slide .integration-note {
+      grid-template-columns: 210px minmax(0, 1fr);
+      min-height: 62px;
+      padding: 12px 18px;
+    }
+
+    .agent-detail-slide .integration-note b {
+      font-size: 23px;
+    }
+
+    .agent-detail-slide .integration-note span {
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .agent-detail-slide .integration-step {
+      min-height: 82px;
+      padding: 12px 10px 10px;
+    }
+
+    .agent-detail-slide .integration-step b {
+      font-size: 15px;
+      margin-bottom: 7px;
+    }
+
+    .agent-detail-slide .integration-step span {
+      font-size: 18px;
+    }
+
+    .agent-side-stack {
+      display: grid;
+      grid-template-rows: 302px 278px;
+      gap: 16px;
+    }
+
+    .agent-panel {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(22, 93, 255, 0.18);
+      border-radius: 20px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(246, 249, 253, 0.94)),
+        #ffffff;
+      box-shadow: var(--shadow);
+    }
+
+    .agent-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-left: 7px solid var(--primary);
+      border-radius: 20px;
+      pointer-events: none;
+    }
+
+    .agent-panel.agent-accent::before {
+      border-left-color: var(--accent);
+    }
+
+    .agent-panel-head {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 54px;
+      padding: 16px 22px 10px 28px;
+    }
+
+    .agent-panel-title {
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .agent-panel-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      border-radius: 999px;
+      padding: 0 11px;
+      background: var(--primary-soft);
+      color: var(--primary-deep);
+      font: 900 13px var(--font-display);
+    }
+
+    .langgraph-panel {
+      height: 590px;
+    }
+
+    .langgraph-board {
+      position: relative;
+      z-index: 1;
+      margin: 6px 22px 0 28px;
+      padding: 16px;
+      border: 1px solid rgba(22, 93, 255, 0.14);
+      border-radius: 18px;
+      background:
+        linear-gradient(rgba(22, 93, 255, 0.052) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(22, 93, 255, 0.052) 1px, transparent 1px),
+        rgba(255, 255, 255, 0.78);
+      background-size: 28px 28px;
+    }
+
+    .state-row {
+      display: grid;
+      grid-template-columns: 1fr 34px 1fr 34px 1fr;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .state-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .agent-state-node {
+      min-height: 88px;
+      display: grid;
+      align-content: center;
+      gap: 5px;
+      padding: 13px 14px;
+      border: 1px solid rgba(22, 93, 255, 0.22);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 12px 26px rgba(31, 48, 78, 0.08);
+    }
+
+    .agent-state-node.warn {
+      border-color: rgba(255, 125, 0, 0.45);
+      background: linear-gradient(180deg, rgba(255, 243, 230, 0.95), rgba(255, 255, 255, 0.92));
+    }
+
+    .agent-state-node.ok {
+      border-color: rgba(22, 93, 255, 0.38);
+      background: linear-gradient(180deg, rgba(234, 241, 255, 0.98), rgba(255, 255, 255, 0.92));
+    }
+
+    .state-name {
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 900;
+      line-height: 1.18;
+    }
+
+    .state-copy {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.28;
+    }
+
+    .state-arrow {
+      position: relative;
+      height: 3px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, rgba(22, 93, 255, 0.18), rgba(22, 93, 255, 0.78));
+    }
+
+    .state-arrow::after {
+      content: "";
+      position: absolute;
+      right: -2px;
+      top: 50%;
+      width: 10px;
+      height: 10px;
+      border-top: 3px solid rgba(22, 93, 255, 0.78);
+      border-right: 3px solid rgba(22, 93, 255, 0.78);
+      transform: translateY(-50%) rotate(45deg);
+    }
+
+    .transition-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 9px;
+      margin: 14px 22px 0 28px;
+    }
+
+    .transition-condition {
+      min-height: 50px;
+      padding: 9px 11px;
+      border: 1px solid rgba(22, 93, 255, 0.12);
+      border-radius: 13px;
+      background: rgba(234, 241, 255, 0.54);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.26;
+      font-weight: 700;
+    }
+
+    .transition-condition code {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--primary-deep);
+      font: 900 13px var(--font-display);
+    }
+
+    .agent-role-grid {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 11px;
+      padding: 8px 20px 20px 28px;
+    }
+
+    .agent-role-card {
+      min-height: 104px;
+      border: 1px solid rgba(255, 125, 0, 0.18);
+      border-radius: 16px;
+      padding: 12px;
+      background: rgba(255, 243, 230, 0.58);
+    }
+
+    .agent-role-name {
+      color: var(--ink);
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 900;
+      line-height: 1.18;
+      margin-bottom: 7px;
+    }
+
+    .agent-role-desc {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .tool-call-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 5px;
+      padding: 6px 20px 14px 28px;
+    }
+
+    .tool-call-item {
+      align-items: center;
+      min-height: 27px;
+      border: 1px solid rgba(22, 93, 255, 0.14);
+      border-radius: 11px;
+      padding: 0 8px;
+      background: rgba(255, 255, 255, 0.82);
+      color: #23415f;
+      font: 900 11px var(--font-display);
+      letter-spacing: 0;
+      white-space: nowrap;
+    }
+
+    .tool-call-item.accent {
+      color: #884400;
+      background: var(--accent-soft);
+      border-color: rgba(255, 125, 0, 0.22);
+    }
+
+    .agent-integration {
+      position: absolute;
+      left: 68px;
+      right: 68px;
+      bottom: 24px;
+      z-index: 3;
+    }
+
+    .integration-note {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      align-items: center;
+      gap: 16px;
+      min-height: 42px;
+      border-radius: 16px 16px 0 0;
+      padding: 8px 14px;
+      background: #111827;
+      color: #ffffff;
+      box-shadow: 0 18px 34px rgba(17, 24, 39, 0.16);
+    }
+
+    .integration-note b {
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .integration-note span {
+      color: rgba(255, 255, 255, 0.86);
+      font-size: 14px;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+
+    .integration-strip {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      border: 1px solid rgba(17, 24, 39, 0.14);
+      border-top: 0;
+      border-radius: 0 0 16px 16px;
+      background: rgba(17, 24, 39, 0.14);
+    }
+
+    .integration-step {
+      min-height: 58px;
+      padding: 8px 8px 7px;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .integration-step b {
+      display: block;
+      color: var(--subtle);
+      font-family: var(--font-display);
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .integration-step span {
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.22;
+    }
+
+    .integration-step.agent-home {
+      background: linear-gradient(180deg, var(--accent-soft), #ffffff);
+      box-shadow: inset 0 5px 0 var(--accent);
+    }
+
+    .integration-step.agent-home b,
+    .integration-step.agent-home span {
+      color: #884400;
+    }
+
+    .visible .agent-panel.reveal:nth-child(1) { transition-delay: 0.1s; }
+    .visible .agent-side-stack .agent-panel:nth-child(1) { transition-delay: 0.2s; }
+    .visible .agent-side-stack .agent-panel:nth-child(2) { transition-delay: 0.3s; }
+    .visible .agent-integration.reveal { transition-delay: 0.44s; }
+
+    @keyframes railFlow {
+      0% { transform: translateY(-120px); }
+      100% { transform: translateY(720px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .rail::after {
+        animation: none !important;
+        opacity: 0;
+      }
+    }
+
+    @media print {
+      .lang-toggle,
+      .edit-hotzone,
+      .edit-toggle,
+      .edit-toast {
+        display: none !important;
+      }
+    }
+
+    /* ===========================================
+       EDIT MODE CONTROLS
+       Hover the top-left hotzone or press E to edit text.
+       =========================================== */
+    .edit-hotzone {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 80px;
+      height: 80px;
+      z-index: 10000;
+      cursor: pointer;
+    }
+
+    .edit-toggle {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      width: 44px;
+      height: 44px;
+      z-index: 10001;
+      border: 1px solid rgba(22, 93, 255, 0.24);
+      border-radius: 12px;
+      background: #ffffff;
+      color: var(--primary);
+      box-shadow: 0 14px 28px rgba(17, 24, 39, 0.14);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    .edit-toggle.show,
+    .edit-toggle.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .editing [data-editable="true"] {
+      outline: 2px dashed rgba(255, 125, 0, 0.62);
+      outline-offset: 4px;
+      cursor: text;
+    }
+
+    .edit-toast {
+      position: fixed;
+      top: 18px;
+      left: 74px;
+      z-index: 10001;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      padding: 0 14px;
+      border-radius: 12px;
+      background: #111827;
+      color: #ffffff;
+      font: 700 14px var(--font-body);
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-8px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .edit-toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body class="lang-zh">
+  <div class="deck-viewport">
+    <main class="deck-stage" id="deckStage" aria-label="家装 AI 智能下单工作流">
+      <section class="slide workflow-slide active" aria-label="技术路径全流程可视化">
+        <header class="topline reveal">
+          <div>
+            <div class="eyebrow" data-lang="zh" data-editable="true">TECH FLOW ARCHITECTURE</div>
+            <div class="eyebrow" data-lang="en" data-editable="true">TECH FLOW ARCHITECTURE</div>
+            <h1 data-lang="zh" data-editable="true">家装 AI 智能下单工作流</h1>
+            <h1 data-lang="en" data-editable="true">Home AI Ordering Workflow</h1>
+            <p class="subtitle" data-lang="zh" data-editable="true">技术路径全流程可视化：从多源资料进入，到结构化订单、智能风控、人工确认与可追溯发单执行。</p>
+            <p class="subtitle" data-lang="en" data-editable="true">A full technical path from multi-source intake to structured orders, controlled automation, human approval, and traceable dispatch.</p>
+          </div>
+          <aside class="metrics" aria-label="核心指标">
+            <div class="metric reveal">
+              <strong data-lang="zh" data-editable="true">7 层</strong><strong data-lang="en" data-editable="true">7 Layers</strong>
+              <span data-lang="zh" data-editable="true">纵向递进技术架构</span><span data-lang="en" data-editable="true">Vertical technical architecture</span>
+            </div>
+            <div class="metric reveal">
+              <strong data-editable="true">L4-L5</strong>
+              <span data-lang="zh" data-editable="true">MVP 建议自动化等级</span><span data-lang="en" data-editable="true">Recommended MVP automation level</span>
+            </div>
+            <div class="metric reveal">
+              <strong data-lang="zh" data-editable="true">0 断点</strong><strong data-lang="en" data-editable="true">0 Gaps</strong>
+              <span data-lang="zh" data-editable="true">资料、订单、审批、发单全链路留痕</span><span data-lang="en" data-editable="true">Full trace from sources to dispatch</span>
+            </div>
+          </aside>
+        </header>
+
+        <main class="flow-shell">
+          <aside class="rail reveal" aria-hidden="true">
+            <div class="rail-label" data-lang="zh">DATA TO ORDER EXECUTION</div>
+            <div class="rail-label" data-lang="en">DATA TO ORDER EXECUTION</div>
+          </aside>
+
+          <section class="layers" aria-label="七层工作流">
+            <article class="layer-card reveal">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M9 16h30v20H9z"/><path d="m10 17 14 11 14-11"/><path d="M13 10h22"/><path d="M17 6h14"/></svg>
+              </div>
+              <div class="layer-title"><span class="num">01 / INPUT</span><h2 data-lang="zh" data-editable="true">数据入口层</h2><h2 data-lang="en" data-editable="true">Data Entry Layer</h2></div>
+              <div class="layer-copy"><strong data-lang="zh" data-editable="true">多源数据统一接入</strong><strong data-lang="en" data-editable="true">Unified multi-source intake</strong><p data-lang="zh" data-editable="true">把分散在沟通与文件系统里的订单资料汇入同一项目空间。</p><p data-lang="en" data-editable="true">Bring scattered order materials from chats, files, and forms into one project workspace.</p></div>
+              <div class="chips"><span data-lang="zh">邮件</span><span data-lang="en">Email</span><span>WhatsApp</span><span data-lang="zh">文件上传</span><span data-lang="en">File Upload</span><span data-lang="zh">云盘</span><span data-lang="en">Cloud Drive</span><span data-lang="zh">表单</span><span data-lang="en">Forms</span><span data-lang="zh">微信截图/导入</span><span data-lang="en">WeChat Screenshots</span></div>
+            </article>
+
+            <article class="layer-card reveal">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M10 15c0-4 7-7 14-7s14 3 14 7-7 7-14 7-14-3-14-7z"/><path d="M10 15v18c0 4 7 7 14 7s14-3 14-7V15"/><path d="M10 24c0 4 7 7 14 7s14-3 14-7"/></svg>
+              </div>
+              <div class="layer-title"><span class="num">02 / ARCHIVE</span><h2 data-lang="zh" data-editable="true">原始资料库</h2><h2 data-lang="en" data-editable="true">Raw Archive</h2></div>
+              <div class="layer-copy"><strong data-lang="zh" data-editable="true">全量原始数据归档</strong><strong data-lang="en" data-editable="true">Complete raw evidence archive</strong><p data-lang="zh" data-editable="true">保存原件和元数据，确保每个订单字段都能追溯回来源证据。</p><p data-lang="en" data-editable="true">Store source files and metadata so every order field can trace back to evidence.</p></div>
+              <div class="chips"><span data-lang="zh">保存文件</span><span data-lang="en">Files</span><span data-lang="zh">来源</span><span data-lang="en">Source</span><span data-lang="zh">发送人</span><span data-lang="en">Sender</span><span data-lang="zh">时间</span><span data-lang="en">Time</span><span data-lang="zh">项目归属</span><span data-lang="en">Project</span></div>
+            </article>
+
+            <article class="layer-card reveal">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M17 9h14v6h6v14h-6v10H17V29h-6V15h6z"/><path d="M18 23h12"/><path d="M24 17v12"/><path d="M14 34h20"/></svg>
+              </div>
+              <div class="layer-title"><span class="num">03 / PARSE</span><h2 data-lang="zh" data-editable="true">AI 解析层</h2><h2 data-lang="en" data-editable="true">AI Parsing Layer</h2></div>
+              <div class="layer-copy"><strong data-lang="zh" data-editable="true">非结构化数据智能处理</strong><strong data-lang="en" data-editable="true">Intelligent unstructured parsing</strong><p data-lang="zh" data-editable="true">把图片、PDF、表格和聊天文本转成可被系统理解的候选字段。</p><p data-lang="en" data-editable="true">Convert images, PDFs, spreadsheets, and chat text into machine-readable candidate fields.</p></div>
+              <div class="chips"><span>OCR</span><span data-lang="zh">PDF 解析</span><span data-lang="en">PDF Parse</span><span data-lang="zh">Excel 解析</span><span data-lang="en">Excel Parse</span><span data-lang="zh">LLM 信息抽取</span><span data-lang="en">LLM Extraction</span></div>
+            </article>
+
+            <article class="layer-card reveal">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M8 10h32v28H8z"/><path d="M8 19h32"/><path d="M18 10v28"/><path d="M28 10v28"/><path d="M8 28h32"/></svg>
+              </div>
+              <div class="layer-title"><span class="num">04 / MODEL</span><h2 data-lang="zh" data-editable="true">结构化订单层</h2><h2 data-lang="en" data-editable="true">Structured Order Layer</h2></div>
+              <div class="layer-copy"><strong data-lang="zh" data-editable="true">标准业务数据模型</strong><strong data-lang="en" data-editable="true">Standard business data model</strong><p data-lang="zh" data-editable="true">沉淀可筛选、可编辑、可版本化的订单主数据。</p><p data-lang="en" data-editable="true">Persist filterable, editable, versioned order master data.</p></div>
+              <div class="chips"><span data-lang="zh">项目</span><span data-lang="en">Project</span><span data-lang="zh">房间</span><span data-lang="en">Room</span><span data-lang="zh">商品</span><span data-lang="en">Item</span><span data-lang="zh">规格</span><span data-lang="en">Specs</span><span data-lang="zh">数量</span><span data-lang="en">Qty</span><span data-lang="zh">供应商</span><span data-lang="en">Supplier</span><span data-lang="zh">版本</span><span data-lang="en">Version</span><span data-lang="zh">状态</span><span data-lang="en">Status</span></div>
+            </article>
+
+            <article class="layer-card agent reveal">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M24 6v8"/><path d="M24 34v8"/><path d="M6 24h8"/><path d="M34 24h8"/><path d="M16 16l16 16"/><path d="M32 16 16 32"/><circle cx="24" cy="24" r="7"/></svg>
+              </div>
+              <div class="layer-title"><span class="num">05 / AGENT</span><h2 data-lang="zh" data-editable="true">规则与 Agent 层</h2><h2 data-lang="en" data-editable="true">Rules & Agent Layer</h2></div>
+              <div class="layer-copy"><strong data-lang="zh" data-editable="true">智能决策自动化</strong><strong data-lang="en" data-editable="true">Controlled decision automation</strong><p data-lang="zh" data-editable="true">判断最新版本、发现冲突缺失，并把高风险订单升级为人工确认。</p><p data-lang="en" data-editable="true">Judge latest versions, detect conflicts or gaps, and escalate high-risk orders to humans.</p></div>
+              <div class="chips"><span data-lang="zh">版本判断</span><span data-lang="en">Versioning</span><span data-lang="zh">冲突检测</span><span data-lang="en">Conflict Check</span><span data-lang="zh">缺失检测</span><span data-lang="en">Missing Fields</span><span data-lang="zh">供应商匹配</span><span data-lang="en">Supplier Match</span><span data-lang="zh">风险评分</span><span data-lang="en">Risk Score</span></div>
+            </article>
+
+            <article class="layer-card reveal">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M11 25 20 34 38 14"/><path d="M8 38h32"/><path d="M8 10h20"/></svg>
+              </div>
+              <div class="layer-title"><span class="num">06 / APPROVE</span><h2 data-lang="zh" data-editable="true">确认与审批层</h2><h2 data-lang="en" data-editable="true">Approval Layer</h2></div>
+              <div class="layer-copy"><strong data-lang="zh" data-editable="true">人机协同风控</strong><strong data-lang="en" data-editable="true">Human-in-the-loop risk control</strong><p data-lang="zh" data-editable="true">低风险自动通过，高风险保留人工确认与异常处理入口。</p><p data-lang="en" data-editable="true">Low-risk items can pass; high-risk items keep a human confirmation path.</p></div>
+              <div class="chips"><span data-lang="zh">人工确认</span><span data-lang="en">Human Review</span><span data-lang="zh">自动通过</span><span data-lang="en">Auto-pass</span><span data-lang="zh">异常处理</span><span data-lang="en">Exception Handling</span></div>
+            </article>
+
+            <article class="layer-card reveal">
+              <div class="icon-wrap" aria-hidden="true">
+                <svg viewBox="0 0 48 48"><path d="M9 12h20l10 10v14H9z"/><path d="M29 12v10h10"/><path d="M15 31h18"/><path d="M15 25h10"/></svg>
+              </div>
+              <div class="layer-title"><span class="num">07 / EXECUTE</span><h2 data-lang="zh" data-editable="true">输出执行层</h2><h2 data-lang="en" data-editable="true">Execution Layer</h2></div>
+              <div class="layer-copy"><strong data-lang="zh" data-editable="true">全流程落地执行</strong><strong data-lang="en" data-editable="true">Traceable downstream execution</strong><p data-lang="zh" data-editable="true">生成采购文件并完成发单记录、回执与状态追踪。</p><p data-lang="en" data-editable="true">Generate purchase files and record dispatch, receipt, and status updates.</p></div>
+              <div class="chips"><span data-lang="zh">PDF/Excel 采购单</span><span data-lang="en">PDF/Excel Orders</span><span data-lang="zh">邮件/WhatsApp 发单</span><span data-lang="en">Email/WhatsApp</span><span data-lang="zh">发单记录</span><span data-lang="en">Dispatch Records</span><span data-lang="zh">状态追踪</span><span data-lang="en">Status Tracking</span></div>
+            </article>
+          </section>
+        </main>
+
+        <footer class="value-footer" aria-label="核心价值">
+          <div class="value-card reveal"><span data-lang="zh" data-editable="true">AI 自动化降本增效</span><span data-lang="en" data-editable="true">AI automation reduces manual cost</span><b>01</b></div>
+          <div class="value-card reveal"><span data-lang="zh" data-editable="true">全流程可追溯</span><span data-lang="en" data-editable="true">Every field remains traceable</span><b>02</b></div>
+          <div class="value-card reveal"><span data-lang="zh" data-editable="true">订单零差错目标</span><span data-lang="en" data-editable="true">Zero-error ordering target</span><b>03</b></div>
+        </footer>
+      </section>
+
+      <section class="slide workflow-slide agent-workflow-slide agent-readable" aria-label="AI Agent 技术方案工作流">
+        <header class="agent-head focused reveal">
+          <div>
+            <div class="agent-kicker" data-lang="zh" data-editable="true">PAGE 2 / LANGGRAPH STATE MACHINE</div>
+            <div class="agent-kicker" data-lang="en" data-editable="true">PAGE 2 / LANGGRAPH STATE MACHINE</div>
+            <h1 class="agent-title" data-lang="zh" data-editable="true">LangGraph <em>状态机工作流</em></h1>
+            <h1 class="agent-title" data-lang="en" data-editable="true">LangGraph <em>State Machine Workflow</em></h1>
+            <p class="agent-subtitle" data-lang="zh" data-editable="true">这一页只保留 Agent 的状态流转：解析、版本判断、冲突检测、人工确认、文件生成与发单追踪。高风险节点必须中断到人工确认。</p>
+            <p class="agent-subtitle" data-lang="en" data-editable="true">This page focuses only on Agent state transitions: parsing, version checks, conflict review, human approval, document generation, and dispatch tracking.</p>
+          </div>
+        </header>
+
+        <main class="agent-layout agent-state-layout">
+          <section class="agent-panel langgraph-panel reveal">
+            <div class="agent-panel-head">
+              <div class="agent-panel-title" data-lang="zh" data-editable="true">LangGraph 状态机图</div>
+              <div class="agent-panel-title" data-lang="en" data-editable="true">LangGraph State Machine</div>
+              <div class="agent-panel-tag">StateGraph + Conditional Edges</div>
+            </div>
+
+            <div class="langgraph-board" aria-label="LangGraph state machine diagram">
+              <div class="state-row">
+                <div class="agent-state-node"><div class="state-name">Intake</div><div class="state-copy" data-lang="zh">接收来源与项目上下文</div><div class="state-copy" data-lang="en">Capture source and project context</div></div>
+                <div class="state-arrow" aria-hidden="true"></div>
+                <div class="agent-state-node"><div class="state-name">Parse</div><div class="state-copy" data-lang="zh">解析 PDF、图片、表格、聊天</div><div class="state-copy" data-lang="en">Parse PDFs, images, sheets, chats</div></div>
+                <div class="state-arrow" aria-hidden="true"></div>
+                <div class="agent-state-node"><div class="state-name">Normalize</div><div class="state-copy" data-lang="zh">转成标准订单字段</div><div class="state-copy" data-lang="en">Normalize into order fields</div></div>
+              </div>
+              <div class="state-row">
+                <div class="agent-state-node"><div class="state-name">Version Check</div><div class="state-copy" data-lang="zh">判断最新需求与版本链</div><div class="state-copy" data-lang="en">Judge latest requirement version</div></div>
+                <div class="state-arrow" aria-hidden="true"></div>
+                <div class="agent-state-node warn"><div class="state-name">Conflict Check</div><div class="state-copy" data-lang="zh">发现尺寸、数量、颜色、供应商风险</div><div class="state-copy" data-lang="en">Find size, quantity, color, supplier risk</div></div>
+                <div class="state-arrow" aria-hidden="true"></div>
+                <div class="agent-state-node warn"><div class="state-name">Human Review</div><div class="state-copy" data-lang="zh">人工确认、修改、忽略或驳回</div><div class="state-copy" data-lang="en">Confirm, edit, ignore, or reject</div></div>
+              </div>
+              <div class="state-row">
+                <div class="agent-state-node ok"><div class="state-name">Generate Docs</div><div class="state-copy" data-lang="zh">生成 PDF、Excel、供应商订单包</div><div class="state-copy" data-lang="en">Generate PDF, Excel, supplier packs</div></div>
+                <div class="state-arrow" aria-hidden="true"></div>
+                <div class="agent-state-node ok"><div class="state-name">Dispatch & Track</div><div class="state-copy" data-lang="zh">发单记录、回执、生产状态</div><div class="state-copy" data-lang="en">Dispatch logs, receipts, production status</div></div>
+                <div class="state-arrow" aria-hidden="true"></div>
+                <div class="agent-state-node"><div class="state-name">Rule Learning</div><div class="state-copy" data-lang="zh">沉淀规则优化与重复错误反馈</div><div class="state-copy" data-lang="en">Learn rules from repeated feedback</div></div>
+              </div>
+            </div>
+
+            <div class="transition-grid" aria-label="状态转换条件">
+              <div class="transition-condition"><code>source_valid -> Parse</code><span data-lang="zh">来源有效且文件可读取，进入解析。</span><span data-lang="en">Valid source and readable file enter parsing.</span></div>
+              <div class="transition-condition"><code>parse_failed -> Human Review</code><span data-lang="zh">OCR/表格/文本解析失败，转人工处理。</span><span data-lang="en">OCR, table, or text parse failure routes to review.</span></div>
+              <div class="transition-condition"><code>missing_required_fields -> Human Review</code><span data-lang="zh">尺寸、材质、数量、供应商等必填缺失。</span><span data-lang="en">Required size, material, quantity, or supplier is missing.</span></div>
+              <div class="transition-condition"><code>conflict_or_low_confidence -> Human Review</code><span data-lang="zh">冲突或低置信度不能自动发单。</span><span data-lang="en">Conflicts or low confidence cannot auto-dispatch.</span></div>
+              <div class="transition-condition"><code>approved_or_auto_pass -> Generate Docs</code><span data-lang="zh">人工确认或低风险自动通过后生成文件。</span><span data-lang="en">Approval or low-risk auto-pass generates documents.</span></div>
+              <div class="transition-condition"><code>dispatch_feedback -> Rule Learning</code><span data-lang="zh">供应商反馈、异常、退回进入规则迭代。</span><span data-lang="en">Supplier feedback, exceptions, and returns update rules.</span></div>
+            </div>
+          </section>
+        </main>
+
+      </section>
+
+      <section class="slide workflow-slide agent-workflow-slide agent-detail-slide" aria-label="Agent 角色工具与集成定位">
+        <header class="agent-head detail reveal">
+          <div>
+            <div class="agent-kicker" data-lang="zh" data-editable="true">PAGE 3 / ROLES, TOOLS & INTEGRATION</div>
+            <div class="agent-kicker" data-lang="en" data-editable="true">PAGE 3 / ROLES, TOOLS & INTEGRATION</div>
+            <h1 class="agent-title" data-lang="zh" data-editable="true">Agent <em>角色与工具边界</em></h1>
+            <h1 class="agent-title" data-lang="en" data-editable="true">Agent <em>Roles & Tool Boundaries</em></h1>
+            <p class="agent-subtitle" data-lang="zh" data-editable="true">把“谁来判断、谁来调用工具、调用后写到哪里”拆清楚。Agent 只做可审计动作，核心订单状态仍由后端和数据库承载。</p>
+            <p class="agent-subtitle" data-lang="en" data-editable="true">Clarify who decides, who calls tools, and where results are written. Agents execute auditable actions while the backend owns order state.</p>
+          </div>
+          <aside class="agent-principles">
+            <div class="agent-principle"><b>01</b><span data-lang="zh" data-editable="true">核心订单状态放在后端和数据库，不放在 n8n。</span><span data-lang="en" data-editable="true">Core order state lives in the backend and database, not in n8n.</span></div>
+            <div class="agent-principle"><b>02</b><span data-lang="zh" data-editable="true">低置信度、冲突、缺失字段必须中断到人工确认。</span><span data-lang="en" data-editable="true">Low confidence, conflicts, and missing fields interrupt to human review.</span></div>
+            <div class="agent-principle"><b>03</b><span data-lang="zh" data-editable="true">工具调用只执行可审计动作，每次调用都写入追踪记录。</span><span data-lang="en" data-editable="true">Tool calls execute auditable actions and write trace records every time.</span></div>
+          </aside>
+        </header>
+
+        <main class="agent-detail-layout">
+          <section class="agent-panel agent-accent agent-detail-panel reveal">
+            <div class="agent-panel-head">
+              <div class="agent-panel-title" data-lang="zh" data-editable="true">核心 Agent 角色</div>
+              <div class="agent-panel-title" data-lang="en" data-editable="true">Core Agent Roles</div>
+              <div class="agent-panel-tag">4 Roles</div>
+            </div>
+            <div class="agent-role-grid">
+              <div class="agent-role-card"><div class="agent-role-name" data-lang="zh" data-editable="true">需求澄清 Agent</div><div class="agent-role-name" data-lang="en" data-editable="true">Clarifier</div><div class="agent-role-desc" data-lang="zh" data-editable="true">只追问影响下单的字段：尺寸、材质、颜色、数量、交期、供应商。</div><div class="agent-role-desc" data-lang="en" data-editable="true">Asks only order-critical questions: size, material, color, quantity, deadline, supplier.</div></div>
+              <div class="agent-role-card"><div class="agent-role-name" data-lang="zh" data-editable="true">结构化抽取 Agent</div><div class="agent-role-name" data-lang="en" data-editable="true">Extractor</div><div class="agent-role-desc" data-lang="zh" data-editable="true">把多源资料转为 JSON Schema 字段，并保留来源证据与置信度。</div><div class="agent-role-desc" data-lang="en" data-editable="true">Turns sources into JSON Schema fields with evidence and confidence.</div></div>
+              <div class="agent-role-card"><div class="agent-role-name" data-lang="zh" data-editable="true">冲突审核 Agent</div><div class="agent-role-name" data-lang="en" data-editable="true">Reviewer</div><div class="agent-role-desc" data-lang="zh" data-editable="true">检测版本冲突、缺失字段、低置信度、重复下单和规则越界。</div><div class="agent-role-desc" data-lang="en" data-editable="true">Detects version conflicts, missing fields, low confidence, duplicates, and rule violations.</div></div>
+              <div class="agent-role-card"><div class="agent-role-name" data-lang="zh" data-editable="true">订单执行 Agent</div><div class="agent-role-name" data-lang="en" data-editable="true">Executor</div><div class="agent-role-desc" data-lang="zh" data-editable="true">人工确认后调用创建订单、生成文件、发单与状态追踪工具。</div><div class="agent-role-desc" data-lang="en" data-editable="true">After approval, calls order creation, document generation, dispatch, and tracking tools.</div></div>
+            </div>
+          </section>
+
+          <section class="agent-panel agent-detail-panel reveal">
+            <div class="agent-panel-head">
+              <div class="agent-panel-title" data-lang="zh" data-editable="true">Tool / Function Calling 清单</div>
+              <div class="agent-panel-title" data-lang="en" data-editable="true">Tool / Function Calling List</div>
+              <div class="agent-panel-tag">Auditable Calls</div>
+            </div>
+            <div class="tool-call-list" aria-label="Tool and function calling list">
+              <span class="tool-call-item">ingest_source</span>
+              <span class="tool-call-item">parse_document</span>
+              <span class="tool-call-item">extract_order_fields</span>
+              <span class="tool-call-item">merge_item_versions</span>
+              <span class="tool-call-item accent">detect_conflicts</span>
+              <span class="tool-call-item">match_supplier</span>
+              <span class="tool-call-item accent">create_confirmation_task</span>
+              <span class="tool-call-item accent">record_human_decision</span>
+              <span class="tool-call-item">generate_purchase_pdf</span>
+              <span class="tool-call-item">dispatch_order</span>
+              <span class="tool-call-item">update_dispatch_status</span>
+            </div>
+          </section>
+        </main>
+
+        <footer class="agent-integration reveal">
+          <div class="integration-note">
+            <b data-lang="zh" data-editable="true">8 层集成定位</b><b data-lang="en" data-editable="true">8-Layer Positioning</b>
+            <span data-lang="zh" data-editable="true">Agent 主要落在第 5 层规则引擎/Agent；读取第 1-4 层状态，人工中断连接第 6 层，工具调用落到第 7-8 层。n8n 只做边缘编排、通知和外部渠道。</span>
+            <span data-lang="en" data-editable="true">The Agent mainly sits in Layer 5. It reads Layers 1-4, interrupts to Layer 6, and calls tools into Layers 7-8. n8n stays at the orchestration edge.</span>
+          </div>
+          <div class="integration-strip" aria-label="现有 8 层工作流集成定位">
+            <div class="integration-step"><b>01</b><span data-lang="zh">数据入口</span><span data-lang="en">Data Entry</span></div>
+            <div class="integration-step"><b>02</b><span data-lang="zh">原始资料库</span><span data-lang="en">Raw Archive</span></div>
+            <div class="integration-step"><b>03</b><span data-lang="zh">AI 解析层</span><span data-lang="en">AI Parsing</span></div>
+            <div class="integration-step"><b>04</b><span data-lang="zh">订单数据库</span><span data-lang="en">Order DB</span></div>
+            <div class="integration-step agent-home"><b>05</b><span data-lang="zh">规则引擎层</span><span data-lang="en">Rule Engine</span></div>
+            <div class="integration-step"><b>06</b><span data-lang="zh">确认与审批层</span><span data-lang="en">Approval</span></div>
+            <div class="integration-step"><b>07</b><span data-lang="zh">输出执行层</span><span data-lang="en">Output</span></div>
+            <div class="integration-step"><b>08</b><span data-lang="zh">发单追踪层</span><span data-lang="en">Dispatch Track</span></div>
+          </div>
+        </footer>
+      </section>
+    </main>
+  </div>
+
+  <div class="lang-toggle" aria-label="Language switcher">
+    <button class="lang-btn active" type="button" data-lang-button="zh" onclick="setLang('zh', this)">中</button>
+    <button class="lang-btn" type="button" data-lang-button="en" onclick="setLang('en', this)">EN</button>
+  </div>
+
+  <div class="edit-hotzone" aria-hidden="true"></div>
+  <button class="edit-toggle" id="editToggle" type="button" title="Edit mode (E)" aria-label="Toggle edit mode">E</button>
+  <div class="edit-toast" id="editToast">Edit mode on. Press Ctrl+S to save locally.</div>
+
+  <script>
+    /* ===========================================
+       SLIDE PRESENTATION CONTROLLER
+       Handles fixed-stage scaling and basic navigation.
+       =========================================== */
+    class SlidePresentation {
+      constructor() {
+        this.slides = Array.from(document.querySelectorAll(".slide"));
+        this.currentSlide = 0;
+        this.stage = document.getElementById("deckStage");
+        this.setupStageScale();
+        this.setupKeyboardNav();
+        this.setupTouchNav();
+        this.setupWheelNav();
+        this.showSlide(0);
+      }
+
+      setupStageScale() {
+        const scale = () => {
+          const factor = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+          const x = (window.innerWidth - 1920 * factor) / 2;
+          const y = (window.innerHeight - 1080 * factor) / 2;
+          this.stage.style.transform = `translate(${x}px, ${y}px) scale(${factor})`;
+        };
+        scale();
+        window.addEventListener("resize", scale);
+      }
+
+      setupKeyboardNav() {
+        document.addEventListener("keydown", (event) => {
+          const editable = event.target && event.target.getAttribute && event.target.getAttribute("contenteditable") === "true";
+          if (editable) return;
+          if (["ArrowRight", " ", "PageDown"].includes(event.key)) this.showSlide(this.currentSlide + 1);
+          if (["ArrowLeft", "PageUp"].includes(event.key)) this.showSlide(this.currentSlide - 1);
+        });
+      }
+
+      setupTouchNav() {
+        let startX = 0;
+        window.addEventListener("touchstart", (event) => {
+          startX = event.changedTouches[0].clientX;
+        }, { passive: true });
+        window.addEventListener("touchend", (event) => {
+          const delta = event.changedTouches[0].clientX - startX;
+          if (Math.abs(delta) > 64) this.showSlide(this.currentSlide + (delta < 0 ? 1 : -1));
+        }, { passive: true });
+      }
+
+      setupWheelNav() {
+        let locked = false;
+        window.addEventListener("wheel", (event) => {
+          if (locked || Math.abs(event.deltaY) < 40) return;
+          locked = true;
+          this.showSlide(this.currentSlide + (event.deltaY > 0 ? 1 : -1));
+          setTimeout(() => { locked = false; }, 600);
+        }, { passive: true });
+      }
+
+      showSlide(index) {
+        this.currentSlide = Math.max(0, Math.min(index, this.slides.length - 1));
+        this.slides.forEach((slide, i) => {
+          slide.classList.toggle("active", i === this.currentSlide);
+          slide.classList.toggle("visible", i === this.currentSlide);
+        });
+      }
+    }
+
+    /* ===========================================
+       INLINE EDITING
+       Enables lightweight text edits and local save.
+       =========================================== */
+    class InlineEditor {
+      constructor() {
+        this.isActive = false;
+        this.storageKey = "home-ai-ordering-workflow-architecture-edits";
+        this.editables = Array.from(document.querySelectorAll('[data-editable="true"]'));
+        this.toast = document.getElementById("editToast");
+        this.restore();
+      }
+
+      toggleEditMode() {
+        this.isActive = !this.isActive;
+        document.body.classList.toggle("editing", this.isActive);
+        document.getElementById("editToggle").classList.toggle("active", this.isActive);
+        this.editables.forEach((el) => {
+          el.setAttribute("contenteditable", this.isActive ? "true" : "false");
+        });
+        this.showToast(this.isActive ? "Edit mode on. Press Ctrl+S to save locally." : "Edit mode off.");
+      }
+
+      save() {
+        const data = this.editables.map((el) => el.innerHTML);
+        localStorage.setItem(this.storageKey, JSON.stringify(data));
+        this.showToast("Saved locally in this browser.");
+      }
+
+      restore() {
+        const raw = localStorage.getItem(this.storageKey);
+        if (!raw) return;
+        try {
+          const data = JSON.parse(raw);
+          this.editables.forEach((el, index) => {
+            if (typeof data[index] === "string") el.innerHTML = data[index];
+          });
+        } catch (error) {
+          console.warn("Could not restore local edits", error);
+        }
+      }
+
+      showToast(message) {
+        this.toast.textContent = message;
+        this.toast.classList.add("show");
+        clearTimeout(this.toastTimer);
+        this.toastTimer = setTimeout(() => this.toast.classList.remove("show"), 1800);
+      }
+    }
+
+    /* ===========================================
+       BILINGUAL SWITCHER
+       Keeps the language state independent from edit mode.
+       =========================================== */
+    function setLang(lang, activeButton) {
+      const nextLang = lang === "en" ? "en" : "zh";
+      document.body.classList.toggle("lang-zh", nextLang === "zh");
+      document.body.classList.toggle("lang-en", nextLang === "en");
+      document.documentElement.lang = nextLang === "zh" ? "zh-CN" : "en";
+      document.title = nextLang === "zh"
+        ? "家装 AI 智能下单工作流 - 技术路径全流程可视化"
+        : "Home AI Ordering Workflow - Technical Architecture";
+
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn === activeButton || btn.dataset.langButton === nextLang);
+      });
+    }
+
+    /* ===========================================
+       BOOTSTRAP
+       Starts presentation scaling and editing controls.
+       =========================================== */
+    const presentation = new SlidePresentation();
+    const editor = new InlineEditor();
+    const hotzone = document.querySelector(".edit-hotzone");
+    const editToggle = document.getElementById("editToggle");
+    let hideTimeout = null;
+
+    hotzone.addEventListener("mouseenter", () => {
+      clearTimeout(hideTimeout);
+      editToggle.classList.add("show");
+    });
+
+    hotzone.addEventListener("mouseleave", () => {
+      hideTimeout = setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove("show");
+      }, 400);
+    });
+
+    editToggle.addEventListener("mouseenter", () => clearTimeout(hideTimeout));
+    editToggle.addEventListener("mouseleave", () => {
+      hideTimeout = setTimeout(() => {
+        if (!editor.isActive) editToggle.classList.remove("show");
+      }, 400);
+    });
+
+    editToggle.addEventListener("click", () => editor.toggleEditMode());
+    hotzone.addEventListener("click", () => editor.toggleEditMode());
+
+    document.addEventListener("keydown", (event) => {
+      const editable = event.target && event.target.getAttribute && event.target.getAttribute("contenteditable") === "true";
+      if ((event.key === "e" || event.key === "E") && !editable) {
+        editor.toggleEditMode();
+      }
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
+        event.preventDefault();
+        editor.save();
+      }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,5494 @@
+{
+  "template_path": "D:\\Couresware\\Workspace\\quote_assistant\\templates\\Telop - Quotation Template - Agent Ready Enhanced.xlsx",
+  "template_file": "Telop - Quotation Template - Agent Ready Enhanced.xlsx",
+  "template_extension": ".xlsx",
+  "template_sha256": "bbd7f72b53e2db01053f45099e2a97f39c48a1539819ffdeca2c6b3833889f48",
+  "package_file_count": 16,
+  "sheet_count": 3,
+  "sheets": [
+    {
+      "name": "Sheet1",
+      "path": "xl/worksheets/sheet1.xml",
+      "dimension": "A1:J17",
+      "cell_node_count": 80,
+      "reported_cell_count": 80,
+      "cell_limit_reached": false,
+      "formula_count": 3,
+      "merged_ranges": [
+        "A1:D1",
+        "A5:J5",
+        "A15:F17",
+        "A9:G9",
+        "A10:B10",
+        "A11:E11",
+        "A7:A8",
+        "B7:B8",
+        "A2:J2",
+        "A4:C4",
+        "A12:E14"
+      ],
+      "row_dimensions": [
+        {
+          "row": "1",
+          "height": "22.25",
+          "style": null
+        },
+        {
+          "row": "2",
+          "height": "155",
+          "style": null
+        },
+        {
+          "row": "3",
+          "height": "21.75",
+          "style": null
+        },
+        {
+          "row": "4",
+          "height": "33",
+          "style": null
+        },
+        {
+          "row": "5",
+          "height": "22.5",
+          "style": null
+        },
+        {
+          "row": "6",
+          "height": "32",
+          "style": null
+        },
+        {
+          "row": "7",
+          "height": "397.5",
+          "style": null
+        },
+        {
+          "row": "8",
+          "height": "69.40000000000001",
+          "style": null
+        },
+        {
+          "row": "9",
+          "height": "30",
+          "style": null
+        },
+        {
+          "row": "10",
+          "height": "37.25",
+          "style": null
+        },
+        {
+          "row": "11",
+          "height": "13.9",
+          "style": null
+        },
+        {
+          "row": "15",
+          "height": "23",
+          "style": null
+        },
+        {
+          "row": "16",
+          "height": "23",
+          "style": null
+        },
+        {
+          "row": "17",
+          "height": "23",
+          "style": null
+        },
+        {
+          "row": "18",
+          "height": "23",
+          "style": null
+        }
+      ],
+      "column_dimensions": [
+        {
+          "min": "1",
+          "max": "1",
+          "width": "53.265625",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "2",
+          "max": "2",
+          "width": "23",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "3",
+          "max": "3",
+          "width": "20.46484375",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "4",
+          "max": "4",
+          "width": "22.33203125",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "5",
+          "max": "5",
+          "width": "13.46484375",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "6",
+          "max": "6",
+          "width": "10.46484375",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "7",
+          "max": "8",
+          "width": "20.46484375",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "9",
+          "max": "9",
+          "width": "22.33203125",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "10",
+          "max": "10",
+          "width": "35.1328125",
+          "style": "19",
+          "hidden": null
+        },
+        {
+          "min": "11",
+          "max": "16384",
+          "width": "8.6640625",
+          "style": "19",
+          "hidden": null
+        }
+      ],
+      "page_setup": {
+        "orientation": "portrait",
+        "paperSize": "9",
+        "scale": "37"
+      },
+      "page_margins": {
+        "left": "0.7",
+        "right": "0.7",
+        "top": "0.75",
+        "bottom": "0.75",
+        "header": "0.3",
+        "footer": "0.3"
+      },
+      "auto_filter": null,
+      "cells": [
+        {
+          "address": "A1",
+          "value": "TELOP TRADING CO., LTD",
+          "formula": null,
+          "style_id": "15",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E1",
+          "value": null,
+          "formula": null,
+          "style_id": "15",
+          "type": "n"
+        },
+        {
+          "address": "F1",
+          "value": null,
+          "formula": null,
+          "style_id": "15",
+          "type": "n"
+        },
+        {
+          "address": "G1",
+          "value": null,
+          "formula": null,
+          "style_id": "15",
+          "type": "n"
+        },
+        {
+          "address": "H1",
+          "value": null,
+          "formula": null,
+          "style_id": "15",
+          "type": "n"
+        },
+        {
+          "address": "I1",
+          "value": null,
+          "formula": null,
+          "style_id": "15",
+          "type": "n"
+        },
+        {
+          "address": "J1",
+          "value": "Client name",
+          "formula": null,
+          "style_id": "3",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A2",
+          "value": "QUOTATION",
+          "formula": null,
+          "style_id": "16",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A3",
+          "value": "QUOTATION DATE",
+          "formula": null,
+          "style_id": "5",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B3",
+          "value": null,
+          "formula": null,
+          "style_id": "5",
+          "type": "n"
+        },
+        {
+          "address": "C3",
+          "value": null,
+          "formula": null,
+          "style_id": "6",
+          "type": "n"
+        },
+        {
+          "address": "D3",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "E3",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "F3",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "G3",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "H3",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "I3",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "J3",
+          "value": "QUOTATION",
+          "formula": null,
+          "style_id": "8",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A4",
+          "value": "2026-05-25",
+          "formula": null,
+          "style_id": "42",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D4",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "E4",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "F4",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "G4",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "H4",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "I4",
+          "value": null,
+          "formula": null,
+          "style_id": "7",
+          "type": "n"
+        },
+        {
+          "address": "J4",
+          "value": "#1056848",
+          "formula": null,
+          "style_id": "9",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A5",
+          "value": null,
+          "formula": null,
+          "style_id": "13",
+          "type": "n"
+        },
+        {
+          "address": "A6",
+          "value": "Supplier\nName/Code",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B6",
+          "value": "Image Reference",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C6",
+          "value": "Description",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D6",
+          "value": "Specifications",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E6",
+          "value": "Production days",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F6",
+          "value": "MOQ/QTY",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G6",
+          "value": "Unit price (RMB)",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H6",
+          "value": "Total price (RMB)",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I6",
+          "value": "Supplier details",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J6",
+          "value": "Remarks",
+          "formula": null,
+          "style_id": "1",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A7",
+          "value": "临沂柯森家居用品有限公司",
+          "formula": null,
+          "style_id": "30",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B7",
+          "value": null,
+          "formula": null,
+          "style_id": "38",
+          "type": "n"
+        },
+        {
+          "address": "C7",
+          "value": "Wooden hair brush",
+          "formula": null,
+          "style_id": "31",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D7",
+          "value": "Size: \n24.5x10x1.1cm\nMaterials:\nBeech wood handle with TPEE comb teeth\nColors:\nNatural beech wood tone with black bristles\nLogo:\nLaser engraved logo on the back\nPackage:\nN/A\nOther: \nShape and size to be produced according to buyer's sample",
+          "formula": null,
+          "style_id": "43",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E7",
+          "value": 30,
+          "formula": null,
+          "style_id": "32",
+          "type": "n"
+        },
+        {
+          "address": "F7",
+          "value": 10000,
+          "formula": null,
+          "style_id": "33",
+          "type": "n"
+        },
+        {
+          "address": "G7",
+          "value": 5.3,
+          "formula": null,
+          "style_id": "44",
+          "type": "n"
+        },
+        {
+          "address": "H7",
+          "value": null,
+          "formula": "G7*F7",
+          "style_id": "45",
+          "type": null
+        },
+        {
+          "address": "I7",
+          "value": "Name:\n临沂柯森家居用品有限公司\nContact:\n高先生\nLocation:\nLinyi, Shandong, China\nWebsite:\nN/A\nWechat:\nN/A\nPhone number:\n13375496928",
+          "formula": null,
+          "style_id": "46",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J7",
+          "value": "The final price will be determined after the final design and details are confirmed.\n\nTrade Term: \nN/A\nPayment term:\nSample & Mold: \nN/A\nBulk: \n30% deposit before production; balance before shipment after buyer inspection approval.\nSample fee:\nN/A\nSample time:\nN/A\nLead time:\n30 days upon receiving Buyer's deposit for completion\nTransportation Cost:\nShipping charges shall be borne by the Buyer\nDelivery method:\nArranged in accordance with the Buyer's requirements\nPacking:\nN/A",
+          "formula": null,
+          "style_id": "47",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A8",
+          "value": null,
+          "formula": null,
+          "style_id": "48",
+          "type": "n"
+        },
+        {
+          "address": "B8",
+          "value": null,
+          "formula": null,
+          "style_id": "48",
+          "type": "n"
+        },
+        {
+          "address": "C8",
+          "value": "Mold cost",
+          "formula": null,
+          "style_id": "31",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D8",
+          "value": null,
+          "formula": null,
+          "style_id": "39",
+          "type": "n"
+        },
+        {
+          "address": "E8",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "32",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F8",
+          "value": 1,
+          "formula": null,
+          "style_id": "33",
+          "type": "n"
+        },
+        {
+          "address": "G8",
+          "value": 14000,
+          "formula": null,
+          "style_id": "44",
+          "type": "n"
+        },
+        {
+          "address": "H8",
+          "value": null,
+          "formula": "F8*G8",
+          "style_id": "45",
+          "type": null
+        },
+        {
+          "address": "I8",
+          "value": null,
+          "formula": null,
+          "style_id": "49",
+          "type": "n"
+        },
+        {
+          "address": "J8",
+          "value": "A full refund of the mold charge shall be issued when the total output reaches 100,000 pieces.",
+          "formula": null,
+          "style_id": "47",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A9",
+          "value": "Summary",
+          "formula": null,
+          "style_id": "26",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B9",
+          "value": null,
+          "formula": null,
+          "style_id": "50",
+          "type": "n"
+        },
+        {
+          "address": "C9",
+          "value": null,
+          "formula": null,
+          "style_id": "50",
+          "type": "n"
+        },
+        {
+          "address": "D9",
+          "value": null,
+          "formula": null,
+          "style_id": "50",
+          "type": "n"
+        },
+        {
+          "address": "E9",
+          "value": null,
+          "formula": null,
+          "style_id": "50",
+          "type": "n"
+        },
+        {
+          "address": "F9",
+          "value": null,
+          "formula": null,
+          "style_id": "50",
+          "type": "n"
+        },
+        {
+          "address": "G9",
+          "value": null,
+          "formula": null,
+          "style_id": "50",
+          "type": "n"
+        },
+        {
+          "address": "H9",
+          "value": null,
+          "formula": "SUM(H7:H8)",
+          "style_id": "51",
+          "type": null
+        },
+        {
+          "address": "I9",
+          "value": null,
+          "formula": null,
+          "style_id": "52",
+          "type": "n"
+        },
+        {
+          "address": "J9",
+          "value": null,
+          "formula": null,
+          "style_id": "29",
+          "type": "n"
+        },
+        {
+          "address": "A10",
+          "value": "Issued by Hod",
+          "formula": null,
+          "style_id": "23",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B10",
+          "value": null,
+          "formula": null,
+          "style_id": "53",
+          "type": "n"
+        },
+        {
+          "address": "C10",
+          "value": null,
+          "formula": null,
+          "style_id": "10",
+          "type": "n"
+        },
+        {
+          "address": "D10",
+          "value": null,
+          "formula": null,
+          "style_id": "10",
+          "type": "n"
+        },
+        {
+          "address": "E10",
+          "value": null,
+          "formula": null,
+          "style_id": "10",
+          "type": "n"
+        },
+        {
+          "address": "F10",
+          "value": null,
+          "formula": null,
+          "style_id": "10",
+          "type": "n"
+        },
+        {
+          "address": "G10",
+          "value": null,
+          "formula": null,
+          "style_id": "10",
+          "type": "n"
+        },
+        {
+          "address": "H10",
+          "value": null,
+          "formula": null,
+          "style_id": "54",
+          "type": "n"
+        },
+        {
+          "address": "I10",
+          "value": null,
+          "formula": null,
+          "style_id": "54",
+          "type": "n"
+        },
+        {
+          "address": "J10",
+          "value": null,
+          "formula": null,
+          "style_id": "29",
+          "type": "n"
+        },
+        {
+          "address": "A11",
+          "value": null,
+          "formula": null,
+          "style_id": "22",
+          "type": "n"
+        },
+        {
+          "address": "A12",
+          "value": null,
+          "formula": null,
+          "style_id": "24",
+          "type": "n"
+        },
+        {
+          "address": "A15",
+          "value": "Unit 04-05, 16/F, The Broadway, 54-62 Lockhart Road, Wanchai, Hong-Kong\nTel +8613113398735 \nE-mail info@teloptrading.com \nWebsite www.teloptrading.com",
+          "formula": null,
+          "style_id": "20",
+          "type": "inlineStr"
+        }
+      ],
+      "field_candidates": {
+        "headers": {},
+        "items": {
+          "product_name.value": [
+            {
+              "label_cell": "C6",
+              "label": "Description",
+              "suggested_value_cell": "D6",
+              "style_id": "1"
+            }
+          ],
+          "remarks.value": [
+            {
+              "label_cell": "J6",
+              "label": "Remarks",
+              "suggested_value_cell": null,
+              "style_id": "1"
+            }
+          ]
+        },
+        "totals": {}
+      }
+    },
+    {
+      "name": "Parsed_OCR_Data",
+      "path": "xl/worksheets/sheet2.xml",
+      "dimension": "A1:J39",
+      "cell_node_count": 390,
+      "reported_cell_count": 390,
+      "cell_limit_reached": false,
+      "formula_count": 0,
+      "merged_ranges": [],
+      "row_dimensions": [
+        {
+          "row": "1",
+          "height": "13.9",
+          "style": null
+        }
+      ],
+      "column_dimensions": [
+        {
+          "min": "1",
+          "max": "1",
+          "width": "28",
+          "style": "37",
+          "hidden": null
+        },
+        {
+          "min": "2",
+          "max": "2",
+          "width": "18",
+          "style": "37",
+          "hidden": null
+        },
+        {
+          "min": "3",
+          "max": "16384",
+          "width": "36",
+          "style": "37",
+          "hidden": null
+        },
+        {
+          "min": "4",
+          "max": "4",
+          "width": "48",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "5",
+          "max": "5",
+          "width": "16",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "6",
+          "max": "6",
+          "width": "10",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "7",
+          "max": "7",
+          "width": "18",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "8",
+          "max": "8",
+          "width": "12",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "9",
+          "max": "9",
+          "width": "12",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "10",
+          "max": "10",
+          "width": "44",
+          "style": null,
+          "hidden": null
+        }
+      ],
+      "page_setup": {
+        "orientation": "portrait",
+        "paperSize": "9"
+      },
+      "page_margins": {
+        "left": "0.7",
+        "right": "0.7",
+        "top": "0.75",
+        "bottom": "0.75",
+        "header": "0.3",
+        "footer": "0.3"
+      },
+      "auto_filter": "A1:J39",
+      "cells": [
+        {
+          "address": "A1",
+          "value": "field_key",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B1",
+          "value": "field_group",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C1",
+          "value": "raw_ocr_value",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D1",
+          "value": "normalized_value",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E1",
+          "value": "data_type",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F1",
+          "value": "required",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G1",
+          "value": "default_if_missing",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H1",
+          "value": "confidence",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I1",
+          "value": "source_page",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J1",
+          "value": "source_note",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A2",
+          "value": "source_file",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B2",
+          "value": "source",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C2",
+          "value": "报价单260525(1).pdf",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D2",
+          "value": "报价单260525(1).pdf",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E2",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F2",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G2",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H2",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I2",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J2",
+          "value": "PDF filename",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A3",
+          "value": "quote_date",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B3",
+          "value": "header",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C3",
+          "value": "2026年5月25日",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D3",
+          "value": "2026-05-25",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E3",
+          "value": "date",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F3",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G3",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H3",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I3",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J3",
+          "value": "购销日期",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A4",
+          "value": "purchase_order_no",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B4",
+          "value": "header",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C4",
+          "value": "2000",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D4",
+          "value": "2000",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E4",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F4",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G4",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H4",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I4",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J4",
+          "value": "采购单号",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A5",
+          "value": "order_no",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B5",
+          "value": "header",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C5",
+          "value": "1056848",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D5",
+          "value": "1056848",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E5",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F5",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G5",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H5",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I5",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J5",
+          "value": "下单号",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A6",
+          "value": "buyer_name",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B6",
+          "value": "party",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C6",
+          "value": "Telop trading Co.,ltd",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D6",
+          "value": "Telop trading Co.,ltd",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E6",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F6",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G6",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H6",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I6",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J6",
+          "value": "甲方",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A7",
+          "value": "supplier_name",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B7",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C7",
+          "value": "临沂柯森家居用品有限公司",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D7",
+          "value": "临沂柯森家居用品有限公司",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E7",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F7",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G7",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H7",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I7",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J7",
+          "value": "乙方",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A8",
+          "value": "supplier_contact",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B8",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C8",
+          "value": "高先生",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D8",
+          "value": "高先生",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E8",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F8",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G8",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H8",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I8",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J8",
+          "value": "供应商联系人",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A9",
+          "value": "supplier_phone",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B9",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C9",
+          "value": "13375496928",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D9",
+          "value": "13375496928",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E9",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F9",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G9",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H9",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I9",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J9",
+          "value": "供应商电话",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A10",
+          "value": "supplier_location",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B10",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C10",
+          "value": "临沂 in supplier name",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D10",
+          "value": "Linyi, Shandong, China",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E10",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F10",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G10",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H10",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I10",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J10",
+          "value": "Inferred from supplier city name 临沂",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A11",
+          "value": "supplier_website",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B11",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C11",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D11",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E11",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F11",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G11",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H11",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I11",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J11",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A12",
+          "value": "supplier_wechat",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B12",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C12",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D12",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E12",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F12",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G12",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H12",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I12",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J12",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A13",
+          "value": "product_image",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B13",
+          "value": "image",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C13",
+          "value": "embedded PDF image IM14",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D13",
+          "value": "C:\\Users\\DC·Laptop-air\\Documents\\Automatic Order Assistant\\outputs\\quote_template_analysis\\product_image.jpg",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E13",
+          "value": "image_path",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F13",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G13",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H13",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I13",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J13",
+          "value": "Inserted into Sheet1!B7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A14",
+          "value": "product_name_en",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B14",
+          "value": "product",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C14",
+          "value": "image classification + specs",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D14",
+          "value": "Wooden hair brush",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E14",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F14",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G14",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H14",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I14",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J14",
+          "value": "Image-recognized English product name",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A15",
+          "value": "product_name_cn",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B15",
+          "value": "product",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C15",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D15",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E15",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F15",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G15",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H15",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I15",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J15",
+          "value": "Product-name cell is blank in PDF table",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A16",
+          "value": "item_type",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B16",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C16",
+          "value": "product row",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D16",
+          "value": "product",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E16",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F16",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G16",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H16",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I16",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J16",
+          "value": "Line item category",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A17",
+          "value": "size",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B17",
+          "value": "spec",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C17",
+          "value": "24.5x10x1.1cm",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D17",
+          "value": "24.5x10x1.1cm",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E17",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F17",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G17",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H17",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I17",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J17",
+          "value": "From 规格型号",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A18",
+          "value": "materials",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B18",
+          "value": "spec",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C18",
+          "value": "榉木手柄 / TPEE 梳齿",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D18",
+          "value": "Beech wood handle with TPEE comb teeth",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E18",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F18",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G18",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H18",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I18",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J18",
+          "value": "Translated from 规格型号",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A19",
+          "value": "colors",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B19",
+          "value": "spec",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C19",
+          "value": "image inferred",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D19",
+          "value": "Natural beech wood tone with black bristles",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E19",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F19",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G19",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H19",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I19",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J19",
+          "value": "Inferred from product image",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A20",
+          "value": "logo",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B20",
+          "value": "spec",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C20",
+          "value": "背面激光雕刻logo",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D20",
+          "value": "Laser engraved logo on the back",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E20",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F20",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G20",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H20",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I20",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J20",
+          "value": "Translated from 规格型号",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A21",
+          "value": "package",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B21",
+          "value": "spec",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C21",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D21",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E21",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F21",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G21",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H21",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I21",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J21",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A22",
+          "value": "other",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B22",
+          "value": "spec",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C22",
+          "value": "形状尺寸按照客户提\n供样品生产",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D22",
+          "value": "Shape and size to be produced according to buyer's sample",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E22",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F22",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G22",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H22",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I22",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J22",
+          "value": "Translated from PDF remark",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A23",
+          "value": "unit",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B23",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C23",
+          "value": "个",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D23",
+          "value": "pcs",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E23",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F23",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G23",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H23",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I23",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J23",
+          "value": "Unit 个 normalized as pcs",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A24",
+          "value": "qty",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B24",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C24",
+          "value": "10000",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D24",
+          "value": "10000",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E24",
+          "value": "number",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F24",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G24",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H24",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I24",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J24",
+          "value": "数量",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A25",
+          "value": "unit_price_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B25",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C25",
+          "value": "5.30",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D25",
+          "value": "5.30",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E25",
+          "value": "currency_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F25",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G25",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H25",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I25",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J25",
+          "value": "单价（元）",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A26",
+          "value": "product_amount_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B26",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C26",
+          "value": "53000.00",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D26",
+          "value": "53000.00",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E26",
+          "value": "currency_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F26",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G26",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H26",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I26",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J26",
+          "value": "总金额",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A27",
+          "value": "mold_fee_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B27",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C27",
+          "value": "14000.00",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D27",
+          "value": "14000.00",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E27",
+          "value": "currency_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F27",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G27",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H27",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I27",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J27",
+          "value": "模具费",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A28",
+          "value": "mold_refund_condition",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B28",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C28",
+          "value": "生产数量达到10万\n个，退还模具费",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D28",
+          "value": "A full refund of the mold charge shall be issued when the total output reaches 100,000 pieces.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E28",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F28",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G28",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H28",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I28",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J28",
+          "value": "Translated from mold-fee remark",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A29",
+          "value": "total_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B29",
+          "value": "summary",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C29",
+          "value": "67000.00",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D29",
+          "value": "67000.00",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E29",
+          "value": "currency_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F29",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G29",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H29",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I29",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J29",
+          "value": "合计小写",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A30",
+          "value": "total_rmb_upper_cn",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B30",
+          "value": "summary",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C30",
+          "value": "陆万柒仟元整",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D30",
+          "value": "陆万柒仟元整",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E30",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F30",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G30",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H30",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I30",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J30",
+          "value": "合计人民币大写",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A31",
+          "value": "trade_term",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B31",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C31",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D31",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E31",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F31",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G31",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H31",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I31",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J31",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A32",
+          "value": "payment_sample_mold",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B32",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C32",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D32",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E32",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F32",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G32",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H32",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I32",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J32",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A33",
+          "value": "payment_bulk",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B33",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C33",
+          "value": "30%预付款生产，生产完成甲方验货合格后支付尾款后发货 。",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D33",
+          "value": "30% deposit before production; balance before shipment after buyer inspection approval.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E33",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F33",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G33",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H33",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I33",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J33",
+          "value": "Translated from 结算方式",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A34",
+          "value": "sample_fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B34",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C34",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D34",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E34",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F34",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G34",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H34",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I34",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J34",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A35",
+          "value": "sample_time",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B35",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C35",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D35",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E35",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F35",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G35",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H35",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I35",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J35",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A36",
+          "value": "lead_time_days",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B36",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C36",
+          "value": "30",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D36",
+          "value": "30",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E36",
+          "value": "number",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F36",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G36",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H36",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I36",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J36",
+          "value": "交货期",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A37",
+          "value": "transportation_cost",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B37",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C37",
+          "value": "甲方公司承担",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D37",
+          "value": "Shipping charges shall be borne by the Buyer",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E37",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F37",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G37",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H37",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I37",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J37",
+          "value": "Translated from 运输费用",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A38",
+          "value": "delivery_method",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B38",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C38",
+          "value": "按照甲方要求",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D38",
+          "value": "Arranged in accordance with the Buyer's requirements",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E38",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F38",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G38",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H38",
+          "value": 0.95,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I38",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J38",
+          "value": "Translated from 交货方式",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A39",
+          "value": "packing",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B39",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C39",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D39",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E39",
+          "value": "text",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F39",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G39",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H39",
+          "value": 0.4,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "I39",
+          "value": 1,
+          "formula": null,
+          "style_id": "56",
+          "type": "n"
+        },
+        {
+          "address": "J39",
+          "value": "Missing in PDF",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        }
+      ],
+      "field_candidates": {
+        "headers": {
+          "quote.headers.quote_date.value": [
+            {
+              "label_cell": "E3",
+              "label": "date",
+              "suggested_value_cell": "F3",
+              "style_id": "56"
+            }
+          ],
+          "quote.headers.supplier.value": [
+            {
+              "label_cell": "B7",
+              "label": "supplier",
+              "suggested_value_cell": "C7",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "B8",
+              "label": "supplier",
+              "suggested_value_cell": "C8",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "B9",
+              "label": "supplier",
+              "suggested_value_cell": "C9",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "B10",
+              "label": "supplier",
+              "suggested_value_cell": "C10",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "B11",
+              "label": "supplier",
+              "suggested_value_cell": "C11",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "B12",
+              "label": "supplier",
+              "suggested_value_cell": "C12",
+              "style_id": "56"
+            }
+          ]
+        },
+        "items": {
+          "product_image.value": [
+            {
+              "label_cell": "B13",
+              "label": "image",
+              "suggested_value_cell": "C13",
+              "style_id": "56"
+            }
+          ],
+          "product_name.value": [
+            {
+              "label_cell": "B14",
+              "label": "product",
+              "suggested_value_cell": "C14",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "B15",
+              "label": "product",
+              "suggested_value_cell": "C15",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "D16",
+              "label": "product",
+              "suggested_value_cell": "E16",
+              "style_id": "56"
+            }
+          ],
+          "specification.value": [
+            {
+              "label_cell": "A17",
+              "label": "size",
+              "suggested_value_cell": "B17",
+              "style_id": "56"
+            }
+          ],
+          "unit.value": [
+            {
+              "label_cell": "A23",
+              "label": "unit",
+              "suggested_value_cell": "B23",
+              "style_id": "56"
+            }
+          ],
+          "quantity.value": [
+            {
+              "label_cell": "A24",
+              "label": "qty",
+              "suggested_value_cell": "B24",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "J24",
+              "label": "数量",
+              "suggested_value_cell": null,
+              "style_id": "56"
+            }
+          ]
+        },
+        "totals": {}
+      }
+    },
+    {
+      "name": "Field_Map",
+      "path": "xl/worksheets/sheet3.xml",
+      "dimension": "A1:J23",
+      "cell_node_count": 230,
+      "reported_cell_count": 230,
+      "cell_limit_reached": false,
+      "formula_count": 3,
+      "merged_ranges": [],
+      "row_dimensions": [],
+      "column_dimensions": [
+        {
+          "min": "1",
+          "max": "1",
+          "width": "30",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "2",
+          "max": "2",
+          "width": "18",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "3",
+          "max": "3",
+          "width": "48",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "4",
+          "max": "4",
+          "width": "18",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "5",
+          "max": "5",
+          "width": "16",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "6",
+          "max": "6",
+          "width": "18",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "7",
+          "max": "7",
+          "width": "70",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "8",
+          "max": "8",
+          "width": "24",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "9",
+          "max": "9",
+          "width": "20",
+          "style": null,
+          "hidden": null
+        },
+        {
+          "min": "10",
+          "max": "10",
+          "width": "54",
+          "style": null,
+          "hidden": null
+        }
+      ],
+      "page_setup": {},
+      "page_margins": {
+        "left": "0.75",
+        "right": "0.75",
+        "top": "1",
+        "bottom": "1",
+        "header": "0.5",
+        "footer": "0.5"
+      },
+      "auto_filter": "A1:J23",
+      "cells": [
+        {
+          "address": "A1",
+          "value": "map_key",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B1",
+          "value": "field_group",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C1",
+          "value": "source_field_keys",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D1",
+          "value": "target_sheet",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E1",
+          "value": "target_cell",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F1",
+          "value": "target_mode",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G1",
+          "value": "transform_or_format_rule",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H1",
+          "value": "default_if_missing",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I1",
+          "value": "auto_append_if_extra",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J1",
+          "value": "notes",
+          "formula": null,
+          "style_id": "55",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A2",
+          "value": "quote_date",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B2",
+          "value": "header",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C2",
+          "value": "quote_date",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D2",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E2",
+          "value": "A4",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F2",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G2",
+          "value": "Write normalized ISO date; preserve date format.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H2",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I2",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J2",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A3",
+          "value": "order_no",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B3",
+          "value": "header",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C3",
+          "value": "order_no",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D3",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E3",
+          "value": "J4",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F3",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G3",
+          "value": "Prefix with # only if the target template requires it.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H3",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I3",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J3",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A4",
+          "value": "supplier_name_or_code",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B4",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C4",
+          "value": "supplier_name",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D4",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E4",
+          "value": "A7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F4",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G4",
+          "value": "If supplier code is unavailable, use supplier_name.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H4",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I4",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J4",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A5",
+          "value": "product_image",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B5",
+          "value": "image",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C5",
+          "value": "product_image",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D5",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E5",
+          "value": "B7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F5",
+          "value": "IMAGE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G5",
+          "value": "Extract embedded PDF image or crop product region; insert image anchored at B7.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H5",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I5",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J5",
+          "value": "If no image object exists, crop from PDF table image area; if still unavailable, write N/A.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A6",
+          "value": "product_name_en",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B6",
+          "value": "product",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C6",
+          "value": "product_name_en",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D6",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E6",
+          "value": "C7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F6",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G6",
+          "value": "Prefer vision-classified English object name; fallback to translated product/spec text.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H6",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I6",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J6",
+          "value": "For this PDF, image is classified as Wooden hair brush.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A7",
+          "value": "specifications_block",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B7",
+          "value": "spec",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C7",
+          "value": "size|materials|colors|logo|package|other",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D7",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E7",
+          "value": "D7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F7",
+          "value": "COMPOSITE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G7",
+          "value": "Format exactly as Label: newline Value blocks in order: Size, Materials, Colors, Logo, Package, Other.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H7",
+          "value": "N/A per missing subfield",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I7",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J7",
+          "value": "Any extra field with field_group=spec must be auto-appended before Other unless Field_Map already defines a target.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A8",
+          "value": "production_days",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B8",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C8",
+          "value": "lead_time_days",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D8",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E8",
+          "value": "E7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F8",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G8",
+          "value": "Use numeric days only when available.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H8",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I8",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J8",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A9",
+          "value": "qty",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B9",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C9",
+          "value": "qty",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D9",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E9",
+          "value": "F7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F9",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G9",
+          "value": "Quantity from product row.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H9",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I9",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J9",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A10",
+          "value": "unit_price_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B10",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C10",
+          "value": "unit_price_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D10",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E10",
+          "value": "G7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F10",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G10",
+          "value": "RMB unit price from product row.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H10",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I10",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J10",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A11",
+          "value": "product_total_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B11",
+          "value": "line_item",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C11",
+          "value": "qty|unit_price_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D11",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E11",
+          "value": "H7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F11",
+          "value": "FORMULA",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G11",
+          "value": null,
+          "formula": "F7*G7",
+          "style_id": "56",
+          "type": null
+        },
+        {
+          "address": "H11",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I11",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J11",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A12",
+          "value": "supplier_details_block",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B12",
+          "value": "supplier",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C12",
+          "value": "supplier_name|supplier_contact|supplier_location|supplier_website|supplier_wechat|supplier_phone",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D12",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E12",
+          "value": "I7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F12",
+          "value": "COMPOSITE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G12",
+          "value": "Format exactly as Name, Contact, Location, Website, Wechat, Phone number. Missing fields become N/A.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H12",
+          "value": "N/A per missing subfield",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I12",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J12",
+          "value": "Any extra supplier field from OCR must be appended as Label/Value below Phone number.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A13",
+          "value": "remarks_terms_block",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B13",
+          "value": "terms",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C13",
+          "value": "trade_term|payment_sample_mold|payment_bulk|sample_fee|sample_time|lead_time_days|transportation_cost|delivery_method|packing",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D13",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E13",
+          "value": "J7",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F13",
+          "value": "COMPOSITE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G13",
+          "value": "Keep original wording style. Missing terms become N/A. Convert lead_time_days into full sentence.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H13",
+          "value": "N/A per missing subfield",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I13",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J13",
+          "value": "Any extra commercial term field from OCR must be appended as a new label/value block.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A14",
+          "value": "mold_fee_label",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B14",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C14",
+          "value": "mold_fee_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D14",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E14",
+          "value": "C8",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F14",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G14",
+          "value": "If mold_fee_rmb exists, write Mold cost; otherwise N/A.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H14",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I14",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J14",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A15",
+          "value": "mold_fee_production_days",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B15",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C15",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D15",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E15",
+          "value": "E8",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F15",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G15",
+          "value": "Mold fee has no production days unless PDF states one.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H15",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I15",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J15",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A16",
+          "value": "mold_fee_qty",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B16",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C16",
+          "value": "mold_fee_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D16",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E16",
+          "value": "F8",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F16",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G16",
+          "value": "Use 1 when mold_fee_rmb exists.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H16",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I16",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J16",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A17",
+          "value": "mold_fee_unit_price",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B17",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C17",
+          "value": "mold_fee_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D17",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E17",
+          "value": "G8",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F17",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G17",
+          "value": "Mold fee amount.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H17",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I17",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J17",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A18",
+          "value": "mold_fee_total",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B18",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C18",
+          "value": "mold_fee_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D18",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E18",
+          "value": "H8",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F18",
+          "value": "FORMULA",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G18",
+          "value": null,
+          "formula": "F8*G8",
+          "style_id": "56",
+          "type": null
+        },
+        {
+          "address": "H18",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I18",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J18",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A19",
+          "value": "mold_fee_remark",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B19",
+          "value": "fee",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C19",
+          "value": "mold_refund_condition",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D19",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E19",
+          "value": "J8",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F19",
+          "value": "VALUE",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G19",
+          "value": "Translated mold refund condition.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H19",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I19",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J19",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A20",
+          "value": "summary_total",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B20",
+          "value": "summary",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C20",
+          "value": "product_amount_rmb|mold_fee_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D20",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E20",
+          "value": "H9",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F20",
+          "value": "FORMULA",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G20",
+          "value": null,
+          "formula": "SUM(H7:H8)",
+          "style_id": "56",
+          "type": null
+        },
+        {
+          "address": "H20",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I20",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J20",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A21",
+          "value": "auto_add_missing_pdf_field",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B21",
+          "value": "automation_rule",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C21",
+          "value": "*",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D21",
+          "value": "Parsed_OCR_Data",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E21",
+          "value": "next empty row",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F21",
+          "value": "AUTO_ADD_FIELD",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G21",
+          "value": "If OCR finds a field not present in Field_Map, add it to Parsed_OCR_Data with normalized_value, group, confidence, source_page, and source_note.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H21",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I21",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J21",
+          "value": "Then route by field_group: spec -> D7; supplier -> I7; terms -> J7; fee -> fee row; otherwise keep in Parsed_OCR_Data for manual review.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A22",
+          "value": "default_missing_template_field",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B22",
+          "value": "automation_rule",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C22",
+          "value": "*",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D22",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E22",
+          "value": "mapped target",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F22",
+          "value": "DEFAULT_NA",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G22",
+          "value": "For every Field_Map row targeting Sheet1, if source_field is missing or blank, write N/A unless the target is a formula or image placeholder.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H22",
+          "value": "N/A",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I22",
+          "value": "Y",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J22",
+          "value": "This prevents stale values from previous quotes.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "A23",
+          "value": "formula_cells",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "B23",
+          "value": "automation_rule",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "C23",
+          "value": "qty|unit_price_rmb|mold_fee_rmb",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "D23",
+          "value": "Sheet1",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "E23",
+          "value": "H7:H9",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "F23",
+          "value": "FORMULA_KEEP",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "G23",
+          "value": "Never overwrite formula total cells with OCR values unless user explicitly requests a hardcoded export.",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "H23",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "I23",
+          "value": "N",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        },
+        {
+          "address": "J23",
+          "value": "",
+          "formula": null,
+          "style_id": "56",
+          "type": "inlineStr"
+        }
+      ],
+      "field_candidates": {
+        "headers": {
+          "quote.headers.supplier.value": [
+            {
+              "label_cell": "B4",
+              "label": "supplier",
+              "suggested_value_cell": "C4",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "B12",
+              "label": "supplier",
+              "suggested_value_cell": "C12",
+              "style_id": "56"
+            }
+          ]
+        },
+        "items": {
+          "remarks.value": [
+            {
+              "label_cell": "J1",
+              "label": "notes",
+              "suggested_value_cell": null,
+              "style_id": "55"
+            }
+          ],
+          "product_image.value": [
+            {
+              "label_cell": "B5",
+              "label": "image",
+              "suggested_value_cell": "C5",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "F5",
+              "label": "IMAGE",
+              "suggested_value_cell": "G5",
+              "style_id": "56"
+            }
+          ],
+          "product_name.value": [
+            {
+              "label_cell": "B6",
+              "label": "product",
+              "suggested_value_cell": "C6",
+              "style_id": "56"
+            }
+          ],
+          "quantity.value": [
+            {
+              "label_cell": "A9",
+              "label": "qty",
+              "suggested_value_cell": "B9",
+              "style_id": "56"
+            },
+            {
+              "label_cell": "C9",
+              "label": "qty",
+              "suggested_value_cell": "D9",
+              "style_id": "56"
+            }
+          ]
+        },
+        "totals": {}
+      }
+    }
+  ]
+}
