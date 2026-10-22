@@ -1,10 +1,28 @@
-**English** | [简体中文](README.zh-CN.md)
+<div align="center">
 
 # AI Procurement Coordinator
 
+From scattered requirements to traceable procurement workflows.
+
+**English** · [简体中文](README.zh-CN.md)
+
+![AI Agents](https://img.shields.io/badge/AI%20Agents-334155?style=flat-square) ![Workflow Automation](https://img.shields.io/badge/Workflow%20Automation-334155?style=flat-square) ![HTML](https://img.shields.io/badge/HTML-E34F26?style=flat-square) [![MIT License](https://img.shields.io/badge/License-MIT-2563EB?style=flat-square)](LICENSE)
+
+</div>
+
+<p align="center">
+<a href="#overview">Overview</a> · <a href="#proposed-workflow">Proposed workflow</a> · <a href="#repository-guide">Repository guide</a> · <a href="#author--license">Author &amp; License</a>
+</p>
+
+---
+
+> **Project focus** · Workflow Design
+
+
+## Overview
+
 A product and workflow design study for turning scattered procurement requirements into structured, traceable order information for suppliers and factories.
 
-**Category:** Artificial Intelligence · Workflow Automation  
 **Status:** Planning and feasibility study. This checkout contains documents and an HTML report; an operational agent, backend, and production integrations are not included.
 
 ## Proposed workflow
@@ -38,8 +56,8 @@ Open `feasibility-report.html` in a browser or read the Markdown document in an 
 
 Validate requirements with sample documents, define an order schema, build an extraction-and-review prototype, and evaluate field accuracy and change tracking before adding dispatch integrations.
 
-## Author and license
+## Author & License
 
-Author / maintainer: [https://github.com/OOOHGOD](https://github.com/OOOHGOD).
+Author / maintainer: [OOOHGOD](https://github.com/OOOHGOD) · Original contributions: [MIT License](LICENSE)
 
-Eligible original contributions are under the [MIT License](LICENSE), permitting commercial use and modification with preservation of copyright and license notices in copies or substantial portions. [License scope](LICENSE_SCOPE.md) explains third-party exclusions and upstream terms.
+Commercial use and modification are permitted with preservation of copyright and license notices in copies or substantial portions. Third-party code, datasets, models, and media retain their own terms; see [license scope](LICENSE_SCOPE.md).
